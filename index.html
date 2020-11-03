@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Manzanas del Cuidado. Ciudad de Bogotá</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link href="./styles.css" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/91822fdb88.js" crossorigin="anonymous"></script>
+  <script lang="javascript" src="https://unpkg.com/file-saver@1.3.3/FileSaver.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <div id="map"></div>
+
+  <div id="toc" class="card">
+    <div class="row" id="logos"
+      style="margin: 0; padding: 5px;background-image: url(./image/top-bg-dotted.png);background-position: left;background-size: cover;">
+      <div class="col-4">
+        <img src="./image/logo-cepal.png" style="height: 50px;line-height: 1;">
+        <img src="./image/bogota.png" style="height: 50px;line-height: 1;">
+      </div>
+      <div class="col-8" style="line-height: 1;">
+        <span style="font-size: x-large; font-family: 'Kanit', sans-serif;color:whitesmoke;">
+          Manzanas del Cuidado<br>Ciudad de Bogotá
+        </span>
+      </div>
+    </div>
+    
+    <div class="row" id="main_menu"
+      style="background-color: #776D9C; color:white; margin: 0; padding: 10px 0px;font-family:'Kanit', sans-serif !important">
+      <div class="col-10">
+        Capas de Información
+      </div>
+    </div>
+
+    <div class="row" id="menu_content" style="background-color: #776D9C; color:whitesmoke; margin: 0; padding: 10px 0px;font-family:'Kanit', sans-serif !important;font-size: large;">
+      <div class="card" id="catalogofiltro" style="width:100%; background-color: #776D9C;">
+        <div class="card-body" style="text-align:left;">
+            <div class="container">
+                <div id="accordion" style="color: #776D9C;">
+                  <div class="card">
+                    <div class="card-header">
+                      <a class="card-link" data-toggle="collapse" href="#collapseOne" style="color:#776D9C;">
+                        Integración
+                      </a>
+                      <i class="fas fa-users" style="margin-left: 50%;"></i>
+                    </div>
+                    <div id="collapseOne" class="collapse" data-parent="#accordion">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check1" onclick="encendido('creciendo_familia')">
+                            <label class="form-check-label" for="exampleCheck1">Creciendo en Familia</label>
+                          </div>
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check2">
+                            <label class="form-check-label" for="exampleCheck1">Comedor Comunitario</label>
+                          </div>
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check3">
+                            <label class="form-check-label" for="exampleCheck1">Envejecimiento Activo y Feliz</label>
+                          </div>
+      
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header">
+                      <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo" style="color:#776D9C;">
+                      Salud
+                    </a>
+                    <i class="fas fa-plus-square" style="margin-left: 62%;"></i>
+                    </div>
+                    <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Hospitales</label>
+                          </div>
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Otro</label>
+                          </div>
+
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div class="card-header">
+                      <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree" style="color:#776D9C;">
+                        Educación
+                      </a>
+                      <i class="fas fa-graduation-cap" style="margin-left: 51%;"></i>
+                    </div>
+                    <div id="collapseThree" class="collapse" data-parent="#accordion">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Colegios</label>
+                          </div>
+                    </div>
+
+                  </div>
+                  
+
+                  <div class="card">
+                    <div class="card-header">
+                      <a class="collapsed card-link" data-toggle="collapse" href="#collapseFour" style="color:#776D9C;">
+                      Mujer
+                    </a>
+                    <i class="fas fa-venus" style="margin-left: 62%;"></i>
+                    </div>
+                    <div id="collapseFour" class="collapse" data-parent="#accordion">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Casa de igualdad de oportunidades para las mujeres de Bogotá D.C</label>
+                          </div>
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Otro</label>
+                          </div>
+
+                    </div>
+                  </div>
+
+                  <div class="card">
+                    <div class="card-header">
+                      <a class="collapsed card-link" data-toggle="collapse" href="#collapseFive" style="color:#776D9C;">
+                        Cultura
+                      </a>
+                      <i class="fas fa-book-reader" style="margin-left: 58%;"></i>
+                    </div>
+                    <div id="collapseFive" class="collapse" data-parent="#accordion">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Bibliotecas Públicas</label>
+                          </div>
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Bibliotecas Comunitarias</label>
+                          </div>
+                    </div>
+                  </div>
+
+                  <div class="card">
+                    <div class="card-header">
+                      <a class="collapsed card-link" data-toggle="collapse" href="#collapseSix" style="color:#776D9C;">
+                        Movilidad
+                      </a>
+                      <i class="fas fa-bus-alt" style="margin-left: 53%;"></i>
+                    </div>
+                    <div id="collapseSix" class="collapse" data-parent="#accordion">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Ciclovias</label>
+                          </div>
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Paraderos</label>
+                          </div>
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Estaciones Tren</label>
+                          </div>
+                    </div>
+                  </div>
+
+                  <div class="card">
+                    <div class="card-header">
+                      <a class="collapsed card-link" data-toggle="collapse" href="#collapseSeven" style="color:#776D9C;">
+                        Seguridad
+                      </a>
+                      <i class="fas fa-user-shield" style="margin-left: 52%;"></i>
+                    </div>
+                    <div id="collapseSeven" class="collapse" data-parent="#accordion">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Puntos de seguridad nocturna mujeres</label>
+                          </div>
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Comisaría de la Familia</label>
+                          </div>
+                        
+                    </div>
+                  </div>
+
+                  <div class="card">
+                    <div class="card-header">
+                      <a class="collapsed card-link" data-toggle="collapse" href="#collapseEight" style="color:#776D9C;">
+                        Indicadores
+                      </a>
+                      <i class="fas fa-chart-pie" style="margin-left: 49%;"></i>
+                    </div>
+                    <div id="collapseEight" class="collapse" data-parent="#accordion">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Total de viviendas</label>
+                          </div>
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Viviendas con al menos una persona de 65 años</label>
+                          </div>
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Razón de sexos (Mujeres/Hombres x 1.000)</label>
+                          </div>
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Mujeres en oficios del hogar y sin ingresos/Mujeres de 10 año y más</label>
+                          </div>
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Personas menores de 15 años con dificultad en su vida diaria</label>
+                          </div>
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Personas mayores de 64 años con dificultad en su vida diaria</label>
+                          </div>
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Personas mayores de 84 años con dificultad en su vida diaria</label>
+                          </div>
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Total personas con dificultades en su vida diaria</label>
+                          </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+        </div>
+    
+    </div>
+    </div>
+    
+  </div>
+
+
+
+  <script src="./scripts.js"></script>
+</body>
+
+</html>
