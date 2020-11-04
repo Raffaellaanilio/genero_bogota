@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+// Cargar mapa
+
     mapboxgl.accessToken = 'pk.eyJ1IjoicmFmZmFlbGxhYW5pbGlvIiwiYSI6ImNrZWlubncydjEwOGgyd21udHdmOWJ4M24ifQ.E2q7D7b-Je_x7VRjbqjAAA';
     var map = new mapboxgl.Map({
     container: 'map',
@@ -11,6 +13,11 @@ $(document).ready(function () {
     map.addControl(new mapboxgl.NavigationControl());
   
 
+    $('[type="checkbox"]').click (function(){
+      $("#titulodescripcion").toggle();
+  });
+
+// Función de encendido
     encendido = function encendido(x) {
 
       y = document.getElementById(x);
@@ -28,7 +35,30 @@ $(document).ready(function () {
           map.setLayoutProperty(x, 'visibility', 'visible');
       }
   };
-  
+
+
+  // Función mostrar descripción
+
+  showdescripcion = function showdescripcion(x) {
+
+    y = document.getElementById(x);
+
+    $(y).toggle();
+
+    var visibility = map.getElementById(x, 'visibility');
+
+    // toggle layer visibility by changing the layout object's visibility property
+    if (visibility === 'visible') {
+        map.getElementById(x, 'visibility', 'visible');
+        this.className = '';
+    } else {
+        this.className = 'active';
+        map.getElementById(x, 'visibility', 'visible');
+    }
+};
+
+// Cargar GeoJSON
+
     map.on('load', function () {
       var url = './geojson/creciendo_familia.geojson';
       map.addSource('creciendo_familia', { type: 'geojson', data: url });
@@ -57,8 +87,8 @@ $(document).ready(function () {
       var url9 = './geojson/ciclovias.geojson';
       map.addSource('ciclovias', { type: 'geojson', data: url9 });
 
-      var url10 = './geojson/paraderos.geojson';
-      map.addSource('paraderos', { type: 'geojson', data: url10 });
+      var url10 = './geojson/paraderos_zonales_SITP.geojson';
+      map.addSource('paraderos_zonales_SITP', { type: 'geojson', data: url10 });
 
       var url11 = './geojson/estaciones.geojson';
       map.addSource('estaciones', { type: 'geojson', data: url11 });
@@ -95,28 +125,6 @@ $(document).ready(function () {
 
     });
 
-    /* 
-    map.on('click', 'estacion_de_servicio', function (e) {
-      innerPopup = '<div><h5 style="color:orangered;">Estación de Servicio <i class="fas fa-gas-pump"></i> </h5> ';
-      var nombre = e.features[0].properties.operator;
-      if (nombre != 'null') {
-          innerPopup = innerPopup + '<b>Nombre: </b>' + nombre + ' <br>';
-      }
-      var brand = e.features[0].properties.brand;
-      if (brand != 'null') {
-          innerPopup = innerPopup + '<b>Bandera: </b>' + brand + '<br>';
-      }
-      var id = e.features[0].properties.id;
-      innerPopup = innerPopup + '<br><button class="btn btn-success btn-sm" onclick="corroborar(\'Estación de servicio\',\'' + brand + '\',\'' + id + '\')">Modificar o validar información</button></div>';
-
-      new mapboxgl.Popup()
-          .setLngLat(e.lngLat)
-          .setHTML(innerPopup)
-          .addTo(map);
-  });
-
-  */
-
       map.addLayer({
           'id': 'creciendo_familia',
           'type': 'symbol',
@@ -125,7 +133,7 @@ $(document).ready(function () {
               'icon-image': 'cat',
               'icon-allow-overlap': true,
               'icon-size': 0.7,
-              'visibility': 'none'
+              'visibility': 'true'
           }
   }
 );

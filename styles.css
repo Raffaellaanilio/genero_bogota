@@ -36,9 +36,6 @@ body {
     background-color:#F5F5F5;
   }
 
-  a {
-    color: black;
-  }
 
   .card-body {
     -ms-flex: 1 1 auto;
@@ -47,108 +44,8 @@ body {
     padding: 5px 10px;
   }
 
-  #tools {
-    position: absolute;
-    right: 1%;
-    top: 2%;
-    width: 4%;
-    height: 10vh;
-    z-index: 1;
-  }
-
-  #basemaps {
-    position: absolute;
-    right: 5%;
-    top: 8%;
-    padding: 2px;
-    height: 7vh;
-    z-index: 1;
-    background-color: white;
-    width: fit-content;
-    display: none;
-  }
-
-  #navigate {
-    position: absolute;
-    left: 26%;
-    top: 2%;
-    width: 4%;
-    height: 10vh;
-    z-index: 1;
-  }
-
-  #indicator_properties {
-    position: absolute;
-    right: 0%;
-    top: 0%;
-    width: 30%;
-    height: 100vh;
-    overflow-y: scroll;
-    padding: 15px;
-    z-index: 1;
-    background-color: gainsboro;
-  }
-
-  #symbology {
-    position: absolute;
-    display: none;
-    left: 26%;
-    top: 30%;
-    width: 20%;
-    height: 50vh;
-    z-index: 1;
-    background-color: gainsboro;
-  }
-
-  #indicator_attributes {
-    position: absolute;
-    font-size: small;
-    right: 0%;
-    top: 0%;
-    width: 30%;
-    height: 100vh;
-    overflow-y: scroll;
-    z-index: 1;
-    background-color: gainsboro;
-  }
-
-  #years_panel {
-    position: absolute;
-    display: block;
-    left: 30%;
-    bottom: 5%;
-    width: 65%;
-    height: 12vh;
-    z-index: 1;
-    background-color: white;
-    border-radius: 5px;
-  }
-
-
-  .image_theme {
-    width: 45px;
-    height: 45px;
-    align-self: center;
-    margin-top: 15px;
-    margin-bottom: 10px;
-  }
-  .theme_title {
-    font-family: "OswaldRegular",sans-serif !important;
-    color:#46484A;
-    font-size: 21px;
-  }
-
   .row {
     margin: 5px;
-  }
-
-  .theme_card {
-    height: 15rem;
-    background-color: whitesmoke;
-  }
-
-  .theme_card:hover {
-    background-color: #D7E8EE;
   }
 
   .col-theme {
@@ -165,39 +62,6 @@ body {
     top: 9rem;
   }
 
-  .indicator_row {
-    color:#3D89AA;
-    font-family: "SourceSansRegular", sans-serif !important;
-    font-size: 14px;
-    border-bottom: 1px dotted #DEEBF1;
-    background-color: #F9FBFC;
-    padding: 5px 0px 5px 20px;
-  }
-
-  .indicator_link {
-    color:#3D89AA;
-    font-family: "SourceSansRegular", sans-serif !important;
-    font-size: 14px;
-    /* border-bottom: 1px dotted #DEEBF1;
-    background-color: #F9FBFC;
-    padding: 5px 0px 5px 20px; */
-  }
-
-  .indicator_link:hover {
-    text-decoration: underline;
-}
-
-  .indicator_header {
-    background-color: #F9FBFC;
-    /* padding: 5px 0px 5px 20px; */
-  }
-
-  .indicator_card {
-    
-    border: none;
-    border-bottom: 1px dotted #DEEBF1;
-    /* padding: 5px 0px 5px 20px; */
-  }
 
   .indicator_header:hover {
     background-color: whitesmoke;
@@ -210,22 +74,3 @@ body {
   .nav-link:hover{
     background-color:#B0AAC5;
   }
-
-  #sub_menu_1 {
-    position: absolute;
-    display: none;
-    padding: 10px;
-    left: 25%;
-    top: 26%;
-    width: 20%;
-    height: 20vh;
-    z-index: 1;
-    background-color: white;
-    color: #3d89aa;
-    font-family: "OswaldRegular",sans-serif !important;
-  }
-
-  .tooltip.show{
-      opacity:0.7;
-  }
-
