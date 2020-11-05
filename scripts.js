@@ -55,21 +55,6 @@ showdescripcion = function showdescripcion(x) {
 };
 
 
-var colors = [
-    '#ffffcc',
-    '#a1dab4',
-    '#41b6c4',
-    '#2c7fb8',
-    '#253494',
-    '#fed976',
-    '#feb24c',
-    '#fd8d3c',
-    '#f03b20',
-    '#bd0026'
-];
-
-
-
   // Cargar GeoJSON
 
   map.on('load', function () {
@@ -91,11 +76,11 @@ var colors = [
     var url6 = './geojson/casa_oportunidades_mujeres.geojson';
     map.addSource('casa_oportunidades_mujeres', { type: 'geojson', data: url6 });
 
-    var url7 = './geojson/bibliotecas_publicas.geojson';
-    map.addSource('bibliotecas_publicas', { type: 'geojson', data: url7 });
+    var url7 = './geojson/biblored.geojson';
+    map.addSource('biblored', { type: 'geojson', data: url7 });
 
-    var url8 = './geojson/Bibliotecas Comunitarias.geojson';
-    map.addSource('Bibliotecas Comunitarias', { type: 'geojson', data: url8 });
+    var url8 = './geojson/bibliotecas_Comunitarias.geojson';
+    map.addSource('bibliotecas_comunitarias', { type: 'geojson', data: url8 });
 
     var url9 = './geojson/ciclovias.geojson';
     map.addSource('ciclovias', { type: 'geojson', data: url9 });
@@ -138,6 +123,28 @@ var colors = [
 
     var url22 = './geojson/limites.geojson';
     map.addSource('limites', { type: 'geojson', data: url22 });
+
+    var url23 = './geojson/paraderos_zonales_SITP.geojson';
+    map.addSource('paraderos_zonales_SITP', { type: 'geojson', data: url23 });
+
+    var url24 = './geojson/estacion_de_policia.geojson';
+    map.addSource('estacion_de_policia', { type: 'geojson', data: url24 });
+
+    var url25 = './geojson/cuadrantes_policia.geojson';
+    map.addSource('cuadrantes_policia', { type: 'geojson', data: url25 });
+
+    var url26 = './geojson/atencion_personas_mayores_discapacidad.geojson';
+    map.addSource('atencion_personas_mayores_discapacidad', { type: 'geojson', data: url26 });
+
+    var url27 = './geojson/atencion_ninos_discapacidad.geojson';
+    map.addSource('atencion_ninos_discapacidad', { type: 'geojson', data: url27 });
+
+    var url28 = './geojson/centro_proteger.geojson';
+    map.addSource('centro_proteger', { type: 'geojson', data: url28 });
+
+    var url29 = './geojson/centro_amar.geojson';
+    map.addSource('centro_amar', { type: 'geojson', data: url29 });
+
 
   });
 
