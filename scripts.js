@@ -54,6 +54,22 @@ showdescripcion = function showdescripcion(x) {
   }
 };
 
+
+var colors = [
+    '#ffffcc',
+    '#a1dab4',
+    '#41b6c4',
+    '#2c7fb8',
+    '#253494',
+    '#fed976',
+    '#feb24c',
+    '#fd8d3c',
+    '#f03b20',
+    '#bd0026'
+];
+
+
+
   // Cargar GeoJSON
 
   map.on('load', function () {
@@ -131,8 +147,7 @@ showdescripcion = function showdescripcion(x) {
         'source': 'limites',
         'layout': {},
         'paint':{
-            'fill-color': '#088',
-            'fill-opacity': 0.8
+            'fill-color': '#000000',
         }
 });
 
