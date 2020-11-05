@@ -1,12 +1,32 @@
-@font-face { font-family: "OswaldRegular"; src: url(./assets/Oswald-Regular.ttf); }
-@font-face { font-family: "SourceSansRegular"; src: url(./assets/SourceSansPro-Regular.otf); }
-@font-face { font-family: "OswaldExtraLight"; src: url(./assets/Oswald-ExtraLight.ttf); }
-
 body {
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
   }
+
+
+  #cds_servicios{
+    position: relative;
+    padding: 20px 20px;
+    width: 350px;
+    height:400px;
+    margin-top: 29%;
+    margin-left: 25.5%;
+    z-index: 3000;
+    background-color: whitesmoke;
+    border-radius: 5%;
+    box-shadow:2px 2px 2px 0px rgba(184,177,184,1);
+    font-family:'Maven Pro';
+  }
+
+  .my-custom-scrollbar {
+    position: relative;
+    height: 300px;
+    overflow: auto;
+    }
+
+  .table-wrapper-scroll-y {
+  display: block;
+    }
 
   #map {
     position: absolute;
@@ -23,13 +43,36 @@ body {
     width: 25%;
     height: 100vh;
     border-radius: 0%;
+    overflow:auto;
+    background-color: #776D9C
+  }
+
+  #titulo{
+    background-color: #776D9C;
+    color:white;
+    margin: 0;
+    padding: 10px 10px;
+    font-family:'Maven Pro';
+    font-weight:900;
+    font-size: large;
+    text-align:left;
+  }
+
+  #menu_content {
+    background-color: #776D9C;
+    color:whitesmoke;
+    margin: 0;
+    padding: 10px 0px;
+    font-family:'Maven Pro';
+    font-weight: 600
   }
 
   .card-header {
-    padding: 5px 10px;
+    padding: 5px 5px;
     margin-bottom: 0;
     background-color: white;
     border-bottom: none;
+    border-color:none;
   }
 
   .card-header:hover {
@@ -38,10 +81,16 @@ body {
 
 
   .card-body {
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
     min-height: 1px;
     padding: 5px 10px;
+    border-color:none;
+  }
+
+  .container{
+    color: grey;
+    font-size:medium;
+    text-align: justify;
+    border-color:none;
   }
 
   .row {
@@ -62,10 +111,6 @@ body {
     top: 9rem;
   }
 
-
-  .indicator_header:hover {
-    background-color: whitesmoke;
-  }
 
   #menu_content .col-12 {
     padding: 10px;
