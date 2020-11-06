@@ -14,13 +14,14 @@
   <link href="./styles.css" rel="stylesheet" />
   <script src="https://kit.fontawesome.com/91822fdb88.js" crossorigin="anonymous"></script>
   <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;700;900&display=swap" rel="stylesheet">
+  Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 </head>
 
 <body>
 
   <!-- Pop Up servicios -->
 
-    <div class="container" id="cds_servicios">
+    <div class="container" id="cds_servicios" style="display:none">
       <h5 style="font-weight: 700;text-align: center;">Servicios ofrecidos en (CDS)</h5>
       <table class="table table-hover table-borderless table-wrapper-scroll-y my-custom-scrollbar">
         <tbody>
@@ -116,8 +117,6 @@
         </tbody>
       </table>
     </div>
-  
-</div>
 
 <!-- Contenedor mapa -->
   <div id="map"></div>
@@ -163,13 +162,13 @@
                       </div>  
                       <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check1" onclick="encendido('creciendo_familia'), showdescripcion('descripcion_creciendo_familia')">
-                            <label class="form-check-label" for="check1">Creciendo en Familia</label> 
-                            <div class="container" id="descripcion_creciendo_familia" style="display:none;font-family: Maven Pro; font-weight:400;">Espacio donde se presta servicio de atención integral a mujeres gestantes, niñas y niños menores de dos años de edad en el marco de la Ruta Integral de Atenciones a la Primera Infancia -RIA- que promueve el desarrollo infantil desde el fortalecimiento de las capacidades para educar, cuidar y proteger de madres, padres, cuidadores y agentes comunitarios en los entornos hogar y espacio público.</p></div>
+                            <label class="form-check-label" for="check1">Creciendo en Familia</label>
+                            <div class="container" id="descripcion_creciendo_familia" style="display:none;font-family: Maven Pro; font-weight:400;">Espacio donde se presta servicio de atención integral a mujeres gestantes, niñas y niños menores de dos años de edad en el marco de la Ruta Integral de Atenciones a la Primera Infancia -RIA- que promueve el desarrollo infantil desde el fortalecimiento de las capacidades para educar, cuidar y proteger de madres, padres, cuidadores y agentes comunitarios en los entornos hogar y espacio público.</div>
                           </div>
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check2" onclick="encendido('comedor_comunitario'), showdescripcion('descripcion_comedor_comunitario')">
                             <label class="form-check-label" for="exampleCheck1">Comedor Comunitario</label>
-                            <div class="container" id="descripcion_comedor_comunitario" style="display:none;font-family: Maven Pro;font-weight:400;">Espacios físicos, sociales y comunitarios de coordinación y articulación transectorial donde se orientan y desarrollan procesos de fortalecimiento de capacidades y se suministra un almuerzo en condiciones adecuadas e inocuas, con un aporte nutricional del 40% de los requerimientos de energía y nutrientes de la población atendida. Asimismo, se realiza vigilancia nutricional y promoción en estilos de vida saludable.</p></div>
+                            <div class="container" id="descripcion_comedor_comunitario" style="display:none;font-family: Maven Pro;font-weight:400;">Espacios físicos, sociales y comunitarios de coordinación y articulación transectorial donde se orientan y desarrollan procesos de fortalecimiento de capacidades y se suministra un almuerzo en condiciones adecuadas e inocuas, con un aporte nutricional del 40% de los requerimientos de energía y nutrientes de la población atendida. Asimismo, se realiza vigilancia nutricional y promoción en estilos de vida saludable.</div>
                           </div>
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check3" onclick="encendido('envejecimiento_activo'), showdescripcion('descripcion_envejecimiento_activo')">
@@ -187,10 +186,6 @@
                             <div class="container" id="descripcion_atencion_ninos_discapacidad" style="display:none;font-family: Maven Pro;font-weight:400;">Lugar en el que se atienden adolescentes y jóvenes entre los 6 y 17 años 11 meses, con discapacidad cognitiva no psicosocial que requieran apoyos extensos y generalizados o con discapacidad múltiple que requieran apoyos intermitentes y limitados; y que habiten en Bogotá D.C. Actividades lúdicas, pedagógicas, recreativas y deportivas orientadas al fortalecimiento de habilidades y capacidades para desenvolverse con independencia en su entorno. Desarrollo de procesos de inclusión educativa de acuerdo con las habilidades y capacidades de los participantes, Apoyo alimentario, Servicio de transporte. Espacio donde se prestan actividades lúdicas, pedagógicas, recreativas y deportivas orientadas al mantenimiento de las condiciones físicas y mentales que permitan mejoramiento de la calidad de vida, apoo alimentario y servicio de transporte a niños niñas y adolescentes entre 6 y 17 años 11 meses con discapacidad múltiple asociada a discapacidad cognitiva, que requieren de apoyos extensos a generalizados y que habiten en Bogotá D.C.</div>
                           </div>
 
-
-
-                          
-      
                     </div>
                   </div>
                   <div class="card">
@@ -372,6 +367,20 @@
                           </div>
                     </div>
                   </div>
+                  <div class="card">
+                    <div class="card-header">
+                      <a class="card-link" data-toggle="collapse" href="#collapseNine" style="color:#776D9C;">
+                        Información Base
+                      </a>
+                      <i class="fas fa-user-plus" style="padding:5px;float: right;"></i>
+                    </div>
+                    <div id="collapseNine" class="collapse">
+                      <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="check22" onclick="encendido('limites')">
+                        <label class="form-check-label" for="check1">Límites Bogotá</label> 
+                      </div>
+                          </div>
+                    </div>
               </div>
         </div>
     
