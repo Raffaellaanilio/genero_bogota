@@ -1,6 +1,7 @@
 {
 "type": "FeatureCollection",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"name": "atencion_personas_mayores_discapacidad",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
                                                                                                                                   
 "features": [
 { "type": "Feature", "properties": { "OBJECTID_1": 779, "OSSCSIRBE": 122234, "OSSSERVICI": "3", "OSSNOMBRE": "INTEGRARTE COLONIA", "OSSDIRECCI": "KM 5 SIBATÉ", "OSSTELEFON": "3808330", "OSSHORARIO": "LUNES A DOMINGO 24 HORAS", "LOCNOMBRE": "CUNDINAMARCA", "UPLNOMBRE": null, "SCATASTRAL": null, "OSSIDENTI": null, "RULEID": 18 }, "geometry": { "type": "Point", "coordinates": [ -8265739.5778, 501324.63390000165 ] } },

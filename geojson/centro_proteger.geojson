@@ -1,6 +1,7 @@
 {
 "type": "FeatureCollection",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"name": "centro_proteger",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
                                                                                                                                   
 "features": [
 { "type": "Feature", "properties": { "OBJECTID_1": 357, "OSSCSIRBE": 122017, "OSSSERVICI": "40", "OSSNOMBRE": "CP LA MARIA", "OSSDIRECCI": "KR 3 10 26 SUR", "OSSTELEFON": "2467319", "OSSHORARIO": "LUNES A DOMINGO 24 HORAS", "LOCNOMBRE": "SAN CRISTOBAL", "UPLNOMBRE": "SOSIEGO", "SCATASTRAL": "LA MARIA", "OSSIDENTI": "0440001", "RULEID": 28 }, "geometry": { "type": "Point", "coordinates": [ -8246908.534499999, 510022.0260999985 ] } },

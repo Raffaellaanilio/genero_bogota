@@ -1,6 +1,7 @@
 {
 "type": "FeatureCollection",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"name": "atencion_ninos_discapacidad",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
                                                                                                                                   
 "features": [
 { "type": "Feature", "properties": { "OBJECTID_1": 361, "OSSCSIRBE": 109, "OSSSERVICI": "92", "OSSNOMBRE": "CENTRO DE PROTECCIÓN RENACER", "OSSDIRECCI": "KR 77 BIS 64 I 50", "OSSTELEFON": "4301958", "OSSHORARIO": "LUNES A DOMINGO 24 HORAS", "LOCNOMBRE": "ENGATIVA", "UPLNOMBRE": "SANTA CECILIA", "SCATASTRAL": "EL REAL", "OSSIDENTI": "1040005", "RULEID": 17 }, "geometry": { "type": "Point", "coordinates": [ -8249313.721, 521906.87739999965 ] } },

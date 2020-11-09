@@ -18,100 +18,99 @@
 </head>
 
 <body>
-
   <!-- Pop Up servicios -->
 
-    <div class="container" id="cds_servicios" style="display:none">
-      <h5 style="font-weight: 700;text-align: center;">Servicios ofrecidos en (CDS)</h5>
+    <div class="container" id="cds_servicios" style="display:none;">
+      <div style="font-weight: 700;text-align: left;font-size: large;">Servicios ofrecidos en <div id="localidad"> </div></div>
       <table class="table table-hover table-borderless table-wrapper-scroll-y my-custom-scrollbar">
         <tbody>
           <tr>
             <td><i style="padding-right: 7px;" class="fas fa-child"></i>Jardín Infantil</th>
-            <td>*</td>
+            <td id="conteo_jardin_infantil"></td>
           </tr>
         </tbody>
         <tbody>
           <tr>
             <td><i style="padding-right: 7px; color: royalblue;" class="fas fa-house-user"></i>Centro Día</th>
-            <td style="padding-right: 50px;">*</td>
+            <td style="padding-right: 50px;" id="conteo_centro_dia"></td>
           </tr>
         </tbody>
         <tbody>
           <tr>
             <td><i style="padding-right: 7px;color: orchid;" class="fas fa-house-user"></i>Centro Crecer</th>
-            <td>*</td>
+            <td id="conteo_centro_crecer"></td>
           </tr>
         </tbody>
         <tbody>
           <tr>
             <td><i style="padding-right: 7px;color:rgb(120, 158, 62);" class="fas fa-users"></i>Comisaría de la Familia</th>
-            <td>*</td>
+            <td id="conteo_comisaria_familia"></td>
           </tr>
         </tbody>
         <tbody>
           <tr>
             <td><i style="padding-right: 7px;color:brown;" class="fas fa-book"></i>Biblioteca</th>
-            <td>*</td>
+            <td id="conteo_biblioteca"></td>
           </tr>
         </tbody>
         <tbody>
           <tr>
             <td><i style="padding-right: 7px;color:brown;" class="fas fa-utensils"></i>Cocina</th>
-            <td>*</td>
+            <td id="conteo_cocina"></td>
           </tr>
         </tbody>
         <tbody>
           <tr>
             <td><i style="padding-right: 7px;color:brown;" class="fas fa-archway"></i>Coliseo</th>
-            <td>*</td>
+            <td id="conteo_coliseo"></td>
           </tr>
         </tbody>
         <tbody>
           <tr>
             <td><i style="padding-right: 7px;color:brown;" class="fas fa-seedling"></i>Huerta</th>
-            <td>*</td>
+            <td id="conteo_huerta"></td>
           </tr>
         </tbody>
         <tbody>
           <tr>
             <td><i style="padding-right: 7px;color:brown;" class="fas fa-swimmer"></i>Piscina</th>
-            <td>*</td>
+            <td id="conteo_piscina"></td>
           </tr>
         </tbody>
         <tbody>
           <tr>
             <td>Sala de Belleza</th>
-            <td>*</td>
+            <td id="conteo_sala_belleza"></td>
           </tr>
         </tbody>
         <tbody>
           <tr>
             <td>Sala de Confección</th>
-            <td>*</td>
+            <td id="conteo_sala_confeccion"></td>
           </tr>
         </tbody>
         <tbody>
           <tr>
             <td>Vive Digital</th>
-            <td>*</td>
+            <td id="conteo_vive_digital"></td>
           </tr>
         </tbody>
         <tbody>
           <tr>
             <td>Salas de Sistemas</th>
-            <td>*</td>
+            <td id="conteo_salas_sistemas"></td>
           </tr>
         </tbody>
         <tbody>
           <tr>
             <td>Salón Múltiple/Auditorio</th>
-            <td>*</td>
+            <td id="conteo_salon_multiple"></td>
           </tr>
         </tbody>
         <tbody>
           <tr>
             <td>Teatro</th>
-            <td>*</td>
+            <td id="conteo_teatro"></td>
           </tr>
         </tbody>
         </tbody>
@@ -147,48 +146,48 @@
                       <a class="card-link" data-toggle="collapse" href="#collapseOne" style="color:#776D9C;">
                         Integración
                       </a>
-                      <i class="fas fa-user-plus" style="padding:5px;float: right;"></i>
+                      <i class="fas fa-user-plus" style="padding:10px;float: right;"></i>
                     </div>
                     <div id="collapseOne" class="collapse">
                       <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="check28" onclick="encendido('centro_proteger'), showdescripcion('descripcion_centro_proteger')">
+                        <input type="checkbox" class="form-check-input" id="check1" onclick="encendido('centro_proteger'), showdescripcion('descripcion_centro_proteger')">
                         <label class="form-check-label" for="check1">Centro Proteger</label> 
                         <div class="container" id="descripcion_centro_proteger" style="display:none;font-family: Maven Pro; font-weight:400;">Espacio donde se brinda atención integral para la garantía de derechos de niños, niñas, adolescentes en edades comprendidas entre 0 a 9 años 11 meses y hermanos con edad hasta 10 años 11 meses cuyos derechos se encuentran inobsevardos, amenazados o vulnerados, en espacios que garantizan la protección y ambientes propicios para llevar a cabo procesos de restablecimiento de derechos a niños, niñas y adolescentes los cuales buscan reparar el daño causado y crear contextos que posibiliten la construcción de individuos integrales para el efectivo goce de sus derechos.</p></div>
                       </div>
                       <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="check29" onclick="encendido('centro_amar'), showdescripcion('descripcion_centro_amar')">
+                        <input type="checkbox" class="form-check-input" id="check2" onclick="encendido('centro_amar'), showdescripcion('descripcion_centro_amar')">
                         <label class="form-check-label" for="check1">Centro Amar</label> 
                         <div class="container" id="descripcion_centro_amar" style="display:none;font-family: Maven Pro; font-weight:400;">Espacio donde se presta servicio de atención integral con enfoque diferencial a niñas, niños y adolescentes en riesgo o en situación de Trabajo Infantil ampliado y sus familias, para fortalecer y contribuir a su desarrollo integral, garantía y restablecimiento de sus derechos, a través de actividades pedagógicos, cuidado calificado, apoyo alimentario con calidad y oportunidad y promoción de la corresponsabilidad de las familias en entorno social.</div>
                       </div>  
                       <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check1" onclick="encendido('creciendo_familia'), showdescripcion('descripcion_creciendo_familia')">
+                            <input type="checkbox" class="form-check-input" id="check3" onclick="encendido('creciendo_familia'), showdescripcion('descripcion_creciendo_familia')">
                             <label class="form-check-label" for="check1">Creciendo en Familia</label>
                             <div class="container" id="descripcion_creciendo_familia" style="display:none;font-family: Maven Pro; font-weight:400;">Espacio donde se presta servicio de atención integral a mujeres gestantes, niñas y niños menores de dos años de edad en el marco de la Ruta Integral de Atenciones a la Primera Infancia -RIA- que promueve el desarrollo infantil desde el fortalecimiento de las capacidades para educar, cuidar y proteger de madres, padres, cuidadores y agentes comunitarios en los entornos hogar y espacio público.</div>
                           </div>
                           <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check2" onclick="encendido('comedor_comunitario'), showdescripcion('descripcion_comedor_comunitario')">
+                            <input type="checkbox" class="form-check-input" id="check4" onclick="encendido('comedor_comunitario'), showdescripcion('descripcion_comedor_comunitario')">
                             <label class="form-check-label" for="exampleCheck1">Comedor Comunitario</label>
                             <div class="container" id="descripcion_comedor_comunitario" style="display:none;font-family: Maven Pro;font-weight:400;">Espacios físicos, sociales y comunitarios de coordinación y articulación transectorial donde se orientan y desarrollan procesos de fortalecimiento de capacidades y se suministra un almuerzo en condiciones adecuadas e inocuas, con un aporte nutricional del 40% de los requerimientos de energía y nutrientes de la población atendida. Asimismo, se realiza vigilancia nutricional y promoción en estilos de vida saludable.</div>
                           </div>
                           <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check3" onclick="encendido('envejecimiento_activo'), showdescripcion('descripcion_envejecimiento_activo')">
+                            <input type="checkbox" class="form-check-input" id="check5" onclick="encendido('envejecimiento_activo'), showdescripcion('descripcion_envejecimiento_activo')">
                             <label class="form-check-label" for="exampleCheck1">Envejecimiento Activo y Feliz</label>
                             <div class="container" id="descripcion_envejecimiento_activo" style="display:none;font-family: Maven Pro;font-weight:400;">Espacio donde se atienden personas mayores de 60 años sin condiciones psiquiátricas asociadas que altere la prestación y convivencia del servicio. Con el desarrollo de actividades deportivas, artísticas y culturales, Promoción de hábitos de vida saludable, Intercambio de saberes entre las personas mayores y las generaciones más jóvenes, Acompañamiento psicosocial, Orientación y referenciación a ofertas de servicios sociales, Apoyo alimentario con calidad y oportunidad, Fortalecimiento de redes familiares, sociales y comunitarias, se atienden personas mayores de 60 años en condición de vulnerabilidad que por sus condiciones no cuentan con un dormitorio seguro donde pasar la noche, redes de apoyo social y ningún tipo de apoyo económico. Con el Alojamiento nocturno transitorio en condiciones higiénicas y seguras, Apoyo alimentario con calidad y oportunidad, Aseo personal, Acompañamiento psicosocial, Promoción de buenas prácticas y fortalecimiento de hábitos saludables, Orientación y referenciación a ofertas de servicios sociales.</div>
                           </div>
                           <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check26" onclick="encendido('atencion_personas_mayores_discapacidad'), showdescripcion('descripcion_atencion_personas_mayores_discapacidad')">
+                            <input type="checkbox" class="form-check-input" id="check6" onclick="encendido('atencion_personas_mayores_discapacidad'), showdescripcion('descripcion_atencion_personas_mayores_discapacidad')">
                             <label class="form-check-label" for="exampleCheck1">Atención a Personas Mayores con Discapacidad</label>
                             <div class="container" id="descripcion_atencion_personas_mayores_discapacidad" style="display:none;font-family: Maven Pro;font-weight:400;">Lugar en el que se atienden personas con discapacidad cognitiva, psicosocial o física, en condición de vulnerabilidad, de 18 años hasta los 59 años y 11 meses que requieran apoyos de extensos a generalizados, que habiten en Bogotá D.C. y que no cuenten con una red familiar o social de apoyo que garantice su cuidado. Se Promueve el desarrollo y fortalecimiento de competencias que permitan a la población con discapacidad alcanzar mayores niveles de independencia y socialización. Se adelanta articulación interinstitucional para promover procesos de inclusión de acuerdo con las habilidades y capacidades de los participantes, Alojamiento y apoyo alimentario con calidad y oportunidad, Servicio de transporte.</div>
                           </div>
                           <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check27" onclick="encendido('atencion_ninos_discapacidad'), showdescripcion('descripcion_atencion_ninos_discapacidad')">
+                            <input type="checkbox" class="form-check-input" id="check7" onclick="encendido('atencion_ninos_discapacidad'), showdescripcion('descripcion_atencion_ninos_discapacidad')">
                             <label class="form-check-label" for="exampleCheck1">Atención a Niños, Niñas y Adolescentes con Discapacidad</label>
                             <div class="container" id="descripcion_atencion_ninos_discapacidad" style="display:none;font-family: Maven Pro;font-weight:400;">Lugar en el que se atienden adolescentes y jóvenes entre los 6 y 17 años 11 meses, con discapacidad cognitiva no psicosocial que requieran apoyos extensos y generalizados o con discapacidad múltiple que requieran apoyos intermitentes y limitados; y que habiten en Bogotá D.C. Actividades lúdicas, pedagógicas, recreativas y deportivas orientadas al fortalecimiento de habilidades y capacidades para desenvolverse con independencia en su entorno. Desarrollo de procesos de inclusión educativa de acuerdo con las habilidades y capacidades de los participantes, Apoyo alimentario, Servicio de transporte. Espacio donde se prestan actividades lúdicas, pedagógicas, recreativas y deportivas orientadas al mantenimiento de las condiciones físicas y mentales que permitan mejoramiento de la calidad de vida, apoo alimentario y servicio de transporte a niños niñas y adolescentes entre 6 y 17 años 11 meses con discapacidad múltiple asociada a discapacidad cognitiva, que requieren de apoyos extensos a generalizados y que habiten en Bogotá D.C.</div>
                           </div>
 
                     </div>
                   </div>
-                  <div class="card">
+                  <!-- <div class="card">
                     <div class="card-header">
                       <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo" style="color:#776D9C;">
                       Salud
@@ -197,26 +196,22 @@
                     </div>
                     <div id="collapseTwo" class="collapse">
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check4" onclick="encendido('hospitales'), showdescripcion('descripcion_hospitales')">
+                            <input type="checkbox" class="form-check-input" id="check8" onclick="encendido('hospitales'), showdescripcion('descripcion_hospitales')">
                             <label class="form-check-label" for="exampleCheck1">Hospitales</label>
-                          </div>
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check5">
-                            <label class="form-check-label" for="exampleCheck1">Otro</label>
                           </div>
 
                     </div>
-                  </div>
+                  </div> -->
                   <div class="card">
                     <div class="card-header">
                       <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree" style="color:#776D9C;">
                         Educación
                       </a>
-                      <i class="fas fa-graduation-cap" style="padding:5px;float: right"></i>
+                      <i class="fas fa-graduation-cap" style="padding:10px;float: right"></i>
                     </div>
                     <div id="collapseThree" class="collapse">
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check6" onclick="encendido('colegios'), showdescripcion('descripcion_colegios')">
+                            <input type="checkbox" class="form-check-input" id="check9" onclick="encendido('colegios'), showdescripcion('descripcion_colegios')">
                             <label class="form-check-label" for="exampleCheck1">Colegios</label>
                             <div class="container" id="descripcion_colegios" style="display:none;font-family:  Maven Pro;font-weight:400;">Equipamientos que reúnen un conjunto de personas y bienes promovidos por las autoridades públicas o por articulares, cuya finalidad es prestar educación preescolar, nueve grados de educación básica como mínimo y la media.</div>
                           </div>
@@ -230,19 +225,14 @@
                       <a class="collapsed card-link" data-toggle="collapse" href="#collapseFour" style="color:#776D9C;">
                       Mujer
                     </a>
-                    <i class="fas fa-venus" style="padding:5px;float: right"></i>
+                    <i class="fas fa-venus" style="padding:10px;float: right"></i>
                     </div>
                     <div id="collapseFour" class="collapse">
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check7" onclick="encendido('casa_oportunidades_mujeres'), showdescripcion('descripcion_casa_oportunidades_mujeres')">
+                            <input type="checkbox" class="form-check-input" id="check10" onclick="encendido('casa_oportunidades_mujeres'), showdescripcion('descripcion_casa_oportunidades_mujeres')">
                             <label class="form-check-label" for="exampleCheck1">Casa de igualdad de oportunidades para las mujeres de Bogotá D.C</label>
                             <div class="container" id="descripcion_casa_oportunidades_mujeres" style="display:none;font-family:  Maven Pro;font-weight:400;">Espacio de encuentro entre mujeres para el conocimiento de sus derechos y el desarrollo de procesos orientados al empoderamiento social y político, promotores del liderazgo, la autonomía y el ejercicio pleno de derechos. Su cubrimiento es el Distrito Capital. En estos lugares se prestan diferentes servicios a la comunidad distrital incluyendo sus 20 localidades.</div>
                           </div>
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check8">
-                            <label class="form-check-label" for="exampleCheck1">Otro</label>
-                          </div>
-
                     </div>
                   </div>
 
@@ -251,16 +241,16 @@
                       <a class="collapsed card-link" data-toggle="collapse" href="#collapseFive" style="color:#776D9C;">
                         Cultura
                       </a>
-                      <i class="fas fa-book-reader" style="padding:5px;float: right"></i>
+                      <i class="fas fa-book-reader" style="padding:10px;float: right"></i>
                     </div>
                     <div id="collapseFive" class="collapse">
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check9" onclick="encendido('biblored'), showdescripcion('descripcion_biblored')">
-                            <label class="form-check-label" for="exampleCheck1">Red Biblioteca Pública - Bibliored</label>
+                            <input type="checkbox" class="form-check-input" id="check11" onclick="encendido('biblored'), showdescripcion('descripcion_biblored')">
+                            <label class="form-check-label" for="exampleCheck1">Red Biblioteca Pública - Biblored</label>
                             <div class="container" id="descripcion_biblored" style="display:none;font-family:  Maven Pro;font-weight:400;">Equipamiento especializado en colecciones de libros y periódicos, de servicio al público.</div>
                           </div>
                           <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check10" onclick="encendido('bibliotecas_comunitarias'), showdescripcion('descripcion_bibliotecas_comunitarias')">
+                            <input type="checkbox" class="form-check-input" id="check12" onclick="encendido('bibliotecas_comunitarias'), showdescripcion('descripcion_bibliotecas_comunitarias')">
                             <label class="form-check-label" for="exampleCheck1">Bibliotecas Comunitarias</label>
                             <div class="container" id="descripcion_bibliotecas_comunitarias" style="display:none;font-family:  Maven Pro;font-weight:400;">Espacios desarrollados fuera de las esferas de los servicios públicos que genera el Estado para asistir a determinada comunidad.</div>
                           </div>
@@ -272,25 +262,25 @@
                       <a class="collapsed card-link" data-toggle="collapse" href="#collapseSix" style="color:#776D9C;">
                         Movilidad
                       </a>
-                      <i class="fas fa-bus-alt" style="padding:5px;float: right"></i>
+                      <i class="fas fa-bus-alt" style="padding:10px;float: right"></i>
                     </div>
                     <div id="collapseSix" class="collapse">
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check11" onclick="encendido('ciclovias'), showdescripcion('descripcion_ciclovias')">
+                            <input type="checkbox" class="form-check-input" id="check13" onclick="encendido('ciclovias'), showdescripcion('descripcion_ciclovias')">
                             <label class="form-check-label" for="exampleCheck1">Ciclovias</label>
                             <div class="container" id="descripcion_ciclovias" style="display:none;font-family: Maven Pro;font-weight:400;">Esta cobertura representa el conjunto de vías, calzadas, carriles o a la parte de estas que se destina exclusivamente al tráfico de bicicletas o que puedan ser utilizadas conjuntamente con el tránsito de automotores y peatones dentro de determinadas condiciones de uso especifico.Las ciclovías se clasifican en tres categorías: Ciclovía de utilización conjunta con peatones, Ciclovias de utilización conjunta con automotores, entiéndase por estas, aquellas vías en donde se ha destinado una parte de ellas al uso exclusivo de bicicletas y la otra al tránsito normal de vehículos, Ciclovías para uso exclusivo de bicicleta.</div>
                           </div>
                           <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check12" onclick="encendido('paraderos_zonales_SITP'), showdescripcion('descripcion_paraderos_zonales_SITP')">
+                            <input type="checkbox" class="form-check-input" id="check14" onclick="encendido('paraderos_zonales_SITP'), showdescripcion('descripcion_paraderos_zonales_SITP')">
                             <label class="form-check-label" for="check12">Paraderos</label>
                             <div class="container" id="descripcion_paraderos_zonales_SITP" style="display:none;font-family: Maven Pro;font-weight:400;">Esta cobertura representa el conjunto de vías, calzadas, carriles o a la parte de estas que se destina exclusivamente al tráfico de bicicletas o que puedan ser utilizadas conjuntamente con el tránsito de automotores y peatones dentro de determinadas condiciones de uso especifico.Las ciclovías se clasifican en tres categorías: Ciclovía de utilización conjunta con peatones, Ciclovias de utilización conjunta con automotores, entiéndase por estas, aquellas vías en donde se ha destinado una parte de ellas al uso exclusivo de bicicletas y la otra al tránsito normal de vehículos, Ciclovías para uso exclusivo de bicicleta.</div>
                           </div>
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check13" onclick="encendido('estaciones_transmilenio'), showdescripcion('descripcion_estaciones_transmilenio')">
+                        <!--   <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check15" onclick="encendido('estaciones_transmilenio'), showdescripcion('descripcion_estaciones_transmilenio')">
                             <label class="form-check-label" for="exampleCheck1">Estaciones Transmilenio</label>
                             <div class="container" id="descripcion_estaciones_transmilenio" style="display:none;font-family: Maven Pro;font-weight:400;">Espacio diseñado especialmente para facilitar el acceso rápido y cómodo de los pasajeros, es el único punto de parada de los servicios troncales para recoger y dejar pasajeros que tienen como fin ordenar el tránsito y darle velocidad al sistema; son espacios cerrados y cubiertos, construidas en aluminio, concreto, acero y vidrio soplado, con taquillas a la entrada, y con acceso seguro para los usuarios a través de semáforos, puentes o túneles peatonales. Su cubrimiento es el área urbana de Bogotá D.C.</div>
 
-                          </div>
+                          </div> -->
                     </div>
                   </div>
 
@@ -299,26 +289,26 @@
                       <a class="collapsed card-link" data-toggle="collapse" href="#collapseSeven" style="color:#776D9C;">
                         Seguridad
                       </a>
-                      <i class="fas fa-user-shield" style="padding:5px;float: right"></i>
+                      <i class="fas fa-user-shield" style="padding:10px;float: right"></i>
                     </div>
                     <div id="collapseSeven" class="collapse">
                       <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="check24" onclick="encendido('estacion_de_policia'), showdescripcion('descripcion_estacion_de_policia')">
+                        <input type="checkbox" class="form-check-input" id="check16" onclick="encendido('estacion_de_policia'), showdescripcion('descripcion_estacion_de_policia')">
                         <label class="form-check-label" for="exampleCheck1">Estación de Policía</label>
                         <div class="container" id="descripcion_estacion_de_policia" style="display:none;font-family: Maven Pro;font-weight:400;">Es la unidad básica de la organización policial cuya jurisdicción corresponde a cada municipio, en el que se divide el territorio nacional, sin perjuicio que en un Municipio funcionen varias estaciones. En Bogotá las estaciones corresponden a las localidades que integran el Distrito Capital.</div>
                       </div>
                       <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="check25" onclick="encendido('cuadrantes_de_policia'), showdescripcion('descripcion_cuadrantes_de_policia')">
+                        <input type="checkbox" class="form-check-input" id="check17" onclick="encendido('cuadrantes_policia'), showdescripcion('descripcion_cuadrantes_policia')">
                         <label class="form-check-label" for="exampleCheck1">Cuadrantes de Policía</label>
-                        <div class="container" id="descripcion_cuadrantes_de_policia" style="display:none;font-family: Maven Pro;font-weight:400;">Es un sector geográfico fijo, que a partir de sus características sociales, demográficas y geográficas, recibe distintos tipos de atención de servicio policial, entre los cuales se cuentan la prevención, la disuasión, control de delitos y contravenciones y la educación ciudadana en seguridad y convivencia.</div>
+                        <div class="container" id="descripcion_cuadrantes_policia" style="display:none;font-family: Maven Pro;font-weight:400;">Es un sector geográfico fijo, que a partir de sus características sociales, demográficas y geográficas, recibe distintos tipos de atención de servicio policial, entre los cuales se cuentan la prevención, la disuasión, control de delitos y contravenciones y la educación ciudadana en seguridad y convivencia.</div>
                       </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check14" onclick="encendido('indice_seguridad'), showdescripcion('descripcion_indice_seguridad')">
+                       <!--  <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check18" onclick="encendido('indice_seguridad'), showdescripcion('descripcion_indice_seguridad')">
                             <label class="form-check-label" for="exampleCheck1">Puntos de seguridad nocturna mujeres</label>
                             <div class="container" id="descripcion_indice_seguridad" style="display:none;font-family: Maven Pro;font-weight:400;">Puntos de evaluación que representan el índice de seguridad para las mujeres en el espacio público nocturno del área urbana de Bogotá, tomada de las calificaciones de las ocho variables (iluminación, que veo, visibilidad, quien me ve, personas, presencia de seguridad, sendero, transporte y presencia mixta)de cada uno de los 19.970 puntos, las cuales se ponderaron con el mismo peso las ocho y se sumaron para generar categorías (Muy bajo, Bajo, Medio, Alto y Muy alto), para cada localidad de Bogotá, en vías, arterias y ciclorutas.</div>
-                          </div>
+                          </div> -->
                           <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check15" onclick="encendido('comisaria_familia'), showdescripcion('descripcion_comisaria_familia')">
+                            <input type="checkbox" class="form-check-input" id="check19" onclick="encendido('comisaria_familia'), showdescripcion('descripcion_comisaria_familia')">
                             <label class="form-check-label" for="exampleCheck1">Comisaría de la Familia</label><i style="padding-left:5px;" onclick="showdescripcion('descripcion_comisaria_familia')" class="fas fa-info-circle"></i>
                             <div class="container" id="descripcion_comisaria_familia" style="display:none;font-family: Maven Pro;font-weight:400;">Espacio donde se accede a la Justicia Familiar, ofrece atención jurídica y psicosocial. Tienen como fin proteger y garantizar los derechos humanos de las víctimas de violencia intrafamiliar y otros tipos de violencias en las familias, a través de la imposición de medidas de protección, preventivas, correctivas y de restablecimiento de derechos.</div>
                           </div>
@@ -330,40 +320,120 @@
                       <a class="collapsed card-link" data-toggle="collapse" href="#collapseEight" style="color:#776D9C;">
                         Indicadores
                       </a>
-                      <i class="fas fa-chart-pie" style="padding:5px; float: right"></i>
+                      <i class="fas fa-chart-pie" style="padding:10px; float: right"></i>
                     </div>
                     <div id="collapseEight" class="collapse">
+                        <h6>Demográficos</h6>
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check16">
+                          <input type="checkbox" class="form-check-input" id="check20">
+                          <label class="form-check-label" for="exampleCheck1">Población total</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" class="form-check-input" id="check21">
+                          <label class="form-check-label" for="exampleCheck1">Población total de hombres</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" class="form-check-input" id="check22">
+                          <label class="form-check-label" for="exampleCheck1">Población total de mujeres</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" class="form-check-input" id="check23">
+                          <label class="form-check-label" for="exampleCheck1">Población total de 0 a 5 años</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" class="form-check-input" id="check24">
+                          <label class="form-check-label" for="exampleCheck1">Población total de hombres de 0 a 5 años</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" class="form-check-input" id="check25">
+                          <label class="form-check-label" for="exampleCheck1">Población total de mujeres de 0 a 5 años</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" class="form-check-input" id="check26">
+                          <label class="form-check-label" for="exampleCheck1">Población total de mediana edad</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" class="form-check-input" id="check27">
+                          <label class="form-check-label" for="exampleCheck1">Población total de hombres de mediana edad</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" class="form-check-input" id="check28">
+                          <label class="form-check-label" for="exampleCheck1">Población total de mujeres de mediana edad</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" class="form-check-input" id="check29">
+                          <label class="form-check-label" for="exampleCheck1">Población total de 65 años o más</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" class="form-check-input" id="check30">
+                          <label class="form-check-label" for="exampleCheck1">Población total de hombres de 65 años o más</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" class="form-check-input" id="check31">
+                          <label class="form-check-label" for="exampleCheck1">Población total de mujeres de 65 años o más</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" class="form-check-input" id="check32">
+                          <label class="form-check-label" for="exampleCheck1">Población total de 85 años y más</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" class="form-check-input" id="check33">
+                          <label class="form-check-label" for="exampleCheck1">Población total de hombres de 85 años o más</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" class="form-check-input" id="check34">
+                          <label class="form-check-label" for="exampleCheck1">Población total de mujeres de 85 años o más</label>
+                        </div>
+                        
+
+                        <h6>Vivienda</h6>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check35">
                             <label class="form-check-label" for="exampleCheck1">Total de viviendas</label>
                           </div>
                           <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check17">
+                            <input type="checkbox" class="form-check-input" id="check36">
                             <label class="form-check-label" for="exampleCheck1">Viviendas con al menos una persona de 65 años</label>
                           </div>
+                          <h6>Relación de sexos</h6>
                           <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check18">
+                            <input type="checkbox" class="form-check-input" id="check37">
                             <label class="form-check-label" for="exampleCheck1">Razón de sexos (Mujeres/Hombres x 1.000)</label>
                           </div>
+                          <h6>Dependencia</h6>
                           <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check19">
-                            <label class="form-check-label" for="exampleCheck1">Mujeres en oficios del hogar y sin ingresos/Mujeres de 10 año y más</label>
+                            <input type="checkbox" class="form-check-input" id="check38">
+                            <label class="form-check-label" for="exampleCheck1">Dependencia de hombres y mujeres</label>
                           </div>
                           <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check20">
-                            <label class="form-check-label" for="exampleCheck1">Personas menores de 15 años con dificultad en su vida diaria</label>
+                            <input type="checkbox" class="form-check-input" id="check39">
+                            <label class="form-check-label" for="exampleCheck1">Personas mayores/Personas jovenes</label>
                           </div>
                           <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check21">
-                            <label class="form-check-label" for="exampleCheck1">Personas mayores de 64 años con dificultad en su vida diaria</label>
+                            <input type="checkbox" class="form-check-input" id="check40">
+                            <label class="form-check-label" for="exampleCheck1">Menores de 15 y mujeres de 15 a 64 años</label>
+                          </div>
+                          <h6>Personas con alguna dificultad en su vida diaria</h6>
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check41">
+                            <label class="form-check-label" for="exampleCheck1">Personas menores de 15 años</label>
                           </div>
                           <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check22">
-                            <label class="form-check-label" for="exampleCheck1">Personas mayores de 84 años con dificultad en su vida diaria</label>
+                            <input type="checkbox" class="form-check-input" id="check42">
+                            <label class="form-check-label" for="exampleCheck1">Personas mayores de 64 años</label>
                           </div>
                           <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check23">
-                            <label class="form-check-label" for="exampleCheck1">Total personas con dificultades en su vida diaria</label>
+                            <input type="checkbox" class="form-check-input" id="check43">
+                            <label class="form-check-label" for="exampleCheck1">Personas mayores de 84 años</label>
+                          </div>
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check44">
+                            <label class="form-check-label" for="exampleCheck1">Total</label>
+                          </div>
+                          <h6>Oficios del hogar</h6>
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check45">
+                            <label class="form-check-label" for="exampleCheck1">Mujeres de 10 años y más en oficios del hogar y sin ingresos</label>
                           </div>
                     </div>
                   </div>
@@ -372,11 +442,11 @@
                       <a class="card-link" data-toggle="collapse" href="#collapseNine" style="color:#776D9C;">
                         Información Base
                       </a>
-                      <i class="fas fa-user-plus" style="padding:5px;float: right;"></i>
+                      <i class="fas fa-layer-group" style="padding:10px;float: right;"></i>
                     </div>
                     <div id="collapseNine" class="collapse">
                       <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="check22" onclick="encendido('limites')">
+                        <input type="checkbox" class="form-check-input" id="check46" onclick="encendido('limites','limites_linea')">
                         <label class="form-check-label" for="check1">Límites Bogotá</label> 
                       </div>
                           </div>

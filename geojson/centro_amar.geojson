@@ -1,6 +1,7 @@
 {
 "type": "FeatureCollection",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"name": "centro_amar",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
                                                                                                                                   
 "features": [
 { "type": "Feature", "properties": { "OBJECTID_1": 527, "OSSCSIRBE": 113315, "OSSSERVICI": "80", "OSSNOMBRE": "CENTRO AMAR SUBA", "OSSDIRECCI": "KR 100 A 137 13", "OSSTELEFON": "6815727", "OSSHORARIO": "LUNES A VIERNES 7:00 AM - 7:00 PM", "LOCNOMBRE": "SUBA", "UPLNOMBRE": "EL RINCON", "SCATASTRAL": "LA CHUCUA", "OSSIDENTI": "1180010", "RULEID": 9 }, "geometry": { "type": "Point", "coordinates": [ -8248129.8932, 528121.59420000017 ] } },

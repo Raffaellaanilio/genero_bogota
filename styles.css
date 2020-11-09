@@ -18,6 +18,12 @@ body {
     font-family:'Maven Pro';
   }
 
+  #localidad{
+    position: absolute;
+    display: inline;
+    padding-left: 4px;
+  }
+
   .my-custom-scrollbar {
     position: relative;
     height: 300px;
@@ -76,7 +82,7 @@ body {
   }
 
   .card-header:hover {
-    background-color:#F5F5F5;
+    background-color:#d9d2e9;
   }
 
   .card-body {
@@ -117,4 +123,8 @@ body {
 
   .nav-link:hover{
     background-color:#B0AAC5;
+  }
+
+  h6 {
+    padding-top: 6px;
   }
