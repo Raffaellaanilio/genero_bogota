@@ -161,8 +161,14 @@ $(document).ready(function () {
         var url30 = './geojson/limites_linea.geojson';
         map.addSource('limites_linea', { type: 'geojson', data: url30 });
 
-        /*         var url30 = './geojson/cuadrantes_policia_puntos.geojson';
-                map.addSource('cuadrantes_policia_puntos', { type: 'geojson', data: url30 }); */
+        var url31 = './geojson/tabla_completa_indicadores.geojson';
+        map.addSource('tabla_completa_indicadores', { type: 'geojson', data: url31 });
+
+        var url32 = './geojson/ambos.geojson';
+        map.addSource('ambos', { type: 'geojson', data: url32 });
+
+        var url33 = './geojson/cuadrantes_policia_puntos.geojson';
+        map.addSource('cuadrantes_policia_puntos', { type: 'geojson', data: url33 });
 
 
 
@@ -361,7 +367,20 @@ $(document).ready(function () {
         });
 
 
-        // Añadir capas de tipo polígono
+        // Añadir capas de tipo polígono y sus estilos
+
+        map.addLayer({
+            'id': 'ambos',
+            'type': 'fill',
+            'source': 'ambos',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': '#088',
+                'fill-opacity': 0.8
+            }
+        });
 
         map.addLayer({
             'id': 'total_viviendas',
@@ -635,7 +654,7 @@ $(document).ready(function () {
 
         // Añadir capas de tipo punto
 
-        /*  map.loadImage(
+        /* map.loadImage(
              './image/icono_cuadrantes_policia_puntos.png',
              function (error, image) {
                  if (error) throw error;
@@ -658,6 +677,29 @@ $(document).ready(function () {
                  });
              }
          ); */
+
+    
+                map.addLayer({
+                    'id': 'cuadrantes_policia_puntos',
+                    'type': 'symbol',
+                    'source': 'cuadrantes_policia_puntos',
+                    'layout': {
+                        'text-field': ['get', 'PCUDESCRIP'],
+                        'text-size': 9,
+                        'text-font': ["Open Sans Regular", "Arial Unicode MS Regular"],
+                        'text-anchor': ['get', 'anchor'],
+                        'icon-image': 'icono_cuadrantes_policia_puntos',
+                        'icon-allow-overlap': true,
+                        'icon-size': 0.2,
+                        'visibility': 'none'
+                    },
+                    'paint': {
+                        'text-color': 'black',
+                        'text-opacity': 1,
+                        'text-halo-color': 'white',
+                        'text-halo-width': 1.5,
+            }
+         });
 
 
         map.loadImage(
@@ -845,7 +887,8 @@ $(document).ready(function () {
 
         // INTENTO DE CATEGORIZAR CAPA PUNTOS POR VALOR DEL DATO
 
-        /* map.addLayer({
+         /* map.addLayer(
+            {
            'id': 'indice_seguridad',
            'type': 'circle',
            'source': 'indice_seguridad',
@@ -853,20 +896,22 @@ $(document).ready(function () {
                'visibility':'none'
            },
            'paint': {
-                'circle-radius':5,
-                [
-                    "interpolate",
-                    ["linear"],
-                    ["get","INDICE_SEG"],
+                'circle-radius':5,[
+                    'interpolate',
+                    ['linear'],
+                    ['get','INDICE_SEG'],
                     0,
-                    "hsl(0, 100%, 54%)",
+                    '#F2F12D',
                     2,
-                    "hsl(33, 100%, 56%)",
+                    '#B86B25',
                     4,
-                    "hsl(95, 93%, 36%)"
-                ]:
-           }
-          });  */
+                    '#7232122'
+                ],
+                'fill-opacity':0.75
+            }
+        },
+         'waterway-label'
+        ); */ 
 
 
         map.loadImage(

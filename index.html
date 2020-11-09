@@ -298,15 +298,15 @@
                         <div class="container" id="descripcion_estacion_de_policia" style="display:none;font-family: Maven Pro;font-weight:400;">Es la unidad básica de la organización policial cuya jurisdicción corresponde a cada municipio, en el que se divide el territorio nacional, sin perjuicio que en un Municipio funcionen varias estaciones. En Bogotá las estaciones corresponden a las localidades que integran el Distrito Capital.</div>
                       </div>
                       <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="check17" onclick="encendido('cuadrantes_policia'), showdescripcion('descripcion_cuadrantes_policia')">
+                        <input type="checkbox" class="form-check-input" id="check17" onclick="encendido('cuadrantes_policia'), encendido('cuadrantes_policia_puntos'),showdescripcion('descripcion_cuadrantes_policia')">
                         <label class="form-check-label" for="exampleCheck1">Cuadrantes de Policía</label>
                         <div class="container" id="descripcion_cuadrantes_policia" style="display:none;font-family: Maven Pro;font-weight:400;">Es un sector geográfico fijo, que a partir de sus características sociales, demográficas y geográficas, recibe distintos tipos de atención de servicio policial, entre los cuales se cuentan la prevención, la disuasión, control de delitos y contravenciones y la educación ciudadana en seguridad y convivencia.</div>
                       </div>
-                       <!--  <div class="form-check">
+                       <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check18" onclick="encendido('indice_seguridad'), showdescripcion('descripcion_indice_seguridad')">
                             <label class="form-check-label" for="exampleCheck1">Puntos de seguridad nocturna mujeres</label>
                             <div class="container" id="descripcion_indice_seguridad" style="display:none;font-family: Maven Pro;font-weight:400;">Puntos de evaluación que representan el índice de seguridad para las mujeres en el espacio público nocturno del área urbana de Bogotá, tomada de las calificaciones de las ocho variables (iluminación, que veo, visibilidad, quien me ve, personas, presencia de seguridad, sendero, transporte y presencia mixta)de cada uno de los 19.970 puntos, las cuales se ponderaron con el mismo peso las ocho y se sumaron para generar categorías (Muy bajo, Bajo, Medio, Alto y Muy alto), para cada localidad de Bogotá, en vías, arterias y ciclorutas.</div>
-                          </div> -->
+                          </div>
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check19" onclick="encendido('comisaria_familia'), showdescripcion('descripcion_comisaria_familia')">
                             <label class="form-check-label" for="exampleCheck1">Comisaría de la Familia</label><i style="padding-left:5px;" onclick="showdescripcion('descripcion_comisaria_familia')" class="fas fa-info-circle"></i>
@@ -325,7 +325,7 @@
                     <div id="collapseEight" class="collapse">
                         <h6>Demográficos</h6>
                         <div class="form-check">
-                          <input type="checkbox" class="form-check-input" id="check20">
+                          <input type="checkbox" class="form-check-input" id="check20" onclick="encendido('ambos')">
                           <label class="form-check-label" for="exampleCheck1">Población total</label>
                         </div>
                         <div class="form-check">
