@@ -61,8 +61,11 @@ $(document).ready(function () {
 
     map.on('load', function () {
 
+        var layers = ['0-10', '10-20', '20-50', '50-100', '100-200', '200-500', '500-1000', '1000+'];
+        var colors = ['#FFEDA0', '#FED976', '#FEB24C', '#FD8D3C', '#FC4E2A', '#E31A1C', '#BD0026', '#800026'];
+
         var array_de_capas_puntos = ['creciendo_familia', 'comedor_comunitario', 'envejecimiento_activo', 'colegios', 'casa_oportunidades_mujeres', 'biblored', 'bibliotecas_comunitarias', 'paraderos_zonales_SITP', 'comisaria_familia', 'estacion_de_policia', 'atencion_personas_mayores_discapacidad', 'atencion_ninos_discapacidad', 'centro_proteger', 'centro_amar']
-        var array_de_capas_poligonos = ['total_viviendas', 'viviendas_65mas', 'razon_sexos', 'm_10mas_oficiohogar_sin_ingreso', '15menos_dificultad', '64mas_dificultad', '84mas_dificultad', 'total_personas_dificultad', 'limites', 'cuadrantes_policia']
+        var array_indicadores = ['ambos', 'hombres', 'mujeres', 'hombres05', 'mujeres05', 'ambos05']
         // Change the cursor to a pointer when the mouse is over the states layer.
 
         //map.on('mouseover', '(var=array_de_capas_puntos)', function () {
@@ -116,29 +119,8 @@ $(document).ready(function () {
         var url14 = './geojson/total_viviendas.geojson';
         map.addSource('total_viviendas', { type: 'geojson', data: url14 });
 
-        var url15 = './geojson/viviendas_65mas.geojson';
-        map.addSource('viviendas_65mas', { type: 'geojson', data: url15 });
-
-        // var url16 = './geojson/razon_sexos.geojson';
-        // map.addSource('razon_sexos', { type: 'geojson', data: url16 });
-
-        var url17 = './geojson/m_10mas_oficiohogar_sin_ingreso.geojson';
-        map.addSource('m_10mas_oficiohogar_sin_ingreso', { type: 'geojson', data: url17 });
-
-        var url18 = './geojson/15menos_dificultad.geojson';
-        map.addSource('15menos_dificultad', { type: 'geojson', data: url18 });
-
-        var url19 = './geojson/64mas_dificultad.geojson';
-        map.addSource('64mas_dificultad', { type: 'geojson', data: url19 });
-
-        var url20 = './geojson/84mas_dificultad.geojson';
-        map.addSource('84mas_dificultad', { type: 'geojson', data: url20 });
-
-        var url21 = './geojson/total_personas_dificultad.geojson';
-        map.addSource('total_personas_dificultad', { type: 'geojson', data: url21 });
-
-        var url22 = './geojson/limites.geojson';
-        map.addSource('limites', { type: 'geojson', data: url22 });
+       /*  var url22 = './geojson/limites.geojson';
+        map.addSource('limites', { type: 'geojson', data: url22 }); */
 
         var url24 = './geojson/estacion_de_policia.geojson';
         map.addSource('estacion_de_policia', { type: 'geojson', data: url24 });
@@ -158,23 +140,22 @@ $(document).ready(function () {
         var url29 = './geojson/centro_amar.geojson';
         map.addSource('centro_amar', { type: 'geojson', data: url29 });
 
-        var url30 = './geojson/limites_linea.geojson';
-        map.addSource('limites_linea', { type: 'geojson', data: url30 });
+/*         var url30 = './geojson/limites_linea.geojson';
+        map.addSource('limites_linea', { type: 'geojson', data: url30 }); */
 
         var url31 = './geojson/tabla_completa_indicadores.geojson';
         map.addSource('tabla_completa_indicadores', { type: 'geojson', data: url31 });
 
-        var url32 = './geojson/ambos.geojson';
-        map.addSource('ambos', { type: 'geojson', data: url32 });
-
         var url33 = './geojson/cuadrantes_policia_puntos.geojson';
         map.addSource('cuadrantes_policia_puntos', { type: 'geojson', data: url33 });
 
+        var url39 = './geojson/etiquetas.geojson';
+        map.addSource('etiquetas', { type: 'geojson', data: url39 });
 
-
+        
         // Se abre caja información de servicios, y cambia el nombre de la localidad según corresponda
 
-        map.on('click', 'limites', function (e) {
+        map.on('click', 'ambos', function (e) {
 
             var nombre = e.features[0].properties.LocNombre;
             var jardin_infantil = e.features[0].properties.jardin_infantil;
@@ -290,6 +271,9 @@ $(document).ready(function () {
                 .addTo(map);
         });
 
+
+        // BIBLORED no tiene info en tabla de atributos
+
         /* map.on('click', 'biblored', function (e) {
 
             var nombre = e.features[0].properties.CIONombre;
@@ -355,10 +339,296 @@ $(document).ready(function () {
         });
 
 
-        map.on('click', 'limites', function (e) {
+      /*   map.on('click', 'limites', function (e) {
 
             var nombre = e.features[0].properties.LocNombre;
             var innerPopup = '<div id="popup_limites">' + '<b>Localidad: </b>' + nombre + '</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        }); */
+
+        map.on('click', 'ambos', function (e) {
+
+            var total = e.features[0].properties.ambos;
+            var innerPopup = '<div>' + '<b>Población total: </b>' + total + '</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'hombres', function (e) {
+
+            var total = e.features[0].properties.hombres;
+            var innerPopup = '<div>' + '<b>Población total de hombres: </b>' + total + '</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'mujeres', function (e) {
+
+            var total = e.features[0].properties.mujeres;
+            var innerPopup = '<div>' + '<b>Población total de mujeres: </b>' + total + '</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'ambos05', function (e) {
+
+            var total = e.features[0].properties.ambos05;
+            var innerPopup = '<div>' + '<b>Población total de 0 a 5 años: </b>' + total + '</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'hombres05', function (e) {
+
+            var total = e.features[0].properties.hombres05;
+            var innerPopup = '<div>' + '<b>Población hombres de 0 a 5 años: </b>' + total + '</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'mujeres05', function (e) {
+
+            var total = e.features[0].properties.mujeres05;
+            var innerPopup = '<div>' + '<b>Población mujeres de 0 a 5 años: </b>' + total + '</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'ambos_mediana_edad', function (e) {
+
+            var total = e.features[0].properties.ambos_mediana_edad;
+            var innerPopup = '<div>' + '<b>Población total mediana edad: </b>' + total + '</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'hombres_mediana_edad', function (e) {
+
+            var total = e.features[0].properties.hombres_mediana_edad;
+            var innerPopup = '<div>' + '<b>Hombres de mediana edad: </b>' + total + '%'+'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'mujeres_mediana_edad', function (e) {
+
+            var total = e.features[0].properties.mujeres_mediana_edad;
+            var innerPopup = '<div>' + '<b>Mujeres de mediana edad: </b>' + total + '%'+'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'ambos65mas', function (e) {
+
+            var total = e.features[0].properties.ambos65mas;
+            var innerPopup = '<div>' + '<b>Población total mediana edad: </b>' + total + '%'+'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'hombres65mas', function (e) {
+
+            var total = e.features[0].properties.hombres65mas;
+            var innerPopup = '<div>' + '<b>Hombres de 65 años o más: </b>' + total + '%'+'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'mujeres65mas', function (e) {
+
+            var total = e.features[0].properties.mujeres65mas;
+            var innerPopup = '<div>' + '<b>Mujeres de 65 años o más: </b>' + total + '%'+'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'ambos85mas', function (e) {
+
+            var total = e.features[0].properties.ambos85mas;
+            var innerPopup = '<div>' + '<b>Población total de 85 años o más: </b>' + total + '%'+'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'hombres85mas', function (e) {
+
+            var total = e.features[0].properties.hombres85mas;
+            var innerPopup = '<div>' + '<b>Hombres de 85 años o más: </b>' + total + '%'+'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'mujeres85mas', function (e) {
+
+            var total = e.features[0].properties.mujeres85mas;
+            var innerPopup = '<div>' + '<b>Mujeres de 85 años o más: </b>' + total + '%'+'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'total_viviendas', function (e) {
+
+            var total = e.features[0].properties.total_viviendas;
+            var innerPopup = '<div>' + '<b>Total viviendas: </b>' + total + '</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'viviendas_65mas', function (e) {
+
+            var total = e.features[0].properties.viviendas_65mas;
+            var innerPopup = '<div>' + '<b>Viviendas 65 mas: </b>' + total + '</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'razon_sexos', function (e) {
+
+            var total = e.features[0].properties.razon_sexos;
+            var innerPopup = '<div>' + '<b>Razon de sexos: </b>' + total + '</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'relacion_dependencia_ambos', function (e) {
+
+            var total = e.features[0].properties.relacion_dependencia_ambos;
+            var innerPopup = '<div>' + '<b>Dependencia hombres/mujeres: </b>' + total + '</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'relacion_mayores_jovenes_ambos', function (e) {
+
+            var total = e.features[0].properties.relacion_mayores_jovenes_ambos;
+            var innerPopup = '<div>' + '<b>Relación personas mayores/jovenes: </b>' + total + '</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'relacion_menos15_mujeres1564', function (e) {
+
+            var total = e.features[0].properties.relacion_menos15_mujeres1564;
+            var innerPopup = '<div>' + '<b>Total: </b>' + total + '</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'dificultad_menos15', function (e) {
+
+            var total = e.features[0].properties.dificultad_menos15;
+            var innerPopup = '<div>' + '<b>Total: </b>' + total + '</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'dificultad_mayor64', function (e) {
+
+            var total = e.features[0].properties.dificultad_mayor64;
+            var innerPopup = '<div>' + '<b>Total: </b>' + total + '</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'dificultad_mayor84', function (e) {
+
+            var total = e.features[0].properties.dificultad_mayor84;
+            var innerPopup = '<div>' + '<b>Total: </b>' + total + '</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'dificultad_total', function (e) {
+
+            var total = e.features[0].properties.dificultad_total;
+            var innerPopup = '<div>' + '<b>Total: </b>' + total + '</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'mujeres_hogar_sin_ingreso', function (e) {
+
+            var total = e.features[0].properties.mujeres_hogar_sin_ingreso;
+            var innerPopup = '<div>' + '<b>Total: </b>' + total + '</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -372,26 +642,550 @@ $(document).ready(function () {
         map.addLayer({
             'id': 'ambos',
             'type': 'fill',
-            'source': 'ambos',
+            'source': 'tabla_completa_indicadores',
             'layout': {
                 'visibility': 'none',
             },
             'paint': {
-                'fill-color': '#088',
-                'fill-opacity': 0.8
+                'fill-color': [
+                    "step",
+                    ['get', 'ambos'],
+                    "#bebebd",
+                    15959,'#ffffd4',
+                    153142,'#ffe19c',
+                    290324,'#ffe19c',
+                    427506,'#feb351',
+                    564688,'#f0821e',
+                    839052,'#cc560c'
+                ],
+                'fill-opacity': 1
+            }
+        });
+
+        map.addLayer({
+            'id': 'hombres',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'hombres'],
+                    "#bebebd",
+                    8227,'#f1eef6',
+                    51297,'#c8d1e6',
+                    74581,'#91b6d7',
+                    166782,'#579ec8',
+                    179777,'#2382b4',
+                    316933,'#045a8d'
+                ],
+                'fill-opacity': 1
+            }
+        });
+
+        map.addLayer({
+            'id': 'mujeres',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'mujeres'],
+                    "#bebebd",
+                    7732,'#fcfbfd',
+                    52917,'#e4e3f0',
+                    81398,'#babbdb',
+                    177313,'#8c88c0',
+                    192080,'#63439c',
+                    339722,'#3f007d'
+                ],
+                'fill-opacity': 1
+            }
+        });
+
+        map.addLayer({
+            'id': 'ambos05',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'ambos05'],
+                    "#bebebd",
+                    4.1,'#fcfbfd',
+                    5.6,'#da9acb',
+                    6.5,'#de348a',
+                    8.8,'#980043'
+                ],
+                'fill-opacity': 1
+            }
+        });
+
+        map.addLayer({
+            'id': 'hombres05',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'hombres05'],
+                    "#bebebd",
+                    4.1,'#ffffff',
+                    6.1,'#ffaaaa',
+                    6.8,'#ff5555',
+                    9.3,'#ff0000'
+                ],
+                'fill-opacity': 1
+            }
+        });
+
+        map.addLayer({
+            'id': 'mujeres05',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'mujeres05'],
+                    "#bebebd",
+                    3.8,'#fcfbfd',
+                    5.2,'#c9cae3',
+                    6.1,'#7c76b6',
+                    8.4,'#3f007d'
+                ],
+                'fill-opacity': 1
+            }
+        });
+
+        map.addLayer({
+            'id': 'ambos_mediana_edad',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'ambos_mediana_edad'],
+                    "#bebebd",
+                    28.000,'#ffffcc',
+                    30.750,'#81ceba',
+                    33.000,'#3391bc',
+                    35.000,'#253494'
+                ],
+                'fill-opacity': 1
+            }
+        });
+
+        map.addLayer({
+            'id': 'hombres_mediana_edad',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'hombres_mediana_edad'],
+                    "#bebebd",
+                    27.000,'#fff5f0',
+                    29.750,'#fca487',
+                    31.500,'#eb362a',
+                    36.000,'#67000d'
+                ],
+                'fill-opacity': 1
+            }
+        });
+
+        map.addLayer({
+            'id': 'mujeres_mediana_edad',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'mujeres_mediana_edad'],
+                    "#bebebd",
+                    27.000,'#fff5f0',
+                    29.750,'#fca487',
+                    31.500,'#eb362a',
+                    36.000,'#67000d'
+                ],
+                'fill-opacity': 1
+            }
+        });
+
+        map.addLayer({
+            'id': 'ambos65mas',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'ambos65mas'],
+                    "#bebebd",
+                    5,'#ffffd4',
+                    7,'#fed98e',
+                    8,'#fe9929',
+                    10,'#d95f0e',
+                    12,'#993404'
+                ],
+                'fill-opacity': 1
+            }
+        });
+
+        map.addLayer({
+            'id': 'hombres65mas',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'hombres65mas'],
+                    "#bebebd",
+                    5,'#fff5f0',
+                    7,'#fca487',
+                    8,'#eb362a',
+                    10,'#67000d',
+                    12,'#67000d'
+                ],
+                'fill-opacity': 1
+            }
+        });
+
+        map.addLayer({
+            'id': 'mujeres65mas',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'mujeres65mas'],
+                    "#bebebd",
+                    5,'#fff5f0',
+                    7,'#fca487',
+                    8,'#eb362a',
+                    10,'#67000d',
+                    12,'#67000d'
+                ],
+                'fill-opacity': 1
+            }
+        });
+
+        map.addLayer({
+            'id': 'ambos85mas',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'ambos85mas'],
+                    "#bebebd",
+                    1,'#fff5f0',
+                    2,'#fca487',
+                ],
+                'fill-opacity': 1
+            }
+        });
+
+        map.addLayer({
+            'id': 'hombres85mas',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'hombres85mas'],
+                    "#bebebd",
+                    1,'#fff5f0',
+                    2,'#fca487',
+                ],
+                'fill-opacity': 1
+            }
+        });
+
+        map.addLayer({
+            'id': 'mujeres85mas',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'mujeres85mas'],
+                    "#bebebd",
+                    1,'#fff5f0',
+                    2,'#fca487',
+                ],
+                'fill-opacity': 1
             }
         });
 
         map.addLayer({
             'id': 'total_viviendas',
             'type': 'fill',
-            'source': 'total_viviendas',
+            'source': 'tabla_completa_indicadores',
             'layout': {
                 'visibility': 'none',
             },
             'paint': {
-                'fill-color': '#088',
-                'fill-opacity': 0.8
+                'fill-color': [
+                    "step",
+                    ['get', 'total_viviendas'],
+                    "#bebebd",
+                    50000,'#fff5f0',
+                    80000,'#fca487',
+                    120000,'#eb362a',
+                    200000,'#67000d',
+                    400000,'#5a1c00'
+                ],
+                'fill-opacity': 1
+            }
+        });
+
+        map.addLayer({
+            'id': 'viviendas_65mas',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'viviendas_65mas'],
+                    "#bebebd",
+                    15,'#fff5f0',
+                    20,'#fca487',
+                    25,'#eb362a'
+                ],
+                'fill-opacity': 1
+            }
+        });
+
+        map.addLayer({
+            'id': 'razon_sexos',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'razon_sexos'],
+                    "#bebebd",
+                    90,'#fff5f0',
+                    100,'#fca487',
+                    110,'#eb362a',
+                    120,'#67000d'
+                ],
+                'fill-opacity': 1
+            }
+        });
+
+        map.addLayer({
+            'id': 'relacion_dependencia_ambos',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'relacion_dependencia_ambos'],
+                    "#bebebd",
+                    33,'#fff5f0',
+                    36,'#fca487',
+                    39,'#eb362a',
+                    42,'#67000d'
+                ],
+                'fill-opacity': 1
+            }
+        });
+
+        map.addLayer({
+            'id': 'relacion_mayores_jovenes_ambos',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'relacion_mayores_jovenes_ambos'],
+                    "#bebebd",
+                    40,'#fff5f0',
+                    65,'#fca487',
+                    100,'#eb362a',
+                    128,'#67000d'
+                ],
+                'fill-opacity': 1
+            }
+        });
+
+        map.addLayer({
+            'id': 'relacion_menos15_mujeres1564',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'relacion_menos15_mujeres1564'],
+                    "#bebebd",
+                    30,'#fff5f0',
+                    40,'#fca487',
+                    50,'#eb362a',
+                    60,'#67000d',
+                    70,'#6b2504'
+                ],
+                'fill-opacity': 1
+            }
+        });
+
+        map.addLayer({
+            'id': 'dificultad_menos15',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'dificultad_menos15'],
+                    "#bebebd",
+                    2,'#fff5f0',
+                    3,'#fca487',
+                    4,'#eb362a',
+                    5,'#67000d'
+                ],
+                'fill-opacity': 1
+            }
+        });
+
+        map.addLayer({
+            'id': 'dificultad_mayor64',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'dificultad_mayor64'],
+                    "#bebebd",
+                    16,'#fff5f0',
+                    20,'#fca487',
+                    24,'#eb362a',
+                    28,'#67000d'
+                ],
+                'fill-opacity': 1
+            }
+        });
+
+        map.addLayer({
+            'id': 'dificultad_mayor84',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'dificultad_mayor84'],
+                    "#bebebd",
+                    30,'#fff5f0',
+                    40,'#fca487',
+                    50,'#eb362a',
+                    60,'#67000d'
+                ],
+                'fill-opacity': 1
+            }
+        });
+
+        map.addLayer({
+            'id': 'dificultad_total',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'dificultad_total'],
+                    "#bebebd",
+                    2,'#fff5f0',
+                    4,'#fca487',
+                    8,'#eb362a',
+                    16,'#67000d'
+                ],
+                'fill-opacity': 1
+            }
+        });
+
+        map.addLayer({
+            'id': 'mujeres_hogar_sin_ingreso',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'mujeres_hogar_sin_ingreso'],
+                    "#bebebd",
+                    25,'#fff5f0',
+                    30,'#fca487',
+                    35,'#eb362a',
+                    40,'#67000d'
+                ],
+                'fill-opacity': 1
             }
         });
 
@@ -417,11 +1211,11 @@ $(document).ready(function () {
             },
             'paint': {
                 'fill-color': '#088',
-                'fill-opacity': 0.8
+                'fill-opacity': 0.4
             }
         })
 
-        map.addLayer({
+       /*  map.addLayer({
             'id': 'limites',
             'type': 'fill',
             'source': 'limites',
@@ -450,7 +1244,7 @@ $(document).ready(function () {
                 'line-color': '#627BC1',
                 'line-width': 2
             }
-        })
+        }) */
 
 
         // Hover
@@ -654,32 +1448,26 @@ $(document).ready(function () {
 
         // Añadir capas de tipo punto
 
-        /* map.loadImage(
-             './image/icono_cuadrantes_policia_puntos.png',
-             function (error, image) {
-                 if (error) throw error;
-                 map.addImage('icono_cuadrantes_policia_puntos', image);
-     
-                 map.addLayer({
-                     'id': 'cuadrantes_policia_puntos',
-                     'type': 'symbol',
-                     'source': 'cuadrantes_policia_puntos',
-                     'layout': {
-                         "text-field": "{'PCUDESCRIP'}",
-                         "text-font": ["Droid Sans Regular"],
-                         "text-size": 12,
-                         'symbol-placement': "point",
-                         'icon-image': 'icono_cuadrantes_policia_puntos',
-                         'icon-allow-overlap': true,
-                         'icon-size': 0.5,
-                         'visibility': 'none'
-                     }
-                 });
-             }
-         ); */
+        map.addLayer({
+            'id': 'etiquetas',
+            'type': 'symbol',
+            'source': 'etiquetas',
+            'layout': {
+                'text-field': ['get', 'LocNombre'],
+                'text-size': 15,
+                'text-font': ["Open Sans Regular", "Arial Unicode MS Regular"],
+                'text-anchor': ['get', 'anchor'],
+                'visibility': 'visible'
+            },
+            'paint': {
+                'text-color': '#3a3b40',
+                'text-opacity': 1,
+                'text-halo-color': 'white',
+                'text-halo-width': 2,
+    }
+ });
 
-    
-                map.addLayer({
+        map.addLayer({
                     'id': 'cuadrantes_policia_puntos',
                     'type': 'symbol',
                     'source': 'cuadrantes_policia_puntos',
@@ -887,8 +1675,7 @@ $(document).ready(function () {
 
         // INTENTO DE CATEGORIZAR CAPA PUNTOS POR VALOR DEL DATO
 
-         /* map.addLayer(
-            {
+         map.addLayer({
            'id': 'indice_seguridad',
            'type': 'circle',
            'source': 'indice_seguridad',
@@ -896,22 +1683,17 @@ $(document).ready(function () {
                'visibility':'none'
            },
            'paint': {
-                'circle-radius':5,[
+                'circle-color':[
                     'interpolate',
                     ['linear'],
                     ['get','INDICE_SEG'],
-                    0,
-                    '#F2F12D',
-                    2,
-                    '#B86B25',
-                    4,
-                    '#7232122'
+                    0, '#e01c0a',
+                    2,'#f0b92c',
+                    4,'#1cc416',
                 ],
-                'fill-opacity':0.75
+                'circle-opacity':0.75
             }
-        },
-         'waterway-label'
-        ); */ 
+        }); 
 
 
         map.loadImage(
@@ -1035,9 +1817,22 @@ $(document).ready(function () {
          }); */
 
 
-
-
         // Add Legend
+
+        for (i = 0; i < layers.length; i++) {
+            var layer = layers[i];
+            var color = colors[i];
+            var item = document.createElement('div');
+            var key = document.createElement('span');
+            key.className = 'legend-key';
+            key.style.backgroundColor = color;
+
+            var value = document.createElement('span');
+            value.innerHTML = layer;
+            item.appendChild(key);
+            item.appendChild(value);
+            legend.appendChild(item);
+            }
 
 
     });
