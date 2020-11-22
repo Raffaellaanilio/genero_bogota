@@ -24,8 +24,7 @@ $(document).ready(function () {
         var visibility = map.getLayoutProperty(x, 'visibility');
 
         $("#cds_servicios").hide();
-        $("#popup_limites").hide(); // Se elimina el div pero igual queda el popup pequeño con la cruz ********* (arreglar)
-
+        $(".mapboxgl-popup-content").hide();
 
         // toggle layer visibility by changing the layout object's visibility property
         if (visibility === 'visible') {
@@ -44,15 +43,6 @@ $(document).ready(function () {
         y = document.getElementById(x);
 
         $(y).toggle();
-
-        // toggle layer visibility by changing the layout object's visibility property
-        if (visibility === 'visible') {
-            map.setLayoutProperty(x, 'visibility', 'none');
-            this.className = '';
-        } else {
-            this.className = 'active';
-            map.setLayoutProperty(x, 'visibility', 'visible');
-        }
     };
 
     var hoveredStateId = null;
@@ -66,7 +56,8 @@ $(document).ready(function () {
 
         var array_de_capas_puntos = ['creciendo_familia', 'comedor_comunitario', 'envejecimiento_activo', 'colegios', 'casa_oportunidades_mujeres', 'biblored', 'bibliotecas_comunitarias', 'paraderos_zonales_SITP', 'comisaria_familia', 'estacion_de_policia', 'atencion_personas_mayores_discapacidad', 'atencion_ninos_discapacidad', 'centro_proteger', 'centro_amar']
         var array_indicadores = ['ambos', 'hombres', 'mujeres', 'hombres05', 'mujeres05', 'ambos05']
-        // Change the cursor to a pointer when the mouse is over the states layer.
+
+    // Change the cursor to a pointer when the mouse is over the states layer.
 
         //map.on('mouseover', '(var=array_de_capas_puntos)', function () {
         //map.getCanvas().style.cursor = 'pointer';
@@ -116,9 +107,6 @@ $(document).ready(function () {
         var url13 = './geojson/comisaria_familia.geojson';
         map.addSource('comisaria_familia', { type: 'geojson', data: url13 });
 
-        var url14 = './geojson/total_viviendas.geojson';
-        map.addSource('total_viviendas', { type: 'geojson', data: url14 });
-
        /*  var url22 = './geojson/limites.geojson';
         map.addSource('limites', { type: 'geojson', data: url22 }); */
 
@@ -139,9 +127,6 @@ $(document).ready(function () {
 
         var url29 = './geojson/centro_amar.geojson';
         map.addSource('centro_amar', { type: 'geojson', data: url29 });
-
-/*         var url30 = './geojson/limites_linea.geojson';
-        map.addSource('limites_linea', { type: 'geojson', data: url30 }); */
 
         var url31 = './geojson/tabla_completa_indicadores.geojson';
         map.addSource('tabla_completa_indicadores', { type: 'geojson', data: url31 });
@@ -193,14 +178,44 @@ $(document).ready(function () {
             $("#conteo_teatro").text(teatro);
         });
 
-        // Popup al hacer clic en SYMBOL layer
+        // Popup al hacer clic en geometría
+        map.on('click', 'centro_proteger', function (e) {
+
+            var nombre = e.features[0].properties.OSSNOMBRE;
+            var direccion = e.features[0].properties.OSSDIRECCI;
+            var telefono = e.features[0].properties.OSSTELEFON;
+            var horario = e.features[0].properties.OSSHORARIO;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Nombre: </b>' + nombre + '</br>' + '<b>Dirección: </b>' + direccion + '</br>' + '<b>Teléfono: </b>' + telefono + '</br>' + '<b>Horario: </b>' + horario + '</div>';
+
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'centro_amar', function (e) {
+
+            var nombre = e.features[0].properties.OSSNOMBRE;
+            var direccion = e.features[0].properties.OSSDIRECCI;
+            var telefono = e.features[0].properties.OSSTELEFON;
+            var horario = e.features[0].properties.OSSHORARIO;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Nombre: </b>' + nombre + '</br>' + '<b>Dirección: </b>' + direccion + '</br>' + '<b>Teléfono: </b>' + telefono + '</br>' + '<b>Horario: </b>' + horario + '</div>';
+
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
         map.on('click', 'comedor_comunitario', function (e) {
 
             var nombre = e.features[0].properties.OSSNOMBRE;
             var direccion = e.features[0].properties.OSSDIRECCI;
             var telefono = e.features[0].properties.OSSTELEFON;
             var horario = e.features[0].properties.OSSHORARIO;
-            var innerPopup = '<div>' + '<b>Nombre: </b>' + nombre + '</br>' + '<b>Dirección: </b>' + direccion + '</br>' + '<b>Teléfono: </b>' + telefono + '</br>' + '<b>Horario: </b>' + horario + '</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Nombre: </b>' + nombre + '</br>' + '<b>Dirección: </b>' + direccion + '</br>' + '<b>Teléfono: </b>' + telefono + '</br>' + '<b>Horario: </b>' + horario + '</div>';
 
 
             new mapboxgl.Popup()
@@ -215,7 +230,7 @@ $(document).ready(function () {
             var direccion = e.features[0].properties.OSSDIRECCI;
             var telefono = e.features[0].properties.OSSTELEFON;
             var horario = e.features[0].properties.OSSHORARIO;
-            var innerPopup = '<div>' + '<b>Nombre: </b>' + nombre + '</br>' + '<b>Dirección: </b>' + direccion + '</br>' + '<b>Teléfono: </b>' + telefono + '</br>' + '<b>Horario: </b>' + horario + '</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Nombre: </b>' + nombre + '</br>' + '<b>Dirección: </b>' + direccion + '</br>' + '<b>Teléfono: </b>' + telefono + '</br>' + '<b>Horario: </b>' + horario + '</div>';
 
 
             new mapboxgl.Popup()
@@ -230,7 +245,38 @@ $(document).ready(function () {
             var direccion = e.features[0].properties.OSSDIRECCI;
             var telefono = e.features[0].properties.OSSTELEFON;
             var horario = e.features[0].properties.OSSHORARIO;
-            var innerPopup = '<div>' + '<b>Nombre: </b>' + nombre + '</br>' + '<b>Dirección: </b>' + direccion + '</br>' + '<b>Teléfono: </b>' + telefono + '</br>' + '<b>Horario: </b>' + horario + '</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Nombre: </b>' + nombre + '</br>' + '<b>Dirección: </b>' + direccion + '</br>' + '<b>Teléfono: </b>' + telefono + '</br>' + '<b>Horario: </b>' + horario + '</div>';
+
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+
+        map.on('click', 'atencion_personas_mayores_discapacidad', function (e) {
+
+            var nombre = e.features[0].properties.OSSNOMBRE;
+            var direccion = e.features[0].properties.OSSDIRECCI;
+            var telefono = e.features[0].properties.OSSTELEFON;
+            var horario = e.features[0].properties.OSSHORARIO;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Nombre: </b>' + nombre + '</br>' + '<b>Dirección: </b>' + direccion + '</br>' + '<b>Teléfono: </b>' + telefono + '</br>' + '<b>Horario: </b>' + horario + '</div>';
+
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'atencion_ninos_discapacidad', function (e) {
+
+            var nombre = e.features[0].properties.OSSNOMBRE;
+            var direccion = e.features[0].properties.OSSDIRECCI;
+            var telefono = e.features[0].properties.OSSTELEFON;
+            var horario = e.features[0].properties.OSSHORARIO;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Nombre: </b>' + nombre + '</br>' + '<b>Dirección: </b>' + direccion + '</br>' + '<b>Teléfono: </b>' + telefono + '</br>' + '<b>Horario: </b>' + horario + '</div>';
 
 
             new mapboxgl.Popup()
@@ -249,7 +295,7 @@ $(document).ready(function () {
             var enfoque = e.features[0].properties.DISCAPACID;
             var talentos = e.features[0].properties.TALENTOS_O;
             var regimen = e.features[0].properties.REGIMEN_Y;
-            var innerPopup = '<div style="width:fit-content;">' + '<b>Nombre: </b>' + nombre + '</br>' + '<b>Dirección: </b>' + direccion + '</br>' + '<b>Teléfono: </b>' + telefono + '</br>' + '<b>Email: </b>' + email + '</br>' + '<b>Sitio Web: </b>' + web + '</br>' + '<b>Enfoque: </b>' + enfoque + '</br>' + '<b>Talentos: </b>' + talentos + '</br>' + '<b>Regimen: </b>' + regimen + '</div>';
+            var innerPopup = '<div' + '<h6 style="text-align: center;"><b>Información</b></h6>' +'</br>'+ '<b>Nombre: </b>' + nombre + '</br>' + '<b>Dirección: </b>' + direccion + '</br>' + '<b>Teléfono: </b>' + telefono + '</br>' + '<b>Email: </b>' + email + '</br>' + '<b>Sitio Web: </b>' + web + '</br>' + '<b>Enfoque: </b>' + enfoque + '</br>' + '<b>Talentos: </b>' + talentos + '</br>' + '<b>Regimen: </b>' + regimen + '</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -264,7 +310,7 @@ $(document).ready(function () {
             var telefono = e.features[0].properties.CIOTelefon;
             var horario = e.features[0].properties.CIOHorario;
             var email = e.features[0].properties.CIOCElectr;
-            var innerPopup = '<div>' + '<b>Nombre: </b>' + nombre + '</br>' + '<b>Dirección: </b>' + direccion + '</br>' + '<b>Teléfono: </b>' + telefono + '</br>' + '<b>Horario: </b>' + horario + '</br>' + '<b>Email: </b>' + email + '</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Nombre: </b>' + nombre + '</br>' + '<b>Dirección: </b>' + direccion + '</br>' + '<b>Teléfono: </b>' + telefono + '</br>' + '<b>Horario: </b>' + horario + '</br>' + '<b>Email: </b>' + email + '</div>';
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
                 .setHTML(innerPopup)
@@ -288,25 +334,22 @@ $(document).ready(function () {
                 .addTo(map);
         }); */
 
-        /* map.on('click', 'bibliotecas_comunitarias', function (e) {
+        map.on('click', 'bibliotecas_comunitarias', function (e) {
 
-            var nombre = e.features[0].properties.CIONombre;
-            var direccion = e.features[0].properties.CIODirecci;
-            var telefono = e.features[0].properties.CIOTelefon;
-            var horario = e.features[0].properties.CIOHorario;
-            var email = e.features[0].properties.CIOCElectr;
-            var innerPopup = '<div>' + '<b>Nombre: </b>'+ nombre + '</br>' + '<b>Dirección: </b>' + direccion + '</br>' + '<b>Teléfono: </b>' + telefono + '</br>' + '<b>Horario: </b>' + horario + '</br>' + '<b>Email: </b>' + email +'</div>';
+            var nombre = e.features[0].properties.LecNombre;
+            var direccion = e.features[0].properties.LecDirecci;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Nombre: </b>'+ nombre + '</br>' + '<b>Dirección: </b>' + direccion + '</div>';
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
                 .setHTML(innerPopup)
                 .addTo(map);
-        }); */
+        });
 
         map.on('click', 'paraderos_zonales_SITP', function (e) {
 
             var nombre = e.features[0].properties.nombre_par;
             var direccion = e.features[0].properties.audio_para;
-            var innerPopup = '<div>' + '<b>Nombre: </b>' + nombre + '</br>' + '<b>Dirección: </b>' + direccion + '</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Nombre: </b>' + nombre + '</br>' + '<b>Dirección: </b>' + direccion + '</div>';
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
                 .setHTML(innerPopup)
@@ -320,7 +363,21 @@ $(document).ready(function () {
             var telefono = e.features[0].properties.EPOTELEFON;
             var email = e.features[0].properties.EPOCELECTR;
             var web = e.features[0].properties.EPOPWEB;
-            var innerPopup = '<div>' + '<b>Nombre: </b>' + direccion + '</br>' + '<b>Funcionamiento: </b>' + funcionamiento + '</br>' + '<b>Teléfono: </b>' + telefono + '</br>' + '<b>Email: </b>' + email + '</br>' + '<b>Sitio Web: </b>' + web + '</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Nombre: </b>' + direccion + '</br>' + '<b>Funcionamiento: </b>' + funcionamiento + '</br>' + '<b>Teléfono: </b>' + telefono + '</br>' + '<b>Email: </b>' + email + '</br>' + '<b>Sitio Web: </b>' + web + '</div>';
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'indice_seguridad', function (e) {
+
+    
+            var seguridad = e.features[0].properties.seguridad_;
+            var imagen = e.features[0].properties.URL_Fotogr;
+            var fecha = e.features[0].properties.Fecha;
+
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' +'<b>Evaluación de seguridad: </b>' + seguridad + '</br>' +'<b>Fecha de Análisis: </b>' + fecha + '</br>' + '<b>Fotografía del lugar: </b>' + '</br>' + '<a target="_blank" class="image-link" href="' + imagen +'">' + '<img id="foto" src="'+ imagen + '">' + '</a>' + '</div>';
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
                 .setHTML(innerPopup)
@@ -331,29 +388,17 @@ $(document).ready(function () {
             var direccion = e.features[0].properties.OSSDIRECCI;
             var telefono = e.features[0].properties.OSSTELEFON;
             var horario = e.features[0].properties.OSSHORARIO;
-            var innerPopup = '<div>' + '<b>Nombre: </b>' + direccion + '</br>' + '<b>Teléfono: </b>' + telefono + '</br>' + '<b>Horario: </b>' + horario + '</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Nombre: </b>' + direccion + '</br>' + '<b>Teléfono: </b>' + telefono + '</br>' + '<b>Horario: </b>' + horario + '</div>';
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
                 .setHTML(innerPopup)
                 .addTo(map);
         });
 
-
-      /*   map.on('click', 'limites', function (e) {
-
-            var nombre = e.features[0].properties.LocNombre;
-            var innerPopup = '<div id="popup_limites">' + '<b>Localidad: </b>' + nombre + '</div>';
-
-            new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(innerPopup)
-                .addTo(map);
-        }); */
-
         map.on('click', 'ambos', function (e) {
 
             var total = e.features[0].properties.ambos;
-            var innerPopup = '<div>' + '<b>Población total: </b>' + total + '</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Población total: </b>' + total + '</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -364,7 +409,7 @@ $(document).ready(function () {
         map.on('click', 'hombres', function (e) {
 
             var total = e.features[0].properties.hombres;
-            var innerPopup = '<div>' + '<b>Población total de hombres: </b>' + total + '</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Población total de hombres: </b>' + total + '</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -375,7 +420,7 @@ $(document).ready(function () {
         map.on('click', 'mujeres', function (e) {
 
             var total = e.features[0].properties.mujeres;
-            var innerPopup = '<div>' + '<b>Población total de mujeres: </b>' + total + '</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Población total de mujeres: </b>' + total + '</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -386,7 +431,7 @@ $(document).ready(function () {
         map.on('click', 'ambos05', function (e) {
 
             var total = e.features[0].properties.ambos05;
-            var innerPopup = '<div>' + '<b>Población total de 0 a 5 años: </b>' + total + '</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Población total de 0 a 5 años: </b>' + total + '</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -397,7 +442,7 @@ $(document).ready(function () {
         map.on('click', 'hombres05', function (e) {
 
             var total = e.features[0].properties.hombres05;
-            var innerPopup = '<div>' + '<b>Población hombres de 0 a 5 años: </b>' + total + '</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Población hombres de 0 a 5 años: </b>' + total + '</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -408,7 +453,7 @@ $(document).ready(function () {
         map.on('click', 'mujeres05', function (e) {
 
             var total = e.features[0].properties.mujeres05;
-            var innerPopup = '<div>' + '<b>Población mujeres de 0 a 5 años: </b>' + total + '</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Población mujeres de 0 a 5 años: </b>' + total + '</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -419,7 +464,7 @@ $(document).ready(function () {
         map.on('click', 'ambos_mediana_edad', function (e) {
 
             var total = e.features[0].properties.ambos_mediana_edad;
-            var innerPopup = '<div>' + '<b>Población total mediana edad: </b>' + total + '</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Población total mediana edad: </b>' + total + '</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -430,7 +475,7 @@ $(document).ready(function () {
         map.on('click', 'hombres_mediana_edad', function (e) {
 
             var total = e.features[0].properties.hombres_mediana_edad;
-            var innerPopup = '<div>' + '<b>Hombres de mediana edad: </b>' + total + '%'+'</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Hombres de mediana edad: </b>' + total + '%'+'</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -441,7 +486,7 @@ $(document).ready(function () {
         map.on('click', 'mujeres_mediana_edad', function (e) {
 
             var total = e.features[0].properties.mujeres_mediana_edad;
-            var innerPopup = '<div>' + '<b>Mujeres de mediana edad: </b>' + total + '%'+'</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Mujeres de mediana edad: </b>' + total + '%'+'</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -452,7 +497,7 @@ $(document).ready(function () {
         map.on('click', 'ambos65mas', function (e) {
 
             var total = e.features[0].properties.ambos65mas;
-            var innerPopup = '<div>' + '<b>Población total mediana edad: </b>' + total + '%'+'</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Población total mediana edad: </b>' + total + '%'+'</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -463,7 +508,7 @@ $(document).ready(function () {
         map.on('click', 'hombres65mas', function (e) {
 
             var total = e.features[0].properties.hombres65mas;
-            var innerPopup = '<div>' + '<b>Hombres de 65 años o más: </b>' + total + '%'+'</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Hombres de 65 años o más: </b>' + total + '%'+'</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -474,7 +519,7 @@ $(document).ready(function () {
         map.on('click', 'mujeres65mas', function (e) {
 
             var total = e.features[0].properties.mujeres65mas;
-            var innerPopup = '<div>' + '<b>Mujeres de 65 años o más: </b>' + total + '%'+'</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Mujeres de 65 años o más: </b>' + total + '%'+'</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -485,7 +530,7 @@ $(document).ready(function () {
         map.on('click', 'ambos85mas', function (e) {
 
             var total = e.features[0].properties.ambos85mas;
-            var innerPopup = '<div>' + '<b>Población total de 85 años o más: </b>' + total + '%'+'</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Población total de 85 años o más: </b>' + total + '%'+'</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -496,7 +541,7 @@ $(document).ready(function () {
         map.on('click', 'hombres85mas', function (e) {
 
             var total = e.features[0].properties.hombres85mas;
-            var innerPopup = '<div>' + '<b>Hombres de 85 años o más: </b>' + total + '%'+'</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Hombres de 85 años o más: </b>' + total + '%'+'</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -507,7 +552,7 @@ $(document).ready(function () {
         map.on('click', 'mujeres85mas', function (e) {
 
             var total = e.features[0].properties.mujeres85mas;
-            var innerPopup = '<div>' + '<b>Mujeres de 85 años o más: </b>' + total + '%'+'</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Mujeres de 85 años o más: </b>' + total + '%'+'</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -518,7 +563,7 @@ $(document).ready(function () {
         map.on('click', 'total_viviendas', function (e) {
 
             var total = e.features[0].properties.total_viviendas;
-            var innerPopup = '<div>' + '<b>Total viviendas: </b>' + total + '</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total viviendas: </b>' + total + '</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -529,7 +574,7 @@ $(document).ready(function () {
         map.on('click', 'viviendas_65mas', function (e) {
 
             var total = e.features[0].properties.viviendas_65mas;
-            var innerPopup = '<div>' + '<b>Viviendas 65 mas: </b>' + total + '</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Viviendas 65 mas: </b>' + total + '</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -540,7 +585,7 @@ $(document).ready(function () {
         map.on('click', 'razon_sexos', function (e) {
 
             var total = e.features[0].properties.razon_sexos;
-            var innerPopup = '<div>' + '<b>Razon de sexos: </b>' + total + '</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Razon de sexos: </b>' + total + '</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -551,7 +596,7 @@ $(document).ready(function () {
         map.on('click', 'relacion_dependencia_ambos', function (e) {
 
             var total = e.features[0].properties.relacion_dependencia_ambos;
-            var innerPopup = '<div>' + '<b>Dependencia hombres/mujeres: </b>' + total + '</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Dependencia hombres/mujeres: </b>' + total + '</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -562,7 +607,7 @@ $(document).ready(function () {
         map.on('click', 'relacion_mayores_jovenes_ambos', function (e) {
 
             var total = e.features[0].properties.relacion_mayores_jovenes_ambos;
-            var innerPopup = '<div>' + '<b>Relación personas mayores/jovenes: </b>' + total + '</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Relación personas mayores/jovenes: </b>' + total + '</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -573,7 +618,7 @@ $(document).ready(function () {
         map.on('click', 'relacion_menos15_mujeres1564', function (e) {
 
             var total = e.features[0].properties.relacion_menos15_mujeres1564;
-            var innerPopup = '<div>' + '<b>Total: </b>' + total + '</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total + '</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -584,7 +629,7 @@ $(document).ready(function () {
         map.on('click', 'dificultad_menos15', function (e) {
 
             var total = e.features[0].properties.dificultad_menos15;
-            var innerPopup = '<div>' + '<b>Total: </b>' + total + '</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total + '</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -595,7 +640,7 @@ $(document).ready(function () {
         map.on('click', 'dificultad_mayor64', function (e) {
 
             var total = e.features[0].properties.dificultad_mayor64;
-            var innerPopup = '<div>' + '<b>Total: </b>' + total + '</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total + '</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -606,7 +651,7 @@ $(document).ready(function () {
         map.on('click', 'dificultad_mayor84', function (e) {
 
             var total = e.features[0].properties.dificultad_mayor84;
-            var innerPopup = '<div>' + '<b>Total: </b>' + total + '</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total + '</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -617,7 +662,7 @@ $(document).ready(function () {
         map.on('click', 'dificultad_total', function (e) {
 
             var total = e.features[0].properties.dificultad_total;
-            var innerPopup = '<div>' + '<b>Total: </b>' + total + '</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total + '</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -628,7 +673,7 @@ $(document).ready(function () {
         map.on('click', 'mujeres_hogar_sin_ingreso', function (e) {
 
             var total = e.features[0].properties.mujeres_hogar_sin_ingreso;
-            var innerPopup = '<div>' + '<b>Total: </b>' + total + '</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total + '</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -638,6 +683,8 @@ $(document).ready(function () {
 
 
         // Añadir capas de tipo polígono y sus estilos
+
+        
 
         map.addLayer({
             'id': 'ambos',
@@ -1343,83 +1390,6 @@ $(document).ready(function () {
                    legend.appendChild(item);
                  } */
 
-        //   map.addLayer({
-        //     'id': 'viviendas_65mas',
-        //     'type': 'fill',
-        //     'source': 'viviendas_65mas',
-        //     'layout': {
-        //       'visibility': 'visible'
-        //     },
-        //     'paint': {
-        //       'fill-color': 'none',
-        //       'border-color' : '#000000'
-        //     }
-        //   });
-
-        //   map.addLayer({
-        //     'id': 'm_10mas_oficiohogar_sin_ingreso',
-        //     'type': 'fill',
-        //     'source': 'm_10mas_oficiohogar_sin_ingreso',
-        //     'layout': {
-        //       'visibility': 'visible'
-        //     },
-        //     'paint': {
-        //       'fill-color': 'none',
-        //       'border-color' : '#000000'
-        //     }
-        //   });
-
-        //   map.addLayer({
-        //     'id': '15menos_dificultad',
-        //     'type': 'fill',
-        //     'source': '15menos_dificultad',
-        //     'layout': {
-        //       'visibility': 'visible'
-        //     },
-        //     'paint': {
-        //       'fill-color': 'none',
-        //       'border-color' : '#000000'
-        //     }
-        //   });
-
-        //   map.addLayer({
-        //     'id': '64mas_dificultad',
-        //     'type': 'fill',
-        //     'source': '64mas_dificultad',
-        //     'layout': {
-        //       'visibility': 'visible'
-        //     },
-        //     'paint': {
-        //       'fill-color': 'none',
-        //       'border-color' : '#000000'
-        //     }
-        //   });
-
-        //   map.addLayer({
-        //     'id': '  84mas_dificultad',
-        //     'type': 'fill',
-        //     'source': '84mas_dificultad',
-        //     'layout': {
-        //       'visibility': 'visible'
-        //     },
-        //     'paint': {
-        //       'fill-color': 'none',
-        //       'border-color' : '#000000'
-        //     }
-        //   });
-
-        //   map.addLayer({
-        //     'id': 'total_personas_dificultad',
-        //     'type': 'fill',
-        //     'source': 'total_personas_dificultad',
-        //     'layout': {
-        //       'visibility': 'visible'
-        //     },
-        //     'paint': {
-        //       'fill-color': 'none',
-        //       'border-color' : '#000000'
-        //     }
-        //   });
 
 
         //INTENTO DE MAP.LOAD.IMAGE POR ARRAY DE CAPAS
@@ -1476,9 +1446,6 @@ $(document).ready(function () {
                         'text-size': 9,
                         'text-font': ["Open Sans Regular", "Arial Unicode MS Regular"],
                         'text-anchor': ['get', 'anchor'],
-                        'icon-image': 'icono_cuadrantes_policia_puntos',
-                        'icon-allow-overlap': true,
-                        'icon-size': 0.2,
                         'visibility': 'none'
                     },
                     'paint': {
@@ -1751,7 +1718,7 @@ $(document).ready(function () {
                     'layout': {
                         'icon-image': 'icono_atencion_ninos_discapacidad',
                         'icon-allow-overlap': true,
-                        'icon-size': 0.9,
+                        'icon-size': 1.2,
                         'visibility': 'none'
                     }
                 });
@@ -1819,7 +1786,7 @@ $(document).ready(function () {
 
         // Add Legend
 
-        for (i = 0; i < layers.length; i++) {
+      /*   for (i = 0; i < layers.length; i++) {
             var layer = layers[i];
             var color = colors[i];
             var item = document.createElement('div');
@@ -1833,7 +1800,7 @@ $(document).ready(function () {
             item.appendChild(value);
             legend.appendChild(item);
             }
-
+ */
 
     });
 });

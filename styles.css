@@ -18,6 +18,20 @@ body {
     font-family:'Maven Pro';
   }
 
+  #leyenda_capas_activas{
+    position: relative;
+    padding: 20px 20px;
+    width: 350px;
+    height:400px;
+    margin-top: 29%;
+    margin-left: 50%;
+    z-index: 3000;
+    background-color: whitesmoke;
+    border-radius: 5%;
+    box-shadow:2px 2px 2px 0px rgba(184,177,184,1);
+    font-family:'Maven Pro';
+  }
+
   #localidad{
     position: absolute;
     display: inline;
@@ -33,6 +47,15 @@ body {
   .table-wrapper-scroll-y {
   display: block;
     }
+
+  .mapboxgl-popup-content{
+    width: fit-content;
+    font-family: 'Maven Pro';
+  }
+
+  #foto{
+    max-width:100%;
+  }
 
   #map {
     position: absolute;
