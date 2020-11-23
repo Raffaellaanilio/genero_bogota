@@ -1454,7 +1454,7 @@ $(document).ready(function () {
                         'text-halo-color': 'white',
                         'text-halo-width': 1.5,
             }
-         });
+         }); 
 
 
         map.loadImage(
