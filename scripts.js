@@ -137,12 +137,129 @@ $(document).ready(function () {
         var url39 = './geojson/etiquetas.geojson';
         map.addSource('etiquetas', { type: 'geojson', data: url39 });
 
+        var url40 = './geojson/tabla_completa_indicadores2.geojson';
+        map.addSource('tabla_completa_indicadores2', { type: 'geojson', data: url40 });
+
         
         // Se abre caja información de servicios, y cambia el nombre de la localidad según corresponda
 
         map.on('click', 'ambos', function (e) {
 
-            var nombre = e.features[0].properties.LocNombre;
+            var nombre = e.features[0].properties.CDCNombre;
+            var jardin_infantil = e.features[0].properties.jardin_infantil;
+            var centro_dia = e.features[0].properties.centro_dia;
+            var centro_crecer = e.features[0].properties.centro_crecer;
+            var comisaria_familia = e.features[0].properties.comisaria_familia;
+            var biblioteca = e.features[0].properties.biblioteca;
+            var cocina = e.features[0].properties.cocina;
+            var coliseo = e.features[0].properties.coliseo;
+            var huerta = e.features[0].properties.huerta;
+            var piscina = e.features[0].properties.piscina;
+            var sala_belleza = e.features[0].properties.sala_belleza;
+            var sala_confeccion = e.features[0].properties.sala_confeccion;
+            var vive_digital = e.features[0].properties.vive_digital;
+            var salas_sistemas = e.features[0].properties.salas_sistemas;
+            var salon_multiple = e.features[0].properties.salon_multiple;
+            var teatro = e.features[0].properties.teatro;
+
+            $("#cds_servicios").show();
+            $("#localidad").text(nombre);
+            $("#conteo_jardin_infantil").text(jardin_infantil);
+            $("#conteo_centro_dia").text(centro_dia);
+            $("#conteo_centro_crecer").text(centro_crecer);
+            $("#conteo_comisaria_familia").text(comisaria_familia);
+            $("#conteo_biblioteca").text(biblioteca);
+            $("#conteo_cocina").text(cocina);
+            $("#conteo_coliseo").text(coliseo);
+            $("#conteo_huerta").text(huerta);
+            $("#conteo_piscina").text(piscina);
+            $("#conteo_sala_belleza").text(sala_belleza);
+            $("#conteo_sala_confeccion").text(sala_confeccion);
+            $("#conteo_vive_digital").text(vive_digital);
+            $("#conteo_salas_sistemas").text(salas_sistemas);
+            $("#conteo_salon_multiple").text(salon_multiple);
+            $("#conteo_teatro").text(teatro);
+        });
+
+        map.on('click', 'hombres', function (e) {
+
+            var nombre = e.features[0].properties.CDCNombre;
+            var jardin_infantil = e.features[0].properties.jardin_infantil;
+            var centro_dia = e.features[0].properties.centro_dia;
+            var centro_crecer = e.features[0].properties.centro_crecer;
+            var comisaria_familia = e.features[0].properties.comisaria_familia;
+            var biblioteca = e.features[0].properties.biblioteca;
+            var cocina = e.features[0].properties.cocina;
+            var coliseo = e.features[0].properties.coliseo;
+            var huerta = e.features[0].properties.huerta;
+            var piscina = e.features[0].properties.piscina;
+            var sala_belleza = e.features[0].properties.sala_belleza;
+            var sala_confeccion = e.features[0].properties.sala_confeccion;
+            var vive_digital = e.features[0].properties.vive_digital;
+            var salas_sistemas = e.features[0].properties.salas_sistemas;
+            var salon_multiple = e.features[0].properties.salon_multiple;
+            var teatro = e.features[0].properties.teatro;
+
+            $("#cds_servicios").show();
+            $("#localidad").text(nombre);
+            $("#conteo_jardin_infantil").text(jardin_infantil);
+            $("#conteo_centro_dia").text(centro_dia);
+            $("#conteo_centro_crecer").text(centro_crecer);
+            $("#conteo_comisaria_familia").text(comisaria_familia);
+            $("#conteo_biblioteca").text(biblioteca);
+            $("#conteo_cocina").text(cocina);
+            $("#conteo_coliseo").text(coliseo);
+            $("#conteo_huerta").text(huerta);
+            $("#conteo_piscina").text(piscina);
+            $("#conteo_sala_belleza").text(sala_belleza);
+            $("#conteo_sala_confeccion").text(sala_confeccion);
+            $("#conteo_vive_digital").text(vive_digital);
+            $("#conteo_salas_sistemas").text(salas_sistemas);
+            $("#conteo_salon_multiple").text(salon_multiple);
+            $("#conteo_teatro").text(teatro);
+        });
+
+        map.on('click', 'mujeres', function (e) {
+
+            var nombre = e.features[0].properties.CDCNombre;
+            var jardin_infantil = e.features[0].properties.jardin_infantil;
+            var centro_dia = e.features[0].properties.centro_dia;
+            var centro_crecer = e.features[0].properties.centro_crecer;
+            var comisaria_familia = e.features[0].properties.comisaria_familia;
+            var biblioteca = e.features[0].properties.biblioteca;
+            var cocina = e.features[0].properties.cocina;
+            var coliseo = e.features[0].properties.coliseo;
+            var huerta = e.features[0].properties.huerta;
+            var piscina = e.features[0].properties.piscina;
+            var sala_belleza = e.features[0].properties.sala_belleza;
+            var sala_confeccion = e.features[0].properties.sala_confeccion;
+            var vive_digital = e.features[0].properties.vive_digital;
+            var salas_sistemas = e.features[0].properties.salas_sistemas;
+            var salon_multiple = e.features[0].properties.salon_multiple;
+            var teatro = e.features[0].properties.teatro;
+
+            $("#cds_servicios").show();
+            $("#localidad").text(nombre);
+            $("#conteo_jardin_infantil").text(jardin_infantil);
+            $("#conteo_centro_dia").text(centro_dia);
+            $("#conteo_centro_crecer").text(centro_crecer);
+            $("#conteo_comisaria_familia").text(comisaria_familia);
+            $("#conteo_biblioteca").text(biblioteca);
+            $("#conteo_cocina").text(cocina);
+            $("#conteo_coliseo").text(coliseo);
+            $("#conteo_huerta").text(huerta);
+            $("#conteo_piscina").text(piscina);
+            $("#conteo_sala_belleza").text(sala_belleza);
+            $("#conteo_sala_confeccion").text(sala_confeccion);
+            $("#conteo_vive_digital").text(vive_digital);
+            $("#conteo_salas_sistemas").text(salas_sistemas);
+            $("#conteo_salon_multiple").text(salon_multiple);
+            $("#conteo_teatro").text(teatro);
+        });
+
+        map.on('click', 'mujeres_tareas_hogar', function (e) {
+
+            var nombre = e.features[0].properties.CDCNombre;
             var jardin_infantil = e.features[0].properties.jardin_infantil;
             var centro_dia = e.features[0].properties.centro_dia;
             var centro_crecer = e.features[0].properties.centro_crecer;
@@ -670,9 +787,9 @@ $(document).ready(function () {
                 .addTo(map);
         });
 
-        map.on('click', 'mujeres_hogar_sin_ingreso', function (e) {
+        map.on('click', 'mujeres_tareas_hogar', function (e) {
 
-            var total = e.features[0].properties.mujeres_hogar_sin_ingreso;
+            var total = e.features[0].properties.mujeres_tareas_hogar;
             var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total + '</div>';
 
             new mapboxgl.Popup()
@@ -705,7 +822,8 @@ $(document).ready(function () {
                     564688,'#f0821e',
                     839052,'#cc560c'
                 ],
-                'fill-opacity': 1
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
             }
         });
 
@@ -728,7 +846,8 @@ $(document).ready(function () {
                     179777,'#2382b4',
                     316933,'#045a8d'
                 ],
-                'fill-opacity': 1
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
             }
         });
 
@@ -751,7 +870,8 @@ $(document).ready(function () {
                     192080,'#63439c',
                     339722,'#3f007d'
                 ],
-                'fill-opacity': 1
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
             }
         });
 
@@ -772,7 +892,8 @@ $(document).ready(function () {
                     6.5,'#de348a',
                     8.8,'#980043'
                 ],
-                'fill-opacity': 1
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
             }
         });
 
@@ -793,7 +914,8 @@ $(document).ready(function () {
                     6.8,'#ff5555',
                     9.3,'#ff0000'
                 ],
-                'fill-opacity': 1
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
             }
         });
 
@@ -814,7 +936,8 @@ $(document).ready(function () {
                     6.1,'#7c76b6',
                     8.4,'#3f007d'
                 ],
-                'fill-opacity': 1
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
             }
         });
 
@@ -835,7 +958,8 @@ $(document).ready(function () {
                     33.000,'#3391bc',
                     35.000,'#253494'
                 ],
-                'fill-opacity': 1
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
             }
         });
 
@@ -856,7 +980,8 @@ $(document).ready(function () {
                     31.500,'#eb362a',
                     36.000,'#67000d'
                 ],
-                'fill-opacity': 1
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
             }
         });
 
@@ -877,7 +1002,8 @@ $(document).ready(function () {
                     31.500,'#eb362a',
                     36.000,'#67000d'
                 ],
-                'fill-opacity': 1
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
             }
         });
 
@@ -899,7 +1025,8 @@ $(document).ready(function () {
                     10,'#d95f0e',
                     12,'#993404'
                 ],
-                'fill-opacity': 1
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
             }
         });
 
@@ -921,7 +1048,8 @@ $(document).ready(function () {
                     10,'#67000d',
                     12,'#67000d'
                 ],
-                'fill-opacity': 1
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
             }
         });
 
@@ -943,7 +1071,8 @@ $(document).ready(function () {
                     10,'#67000d',
                     12,'#67000d'
                 ],
-                'fill-opacity': 1
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
             }
         });
 
@@ -962,7 +1091,8 @@ $(document).ready(function () {
                     1,'#fff5f0',
                     2,'#fca487',
                 ],
-                'fill-opacity': 1
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
             }
         });
 
@@ -981,7 +1111,8 @@ $(document).ready(function () {
                     1,'#fff5f0',
                     2,'#fca487',
                 ],
-                'fill-opacity': 1
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
             }
         });
 
@@ -1000,7 +1131,8 @@ $(document).ready(function () {
                     1,'#fff5f0',
                     2,'#fca487',
                 ],
-                'fill-opacity': 1
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
             }
         });
 
@@ -1022,7 +1154,8 @@ $(document).ready(function () {
                     200000,'#67000d',
                     400000,'#5a1c00'
                 ],
-                'fill-opacity': 1
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
             }
         });
 
@@ -1042,7 +1175,8 @@ $(document).ready(function () {
                     20,'#fca487',
                     25,'#eb362a'
                 ],
-                'fill-opacity': 1
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
             }
         });
 
@@ -1058,12 +1192,16 @@ $(document).ready(function () {
                     "step",
                     ['get', 'razon_sexos'],
                     "#bebebd",
-                    90,'#fff5f0',
-                    100,'#fca487',
-                    110,'#eb362a',
-                    120,'#67000d'
+                    90,'#f7fbff',
+                    95,'#d8e7f5',
+                    100,'#b0d2e8',
+                    105,'#73b3d8',
+                    110,'#3e8ec4',
+                    115,'#1563aa',
+                    120,'#08306b'
                 ],
-                'fill-opacity': 1
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
             }
         });
 
@@ -1084,7 +1222,8 @@ $(document).ready(function () {
                     39,'#eb362a',
                     42,'#67000d'
                 ],
-                'fill-opacity': 1
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
             }
         });
 
@@ -1105,7 +1244,8 @@ $(document).ready(function () {
                     100,'#eb362a',
                     128,'#67000d'
                 ],
-                'fill-opacity': 1
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
             }
         });
 
@@ -1127,7 +1267,8 @@ $(document).ready(function () {
                     60,'#67000d',
                     70,'#6b2504'
                 ],
-                'fill-opacity': 1
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
             }
         });
 
@@ -1148,7 +1289,8 @@ $(document).ready(function () {
                     4,'#eb362a',
                     5,'#67000d'
                 ],
-                'fill-opacity': 1
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
             }
         });
 
@@ -1169,7 +1311,8 @@ $(document).ready(function () {
                     24,'#eb362a',
                     28,'#67000d'
                 ],
-                'fill-opacity': 1
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
             }
         });
 
@@ -1190,7 +1333,8 @@ $(document).ready(function () {
                     50,'#eb362a',
                     60,'#67000d'
                 ],
-                'fill-opacity': 1
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
             }
         });
 
@@ -1211,28 +1355,54 @@ $(document).ready(function () {
                     8,'#eb362a',
                     16,'#67000d'
                 ],
-                'fill-opacity': 1
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
             }
         });
 
         map.addLayer({
-            'id': 'mujeres_hogar_sin_ingreso',
+            'id': 'mujeres_tareas_hogar',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores',
+            'source': 'tabla_completa_indicadores2',
             'layout': {
                 'visibility': 'none',
             },
             'paint': {
                 'fill-color': [
                     "step",
-                    ['get', 'mujeres_hogar_sin_ingreso'],
+                    ['get', 'mujeres_tareas_hogar'],
                     "#bebebd",
-                    25,'#fff5f0',
-                    30,'#fca487',
-                    35,'#eb362a',
-                    40,'#67000d'
+                    30000,'#fff5eb',
+                    60000,'#fed2a6',
+                    90000,'#fd9243',
+                    120000,'#df4f05',
+                    160000,'#7f2704'
                 ],
-                'fill-opacity': 1
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': 'pobreza_multidimension',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'pobreza_multidimension'],
+                    "#bebebd",
+                    2,'#fff5eb',
+                    4,'#fed2a6',
+                    6,'#fd9243',
+                    8,'#df4f05',
+                    10,'#7f2704'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
             }
         });
 

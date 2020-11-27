@@ -34,14 +34,15 @@ capas = [
         'type': 'punto',
         'nombre': 'Centro Proteger',
         'grupo': 'integracion',
-        'descripcion': 'Espacio donde se brinda atención integral para la garantía de derechos de niños, niñas, adolescentes en edades comprendidas entre 0 a 9 años 11 meses y hermanos con edad hasta 10 años 11 meses cuyos derechos se encuentran inobsevardos, amenazados o vulnerados, en espacios que garantizan la protección y ambientes propicios para llevar a cabo procesos de restablecimiento de derechos a niños, niñas y adolescentes los cuales buscan reparar el daño causado y crear contextos que posibiliten la construcción de individuos integrales para el efectivo goce de sus derechos.'
+        'descripcion': 'Espacio donde se brinda atención integral para la garantía de derechos de niños, niñas, adolescentes en edades comprendidas entre 0 a 9 años 11 meses y hermanos con edad hasta 10 años 11 meses cuyos derechos se encuentran inobsevardos, amenazados o vulnerados, en espacios que garantizan la protección y ambientes propicios para llevar a cabo procesos de restablecimiento de derechos a niños, niñas y adolescentes los cuales buscan reparar el daño causado y crear contextos que posibiliten la construcción de individuos integrales para el efectivo goce de sus derechos.',
+        'popup':[['Localidad','LocNombre'],['Población total de mediana edad','ambos_mediana_edad']]
     },
     {
         'id': 'centro_amar',
         'type': 'punto',
         'nombre': 'Centro Amar',
         'grupo': 'integracion',
-        'descripcion': 'Espacio donde se presta servicio de atención integral con enfoque diferencial a niñas, niños y adolescentes en riesgo o en situación de Trabajo Infantil ampliado y sus familias, para fortalecer y contribuir a su desarrollo integral, garantía y restablecimiento de sus derechos, a través de actividades pedagógicos, cuidado calificado, apoyo alimentario con calidad y oportunidad y promoción de la corresponsabilidad de las familias en entorno social.'
+        'descripcion': 'Espacio donde se presta servicio de atención integral con enfoque diferencial a niñas, niños y adolescentes en riesgo o en situación de Trabajo Infantil ampliado y sus familias, para fortalecer y contribuir a su desarrollo integral, garantía y restablecimiento de sus derechos, a través de actividades pedagógicos, cuidado calificado, apoyo alimentario con calidad y oportunidad y promoción de la corresponsabilidad de las familias en entorno social.',
     },
     {
         'id': 'creciendo_familia',
@@ -164,7 +165,9 @@ capas = [
         'source': 'tabla_completa_indicadores',
         'nombre': 'Población Total',
         'grupo': 'indicadores',
-        'descripcion': ''
+        'descripcion': '',
+        'campo':'ambos',
+        'popup':[['Localidad','LocNombre'],['Población Total','ambos']]
     },
     {
         'id': 'hombres',
@@ -172,7 +175,9 @@ capas = [
         'source': 'tabla_completa_indicadores',
         'nombre': 'Población total de hombres',
         'grupo': 'indicadores',
-        'descripcion': ''
+        'descripcion': '',
+        'campo':'hombres',
+        'popup':[['Localidad','LocNombre'],['Cantidad total de hombres','hombres']]
     },
     {
         'id': 'mujeres',
@@ -180,7 +185,9 @@ capas = [
         'source': 'tabla_completa_indicadores',
         'nombre': 'Población total de mujeres',
         'grupo': 'indicadores',
-        'descripcion': ''
+        'descripcion': '',
+        'campo':'mujeres',
+        'popup':[['Localidad','LocNombre'],['Cantidad total de mujeres','mujeres']]
     },
     {
         'id': 'ambos05',
@@ -188,7 +195,9 @@ capas = [
         'source': 'tabla_completa_indicadores',
         'nombre': 'Población total de 0 a 5 años',
         'grupo': 'indicadores',
-        'descripcion': ''
+        'descripcion': '',
+        'campo':'ambos05',
+        'popup':[['Localidad','LocNombre'],['Población total entre 0 a 5 años','ambos05']]
     },
     {
         'id': 'hombres05',
@@ -196,7 +205,9 @@ capas = [
         'source': 'tabla_completa_indicadores',
         'nombre': 'Población total de hombres entre 0 y 5 años',
         'grupo': 'indicadores',
-        'descripcion': ''
+        'descripcion': '',
+        'campo':'hombres05',
+        'popup':[['Localidad','LocNombre'],['Cantidad de hombres entre 0 a 5 años','hombres05']]
     },
     {
         'id': 'mujeres05',
@@ -204,7 +215,9 @@ capas = [
         'source': 'tabla_completa_indicadores',
         'nombre': 'Población total de mujeres entre 0 y 5 años',
         'grupo': 'indicadores',
-        'descripcion': ''
+        'descripcion': '',
+        'campo':'mujeres05',
+        'popup':[['Localidad','LocNombre'],['Cantidad de mujeres entre 0 a 5 años','mujeres05']]
     },
     {
         'id': 'ambos_mediana_edad',
@@ -212,7 +225,9 @@ capas = [
         'source': 'tabla_completa_indicadores',
         'nombre': 'Población total de mediana edad',
         'grupo': 'indicadores',
-        'descripcion': ''
+        'descripcion': '',
+        'campo':'ambos_mediana_edad',
+        'popup':[['Localidad','LocNombre'],['Población total de mediana edad','ambos_mediana_edad']]
     },
     {
         'id': 'hombres_mediana_edad',
@@ -220,7 +235,9 @@ capas = [
         'source': 'tabla_completa_indicadores',
         'nombre': 'Población total de hombres de mediana edad',
         'grupo': 'indicadores',
-        'descripcion': ''
+        'descripcion': '',
+        'campo':'hombres_mediana_edad',
+        'popup':[['Localidad','LocNombre'],['Cantidad de hombres de mediana edad','hombres_mediana_edad']]
     },
     {
         'id': 'mujeres_mediana_edad',
@@ -228,7 +245,9 @@ capas = [
         'source': 'tabla_completa_indicadores',
         'nombre': 'Población total de mujeres de mediana edad',
         'grupo': 'indicadores',
-        'descripcion': ''
+        'descripcion': '',
+        'campo':'mujeres_mediana_edad',
+        'popup':[['Localidad','LocNombre'],['Cantidad de mujeres de mediana edad','mujeres_mediana_edad']]
     },
     {
         'id': 'ambos65mas',
@@ -236,7 +255,9 @@ capas = [
         'source': 'tabla_completa_indicadores',
         'nombre': 'Población total de 65 años o más',
         'grupo': 'indicadores',
-        'descripcion': ''
+        'descripcion': '',
+        'campo':'ambos65mas',
+        'popup':[['Localidad','LocNombre'],['Población total entre 65 y más años','ambos65mas']]
     },
     {
         'id': 'hombres65mas',
@@ -244,7 +265,9 @@ capas = [
         'source': 'tabla_completa_indicadores',
         'nombre': 'Población total de hombres de 65 años y más',
         'grupo': 'indicadores',
-        'descripcion': ''
+        'descripcion': '',
+        'campo':'hombres65mas',
+        'popup':[['Localidad','LocNombre'],['Cantidad de hombres entre 65 y más años','hombres65mas']]
     },
     {
         'id': 'mujeres65mas',
@@ -252,7 +275,9 @@ capas = [
         'source': 'tabla_completa_indicadores',
         'nombre': 'Población total de mujeres de 65 años y más',
         'grupo': 'indicadores',
-        'descripcion': ''
+        'descripcion': '',
+        'campo':'mujeres65mas',
+        'popup':[['Localidad','LocNombre'],['Cantidad de mujeres entre 65 y más años','mujeres65mas']]
     },
     {
         'id': 'ambos85mas',
@@ -260,7 +285,9 @@ capas = [
         'source': 'tabla_completa_indicadores',
         'nombre': 'Población total de 85 años y más',
         'grupo': 'indicadores',
-        'descripcion': ''
+        'descripcion': '',
+        'campo':'ambos65mas',
+        'popup':[['Localidad','LocNombre'],['Población total entre 85 y más años','ambos65mas']]
     },
     {
         'id': 'hombres85mas',
@@ -268,7 +295,9 @@ capas = [
         'source': 'tabla_completa_indicadores',
         'nombre': 'Población total de hombres de 85 años y más',
         'grupo': 'indicadores',
-        'descripcion': ''
+        'descripcion': '',
+        'campo':'hombres65mas',
+        'popup':[['Localidad','LocNombre'],['Cantidad de hombres entre 85 y más años','hombres65mas']]
     },
     {
         'id': 'mujeres85mas',
@@ -276,7 +305,9 @@ capas = [
         'source': 'tabla_completa_indicadores',
         'nombre': 'Población total de mujeres de 85 años y más',
         'grupo': 'indicadores',
-        'descripcion': ''
+        'descripcion': '',
+        'campo':'mujeres65mas',
+        'popup':[['Localidad','LocNombre'],['Cantidad de mujeres entre 65 y más años','mujeres65mas']]
     },
     {
         'id': 'total_viviendas',
@@ -284,7 +315,9 @@ capas = [
         'source': 'tabla_completa_indicadores',
         'nombre': 'Total de viviendas',
         'grupo': 'indicadores',
-        'descripcion': ''
+        'descripcion': '',
+        'campo':'total_viviendas',
+        'popup':[['Localidad','LocNombre'],['Total de viviendas','total_viviendas']]
     },
     {
         'id': 'viviendas_65mas',
@@ -292,7 +325,9 @@ capas = [
         'source': 'tabla_completa_indicadores',
         'nombre': 'Viviendas con al menos una persona de 65 años o más',
         'grupo': 'indicadores',
-        'descripcion': ''
+        'descripcion': '',
+        'campo':'viviendas_65mas',
+        'popup':[['Localidad','LocNombre'],['Cantidad de viviendas con al menos una persona de 65 años o más','viviendas_65mas']]
     },
     {
         'id': 'razon_sexos',
@@ -300,7 +335,9 @@ capas = [
         'source': 'tabla_completa_indicadores',
         'nombre': 'Razón de sexos (Mujeres/Hombres x 1.000)',
         'grupo': 'indicadores',
-        'descripcion': ''
+        'descripcion': '',
+        'campo':'razon_sexos',
+        'popup':[['Localidad','LocNombre'],['Razón de sexos','razon_sexos']]
     },
     {
         'id': 'relacion_dependencia_ambos',
@@ -308,7 +345,9 @@ capas = [
         'source': 'tabla_completa_indicadores',
         'nombre': 'Dependencia de hombres y mujeres',
         'grupo': 'indicadores',
-        'descripcion': ''
+        'descripcion': '',
+        'campo':'relacion_dependencia_ambos',
+        'popup':[['Localidad','LocNombre'],['Relación de dependencia entre ambos sexos','relacion_dependencia_ambos']]
     },
     {
         'id': 'relacion_mayores_jovenes_ambos',
@@ -316,7 +355,9 @@ capas = [
         'source': 'tabla_completa_indicadores',
         'nombre': 'Personas mayores/Personas jovenes',
         'grupo': 'indicadores',
-        'descripcion': ''
+        'descripcion': '',
+        'campo':'relacion_mayores_jovenes_ambos',
+        'popup':[['Localidad','LocNombre'],['Relación de dependencia mayores/jovenes','relacion_mayores_jovenes_ambos']]
     },
     {
         'id': 'relacion_menos15_mujeres1564',
@@ -324,15 +365,9 @@ capas = [
         'source': 'tabla_completa_indicadores',
         'nombre': 'Menores de 15 y mujeres de 15 a 64 años',
         'grupo': 'indicadores',
-        'descripcion': ''
-    },
-    {
-        'id': 'relacion_menos15_mujeres1564',
-        'type': 'coropletico',
-        'source': 'tabla_completa_indicadores',
-        'nombre': 'Menores de 15 y mujeres de 15 a 64 años',
-        'grupo': 'indicadores',
-        'descripcion': ''
+        'descripcion': '',
+        'campo':'relacion_menos15_mujeres1564',
+        'popup':[['Localidad','LocNombre'],['Relación de dependencia entre menores de 15 y mujeres de 15 a 64 años','relacion_menos15_mujeres1564']]
     },
     {
         'id': 'dificultad_menos15',
@@ -340,7 +375,9 @@ capas = [
         'source': 'tabla_completa_indicadores',
         'nombre': 'Personas menores de 15 años con alguna dificultad en su vida diaria',
         'grupo': 'indicadores',
-        'descripcion': ''
+        'descripcion': '',
+        'campo':'dificultad_menos15',
+        'popup':[['Localidad','LocNombre'],['Personas de menos de 15 años con alguna dificultad en su vida diaria','dificultad_menos15']]
     },
     {
         'id': 'dificultad_mayor64',
@@ -348,7 +385,9 @@ capas = [
         'source': 'tabla_completa_indicadores',
         'nombre': 'Personas mayores de 64 años con alguna dificultad en su vida diaria',
         'grupo': 'indicadores',
-        'descripcion': ''
+        'descripcion': '',
+        'campo':'dificultad_mayor64',
+        'popup':[['Localidad','LocNombre'],['Personas mayores de 64 años con alguna dificultad en su vida diaria','dificultad_mayor64']]
     },
     {
         'id': 'dificultad_mayor84',
@@ -356,7 +395,9 @@ capas = [
         'source': 'tabla_completa_indicadores',
         'nombre': 'Personas mayores de 84 años con alguna dificultad en su vida diaria',
         'grupo': 'indicadores',
-        'descripcion': ''
+        'descripcion': '',
+        'campo':'dificultad_mayor84',
+        'popup':[['Localidad','LocNombre'],['Personas mayores de 84 años con alguna dificultad en su vida diaria','dificultad_mayor84']]
     },
     {
         'id': 'dificultad_total',
@@ -364,7 +405,9 @@ capas = [
         'source': 'tabla_completa_indicadores',
         'nombre': 'Total de personas con alguna dificultad en su vida diaria',
         'grupo': 'indicadores',
-        'descripcion': ''
+        'descripcion': '',
+        'campo':'dificultad_total',
+        'popup':[['Localidad','LocNombre'],['Total de personas con alguna dificultad en su vida diaria','dificultad_total']]
     },
     {
         'id': 'mujeres_hogar_sin_ingreso',
@@ -372,6 +415,8 @@ capas = [
         'source': 'tabla_completa_indicadores',
         'nombre': 'Mujeres de 10 años y más en oficios del hogar y sin ingresos',
         'grupo': 'indicadores',
-        'descripcion': ''
+        'descripcion': '',
+        'campo':'mujeres_hogar_sin_ingreso',
+        'popup':[['Localidad','LocNombre'],['Mujeres de 10 años y más en oficios del hogar y sin ingresos','mujeres_hogar_sin_ingreso']]
     },
 ]

@@ -21,7 +21,7 @@
   <!-- Pop Up servicios -->
 
     <div class="container" id="cds_servicios" style="display:none;">
-      <div style="font-weight: 700;text-align: left;font-size: large;">Servicios ofrecidos en <div id="localidad"> </div></div>
+      <div style="font-weight: 700;text-align: left;font-size: large;">Servicios ofrecidos en el CDC <div id="localidad"> </div></div>
       <table class="table table-hover table-borderless table-wrapper-scroll-y my-custom-scrollbar">
         <tbody>
           <tr>
@@ -155,9 +155,9 @@
         <div class="card-body" style="text-align:left;">
                 <div id="accordion" style="color: #776D9C;">
                   <div class="card">
-                    <div class="card-header">
-                      <a class="card-link" data-toggle="collapse" href="#collapseOne" style="color:#776D9C;">
-                        Integración
+                    <div class="card-header" data-toggle="collapse" href="#collapseOne">
+                      <a class="card-link" style="color:#776D9C;">
+                        Oferta Pública en Cuidados
                       </a>
                       <i class="fas fa-user-plus" style="padding:10px;float: right;"></i>
                     </div>
@@ -197,6 +197,11 @@
                             <label class="form-check-label" for="exampleCheck1">Atención a Niños, Niñas y Adolescentes con Discapacidad</label>
                             <div class="container" id="descripcion_atencion_ninos_discapacidad" style="display:none;font-family: Maven Pro;font-weight:400;">Lugar en el que se atienden adolescentes y jóvenes entre los 6 y 17 años 11 meses, con discapacidad cognitiva no psicosocial que requieran apoyos extensos y generalizados o con discapacidad múltiple que requieran apoyos intermitentes y limitados; y que habiten en Bogotá D.C. Actividades lúdicas, pedagógicas, recreativas y deportivas orientadas al fortalecimiento de habilidades y capacidades para desenvolverse con independencia en su entorno. Desarrollo de procesos de inclusión educativa de acuerdo con las habilidades y capacidades de los participantes, Apoyo alimentario, Servicio de transporte. Espacio donde se prestan actividades lúdicas, pedagógicas, recreativas y deportivas orientadas al mantenimiento de las condiciones físicas y mentales que permitan mejoramiento de la calidad de vida, apoo alimentario y servicio de transporte a niños niñas y adolescentes entre 6 y 17 años 11 meses con discapacidad múltiple asociada a discapacidad cognitiva, que requieren de apoyos extensos a generalizados y que habiten en Bogotá D.C.</div>
                           </div>
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check10" onclick="encendido('casa_oportunidades_mujeres'), showdescripcion('descripcion_casa_oportunidades_mujeres')">
+                            <label class="form-check-label" for="exampleCheck1">Casa de igualdad de oportunidades para las mujeres de Bogotá D.C</label>
+                            <div class="container" id="descripcion_casa_oportunidades_mujeres" style="display:none;font-family:  Maven Pro;font-weight:400;">Espacio de encuentro entre mujeres para el conocimiento de sus derechos y el desarrollo de procesos orientados al empoderamiento social y político, promotores del liderazgo, la autonomía y el ejercicio pleno de derechos. Su cubrimiento es el Distrito Capital. En estos lugares se prestan diferentes servicios a la comunidad distrital incluyendo sus 20 localidades.</div>
+                          </div>
 
                     </div>
                   </div>
@@ -216,8 +221,8 @@
                     </div>
                   </div> -->
                   <div class="card">
-                    <div class="card-header">
-                      <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree" style="color:#776D9C;">
+                    <div class="card-header" data-toggle="collapse" href="#collapseThree">
+                      <a class="collapsed card-link" style="color:#776D9C;">
                         Educación
                       </a>
                       <i class="fas fa-graduation-cap" style="padding:10px;float: right"></i>
@@ -233,9 +238,9 @@
                   </div>
                   
 
-                  <div class="card">
-                    <div class="card-header">
-                      <a class="collapsed card-link" data-toggle="collapse" href="#collapseFour" style="color:#776D9C;">
+                  <!-- <div class="card">
+                    <div class="card-header"  data-toggle="collapse" href="#collapseFour">
+                      <a class="collapsed card-link" style="color:#776D9C;">
                       Mujer
                     </a>
                     <i class="fas fa-venus" style="padding:10px;float: right"></i>
@@ -247,11 +252,11 @@
                             <div class="container" id="descripcion_casa_oportunidades_mujeres" style="display:none;font-family:  Maven Pro;font-weight:400;">Espacio de encuentro entre mujeres para el conocimiento de sus derechos y el desarrollo de procesos orientados al empoderamiento social y político, promotores del liderazgo, la autonomía y el ejercicio pleno de derechos. Su cubrimiento es el Distrito Capital. En estos lugares se prestan diferentes servicios a la comunidad distrital incluyendo sus 20 localidades.</div>
                           </div>
                     </div>
-                  </div>
+                  </div> -->
 
                   <div class="card">
-                    <div class="card-header">
-                      <a class="collapsed card-link" data-toggle="collapse" href="#collapseFive" style="color:#776D9C;">
+                    <div class="card-header" data-toggle="collapse" href="#collapseFive">
+                      <a class="collapsed card-link" style="color:#776D9C;">
                         Cultura
                       </a>
                       <i class="fas fa-book-reader" style="padding:10px;float: right"></i>
@@ -271,8 +276,8 @@
                   </div>
 
                   <div class="card">
-                    <div class="card-header">
-                      <a class="collapsed card-link" data-toggle="collapse" href="#collapseSix" style="color:#776D9C;">
+                    <div class="card-header"  data-toggle="collapse" href="#collapseSix">
+                      <a class="collapsed card-link" style="color:#776D9C;">
                         Movilidad
                       </a>
                       <i class="fas fa-bus-alt" style="padding:10px;float: right"></i>
@@ -298,8 +303,8 @@
                   </div>
 
                   <div class="card">
-                    <div class="card-header">
-                      <a class="collapsed card-link" data-toggle="collapse" href="#collapseSeven" style="color:#776D9C;">
+                    <div class="card-header"  data-toggle="collapse" href="#collapseSeven">
+                      <a class="collapsed card-link" style="color:#776D9C;">
                         Seguridad
                       </a>
                       <i class="fas fa-user-shield" style="padding:10px;float: right"></i>
@@ -330,9 +335,9 @@
                   </div>
 
                   <div class="card">
-                    <div class="card-header">
-                      <a class="collapsed card-link" data-toggle="collapse" href="#collapseEight" style="color:#776D9C;">
-                        Indicadores
+                    <div class="card-header" data-toggle="collapse" href="#collapseEight">
+                      <a class="collapsed card-link" style="color:#776D9C;">
+                        Indicadores de Demanda de Cuidado
                       </a>
                       <i class="fas fa-chart-pie" style="padding:10px; float: right"></i>
                     </div>
@@ -443,11 +448,17 @@
                             <input type="checkbox" class="form-check-input" id="check44" onclick="encendido('dificultad_total')">
                             <label class="form-check-label" for="exampleCheck1">Total</label>
                           </div>
-                          <h6>Oficios del hogar</h6>
+                          <h6>Trabajo domestico no remunerado</h6>
                           <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check45" onclick="encendido('mujeres_hogar_sin_ingreso')">
-                            <label class="form-check-label" for="exampleCheck1">Mujeres de 10 años y más en oficios del hogar y sin ingresos</label>
+                            <input type="checkbox" class="form-check-input" id="check45" onclick="encendido('mujeres_tareas_hogar')">
+                            <label class="form-check-label" for="exampleCheck1">Mujeres que se dedican exclusivamente a las tareas del hogar de 15 años o más/Total mujeres de 15 años o más</label>
                           </div>
+                          <!-- <h6>Pobreza</h6>
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check45" onclick="encendido('pobreza_multidimension')">
+                            <label class="form-check-label" for="exampleCheck1">Pobreza Multidimensional</label>
+                            <div class="container" id="descripcion_centro_proteger" style="display:none;font-family: Maven Pro; font-weight:400;">Porcentaje de Personas en hogares que tienen índice de pobreza multidimensional ponderado, igual o superior al 33% de las privaciones</div>
+                          </div> -->
                     </div>
                   </div>
                   <!-- <div class="card">

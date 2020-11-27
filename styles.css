@@ -7,7 +7,7 @@ body {
   #cds_servicios{
     position: relative;
     padding: 20px 20px;
-    width: 350px;
+    width: 400px;
     height:400px;
     margin-top: 29%;
     margin-left: 25.5%;
@@ -16,6 +16,7 @@ body {
     border-radius: 5%;
     box-shadow:2px 2px 2px 0px rgba(184,177,184,1);
     font-family:'Maven Pro';
+
   }
 
   #leyenda_capas_activas{
