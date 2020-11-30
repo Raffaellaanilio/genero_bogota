@@ -1,0 +1,18 @@
+{
+"type": "FeatureCollection",
+"name": "propuesta_manzanas",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Name": "Av Suba #103b-90" }, "geometry": { "type": "Point", "coordinates": [ -74.066024500000012, 4.6919327, 0.0 ] } },
+{ "type": "Feature", "properties": { "Name": "Cade la gaitana" }, "geometry": { "type": "Point", "coordinates": [ -74.109427099999962, 4.7413744, 0.0 ] } },
+{ "type": "Feature", "properties": { "Name": "CDC LA VICTORIA" }, "geometry": { "type": "Point", "coordinates": [ -74.0944433, 4.5539062, 0.0 ] } },
+{ "type": "Feature", "properties": { "Name": "Centro De Desarrollo Comunitario Julio César Sánchez" }, "geometry": { "type": "Point", "coordinates": [ -74.108960399999958, 4.5009015, 0.0 ] } },
+{ "type": "Feature", "properties": { "Name": "Cl. 64c #121-76" }, "geometry": { "type": "Point", "coordinates": [ -74.141191, 4.7150329, 0.0 ] } },
+{ "type": "Feature", "properties": { "Name": "Colegio Charry" }, "geometry": { "type": "Point", "coordinates": [ -74.1199527, 4.7133631, 0.0 ] } },
+{ "type": "Feature", "properties": { "Name": "Colegio Restrepo Millán Sede A" }, "geometry": { "type": "Point", "coordinates": [ -74.122488799999957, 4.5811344, 0.0 ] } },
+{ "type": "Feature", "properties": { "Name": "Cra. 7 #155-20" }, "geometry": { "type": "Point", "coordinates": [ -74.023902299999961, 4.7297841, 0.0 ] } },
+{ "type": "Feature", "properties": { "Name": "Humedal Santa María del Lago" }, "geometry": { "type": "Point", "coordinates": [ -74.092667899999952, 4.694405, 0.0 ] } },
+{ "type": "Feature", "properties": { "Name": "Jardin Infantil Bellavista" }, "geometry": { "type": "Point", "coordinates": [ -74.171486800000011, 4.6457905, 0.0 ] } },
+{ "type": "Feature", "properties": { "Name": "Panadería Nicoll" }, "geometry": { "type": "Point", "coordinates": [ -74.111086, 4.576697, 0.0 ] } }
+]
+}
