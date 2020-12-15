@@ -5,7 +5,7 @@ $(document).ready(function () {
     mapboxgl.accessToken = 'pk.eyJ1IjoicmFmZmFlbGxhYW5pbGlvIiwiYSI6ImNrZWlubncydjEwOGgyd21udHdmOWJ4M24ifQ.E2q7D7b-Je_x7VRjbqjAAA';
     var map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v11',
+        style: 'mapbox://styles/mapbox/streets-v10',
         center: [-74.0894, 4.5378],
         zoom: 10
     });
@@ -107,8 +107,8 @@ $(document).ready(function () {
         var url13 = './geojson/comisaria_familia.geojson';
         map.addSource('comisaria_familia', { type: 'geojson', data: url13 });
 
-       /*  var url22 = './geojson/limites.geojson';
-        map.addSource('limites', { type: 'geojson', data: url22 }); */
+       var url22 = './geojson/limites.geojson';
+        map.addSource('limites', { type: 'geojson', data: url22 });
 
         var url24 = './geojson/estacion_de_policia.geojson';
         map.addSource('estacion_de_policia', { type: 'geojson', data: url24 });
@@ -128,9 +128,6 @@ $(document).ready(function () {
         var url29 = './geojson/centro_amar.geojson';
         map.addSource('centro_amar', { type: 'geojson', data: url29 });
 
-        var url31 = './geojson/tabla_completa_indicadores.geojson';
-        map.addSource('tabla_completa_indicadores', { type: 'geojson', data: url31 });
-
         var url33 = './geojson/cuadrantes_policia_puntos.geojson';
         map.addSource('cuadrantes_policia_puntos', { type: 'geojson', data: url33 });
 
@@ -142,6 +139,15 @@ $(document).ready(function () {
 
         var url41 = './geojson/propuesta_manzanas.geojson';
         map.addSource('propuesta_manzanas', { type: 'geojson', data: url41 });
+
+        var url42 = './geojson/cdc.geojson';
+        map.addSource('cdc', { type: 'geojson', data: url42 });
+
+        var url43 = './geojson/jardin_infantil.geojson';
+        map.addSource('jardin_infantil', { type: 'geojson', data: url43 });
+
+        var url44 = './geojson/coordenadas_empresas.geojson';
+        map.addSource('coordenadas_empresas', { type: 'geojson', data: url44 });
 
         
         // Se abre caja información de servicios, y cambia el nombre de la localidad según corresponda
@@ -298,7 +304,59 @@ $(document).ready(function () {
             $("#conteo_teatro").text(teatro);
         });
 
+        map.on('click', 'cdc', function (e) {
+
+            var nombre = e.features[0].properties.OSSNOMBRE;
+            var jardin_infantil = e.features[0].properties.jardin_infantil;
+            var centro_dia = e.features[0].properties.centro_dia;
+            var centro_crecer = e.features[0].properties.centro_crecer;
+            var comisaria_familia = e.features[0].properties.comisaria_familia;
+            var biblioteca = e.features[0].properties.biblioteca;
+            var cocina = e.features[0].properties.cocina;
+            var coliseo = e.features[0].properties.coliseo;
+            var huerta = e.features[0].properties.huerta;
+            var piscina = e.features[0].properties.piscina;
+            var sala_belleza = e.features[0].properties.sala_belleza;
+            var sala_confeccion = e.features[0].properties.sala_confeccion;
+            var vive_digital = e.features[0].properties.vive_digital;
+            var salas_sistemas = e.features[0].properties.salas_sistemas;
+            var salon_multiple = e.features[0].properties.salon_multiple;
+            var teatro = e.features[0].properties.teatro;
+
+            $("#cds_servicios").show();
+            $("#localidad").text(nombre);
+            $("#conteo_jardin_infantil").text(jardin_infantil);
+            $("#conteo_centro_dia").text(centro_dia);
+            $("#conteo_centro_crecer").text(centro_crecer);
+            $("#conteo_comisaria_familia").text(comisaria_familia);
+            $("#conteo_biblioteca").text(biblioteca);
+            $("#conteo_cocina").text(cocina);
+            $("#conteo_coliseo").text(coliseo);
+            $("#conteo_huerta").text(huerta);
+            $("#conteo_piscina").text(piscina);
+            $("#conteo_sala_belleza").text(sala_belleza);
+            $("#conteo_sala_confeccion").text(sala_confeccion);
+            $("#conteo_vive_digital").text(vive_digital);
+            $("#conteo_salas_sistemas").text(salas_sistemas);
+            $("#conteo_salon_multiple").text(salon_multiple);
+            $("#conteo_teatro").text(teatro);
+        });
+
         // Popup al hacer clic en geometría
+
+        map.on('click', 'cdc', function (e) {
+
+            var nombre = e.features[0].properties.OSSNOMBRE;
+            var direccion = e.features[0].properties.OSSDIRECCI;
+            var telefono = e.features[0].properties.OSSTELEFON;
+            var horario = e.features[0].properties.OSSHORARIO;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Nombre: </b>' + nombre + '</br>' + '<b>Dirección: </b>' + direccion + '</br>' + '<b>Teléfono: </b>' + telefono + '</br>' + '<b>Horario: </b>' + horario + '</div>';
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
         map.on('click', 'centro_proteger', function (e) {
 
             var nombre = e.features[0].properties.OSSNOMBRE;
@@ -437,22 +495,18 @@ $(document).ready(function () {
                 .addTo(map);
         });
 
+        map.on('click', 'jardin_infantil', function (e) {
 
-        // BIBLORED no tiene info en tabla de atributos
-
-        /* map.on('click', 'biblored', function (e) {
-
-            var nombre = e.features[0].properties.CIONombre;
-            var direccion = e.features[0].properties.CIODirecci;
-            var telefono = e.features[0].properties.CIOTelefon;
-            var horario = e.features[0].properties.CIOHorario;
-            var email = e.features[0].properties.CIOCElectr;
-            var innerPopup = '<div>' + '<b>Nombre: </b>'+ nombre + '</br>' + '<b>Dirección: </b>' + direccion + '</br>' + '<b>Teléfono: </b>' + telefono + '</br>' + '<b>Horario: </b>' + horario + '</br>' + '<b>Email: </b>' + email +'</div>';
+            var nombre = e.features[0].properties.OSSNOMBRE;
+            var direccion = e.features[0].properties.OSSDIRECCI;
+            var telefono = e.features[0].properties.OSSTELEFON;
+            var horario = e.features[0].properties.OSSHORARIO;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Nombre: </b>' + nombre + '</br>' + '<b>Dirección: </b>' + direccion + '</br>' + '<b>Teléfono: </b>' + telefono + '</br>' + '<b>Horario: </b>' + horario + '</br>' + '</div>';
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
                 .setHTML(innerPopup)
                 .addTo(map);
-        }); */
+        });
 
         map.on('click', 'bibliotecas_comunitarias', function (e) {
 
@@ -856,17 +910,6 @@ $(document).ready(function () {
                 .addTo(map);
         });
 
-        map.on('click', 'razon_sexos', function (e) {
-
-            var total = e.features[0].properties.razon_sexos;
-            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Razon de sexos: </b>' + total + '</div>';
-
-            new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(innerPopup)
-                .addTo(map);
-        });
-
         map.on('click', 'indice_feminidad', function (e) {
 
             var total = e.features[0].properties.indice_feminidad;
@@ -878,82 +921,6 @@ $(document).ready(function () {
                 .addTo(map);
         });
 
-        map.on('click', 'relacion_dependencia_ambos', function (e) {
-
-            var total = e.features[0].properties.relacion_dependencia_ambos;
-            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Dependencia hombres/mujeres: </b>' + total + '</div>';
-
-            new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(innerPopup)
-                .addTo(map);
-        });
-
-        map.on('click', 'relacion_mayores_jovenes_ambos', function (e) {
-
-            var total = e.features[0].properties.relacion_mayores_jovenes_ambos;
-            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Relación personas mayores/jovenes: </b>' + total + '</div>';
-
-            new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(innerPopup)
-                .addTo(map);
-        });
-
-        map.on('click', 'relacion_menos15_mujeres1564', function (e) {
-
-            var total = e.features[0].properties.relacion_menos15_mujeres1564;
-            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total + '</div>';
-
-            new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(innerPopup)
-                .addTo(map);
-        });
-
-        map.on('click', 'dificultad_menos15', function (e) {
-
-            var total = e.features[0].properties.dificultad_menos15;
-            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total + '</div>';
-
-            new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(innerPopup)
-                .addTo(map);
-        });
-
-        map.on('click', 'dificultad_mayor64', function (e) {
-
-            var total = e.features[0].properties.dificultad_mayor64;
-            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total + '</div>';
-
-            new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(innerPopup)
-                .addTo(map);
-        });
-
-        map.on('click', 'dificultad_mayor84', function (e) {
-
-            var total = e.features[0].properties.dificultad_mayor84;
-            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total + '</div>';
-
-            new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(innerPopup)
-                .addTo(map);
-        });
-
-        map.on('click', 'dificultad_total', function (e) {
-
-            var total = e.features[0].properties.dificultad_total;
-            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total + '</div>';
-
-            new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(innerPopup)
-                .addTo(map);
-        });
 
         map.on('click', 'mujeres_tareas_hogar', function (e) {
 
@@ -970,6 +937,21 @@ $(document).ready(function () {
 
             var nombre = e.features[0].properties.Name;
             var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Referencia: </b>' + nombre + '</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'coordenadas_empresas', function (e) {
+
+            var nombre = e.features[0].properties.RAZON_SOCIAL;
+            var direccion = e.features[0].properties.DIRECCION_NORMALIZADA;
+            var telefono1 = e.features[0].properties.TELEFONO1;
+            var telefono2 = e.features[0].properties.TELEFONO2;
+            var descripcion = e.features[0].properties.DESCRIPCION;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Nombre: </b>' + nombre + '</br>' + '<b>Dirección: </b>' + direccion + '</br>' + '<b>Telefono 1: </b>' + telefono1 + '</br>' + '<b>Telefono 2: </b>' + telefono2 + '</br>' + '<b>Descripción: </b>' + descripcion + '</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -1000,6 +982,118 @@ $(document).ready(function () {
                     427506,'#feb351',
                     564688,'#f0821e',
                     839052,'#cc560c'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': 'porc_pobl_4_menos',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'porc_pobl_4_menos'],
+                    "#bebebd",
+                    4,'#feb351',
+                    6,'#f0821e',
+                    8,'#cc560c'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': 'porc_pobl_65mas',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'porc_pobl_65mas'],
+                    "#bebebd",
+                    4,'#ffffd4',
+                    6,'#ffe19c',
+                    8,'#ffe19c',
+                    10,'#feb351',
+                    12,'#f0821e',
+                    14,'#cc560c'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': 'porc_poblacion_81mas',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'porc_poblacion_81mas'],
+                    "#bebebd",
+                    1,'#ffffd4',
+                    2,'#feb351',
+                    3,'#cc560c'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': 'relacion_dependencia',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'relacion_dependencia'],
+                    "#bebebd",
+                    30,'#f1eef6',
+                    33,'#91b6d7',
+                    37,'#2382b4',
+                    41,'#045a8d'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': 'requieren_cuidado',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'requieren_cuidado'],
+                    "#bebebd",
+                    200,'#f1eef6',
+                    3000,'#c8d1e6',
+                    6000,'#91b6d7',
+                    12000,'#579ec8',
+                    20000,'#2382b4',
+                    25000,'#045a8d'
                 ],
                 'fill-opacity': 1,
                 'fill-outline-color':'#000000',
@@ -1055,267 +1149,6 @@ $(document).ready(function () {
         });
 
         map.addLayer({
-            'id': 'ambos05',
-            'type': 'fill',
-            'source': 'tabla_completa_indicadores',
-            'layout': {
-                'visibility': 'none',
-            },
-            'paint': {
-                'fill-color': [
-                    "step",
-                    ['get', 'ambos05'],
-                    "#bebebd",
-                    4.1,'#fcfbfd',
-                    5.6,'#da9acb',
-                    6.5,'#de348a',
-                    8.8,'#980043'
-                ],
-                'fill-opacity': 1,
-                'fill-outline-color':'#000000',
-            }
-        });
-
-        map.addLayer({
-            'id': 'hombres05',
-            'type': 'fill',
-            'source': 'tabla_completa_indicadores',
-            'layout': {
-                'visibility': 'none',
-            },
-            'paint': {
-                'fill-color': [
-                    "step",
-                    ['get', 'hombres05'],
-                    "#bebebd",
-                    4.1,'#ffffff',
-                    6.1,'#ffaaaa',
-                    6.8,'#ff5555',
-                    9.3,'#ff0000'
-                ],
-                'fill-opacity': 1,
-                'fill-outline-color':'#000000',
-            }
-        });
-
-        map.addLayer({
-            'id': 'mujeres05',
-            'type': 'fill',
-            'source': 'tabla_completa_indicadores',
-            'layout': {
-                'visibility': 'none',
-            },
-            'paint': {
-                'fill-color': [
-                    "step",
-                    ['get', 'mujeres05'],
-                    "#bebebd",
-                    3.8,'#fcfbfd',
-                    5.2,'#c9cae3',
-                    6.1,'#7c76b6',
-                    8.4,'#3f007d'
-                ],
-                'fill-opacity': 1,
-                'fill-outline-color':'#000000',
-            }
-        });
-
-        map.addLayer({
-            'id': 'ambos_mediana_edad',
-            'type': 'fill',
-            'source': 'tabla_completa_indicadores',
-            'layout': {
-                'visibility': 'none',
-            },
-            'paint': {
-                'fill-color': [
-                    "step",
-                    ['get', 'ambos_mediana_edad'],
-                    "#bebebd",
-                    28.000,'#ffffcc',
-                    30.750,'#81ceba',
-                    33.000,'#3391bc',
-                    35.000,'#253494'
-                ],
-                'fill-opacity': 1,
-                'fill-outline-color':'#000000',
-            }
-        });
-
-        map.addLayer({
-            'id': 'hombres_mediana_edad',
-            'type': 'fill',
-            'source': 'tabla_completa_indicadores',
-            'layout': {
-                'visibility': 'none',
-            },
-            'paint': {
-                'fill-color': [
-                    "step",
-                    ['get', 'hombres_mediana_edad'],
-                    "#bebebd",
-                    27.000,'#fff5f0',
-                    29.750,'#fca487',
-                    31.500,'#eb362a',
-                    36.000,'#67000d'
-                ],
-                'fill-opacity': 1,
-                'fill-outline-color':'#000000',
-            }
-        });
-
-        map.addLayer({
-            'id': 'mujeres_mediana_edad',
-            'type': 'fill',
-            'source': 'tabla_completa_indicadores',
-            'layout': {
-                'visibility': 'none',
-            },
-            'paint': {
-                'fill-color': [
-                    "step",
-                    ['get', 'mujeres_mediana_edad'],
-                    "#bebebd",
-                    27.000,'#fff5f0',
-                    29.750,'#fca487',
-                    31.500,'#eb362a',
-                    36.000,'#67000d'
-                ],
-                'fill-opacity': 1,
-                'fill-outline-color':'#000000',
-            }
-        });
-
-        map.addLayer({
-            'id': 'ambos65mas',
-            'type': 'fill',
-            'source': 'tabla_completa_indicadores',
-            'layout': {
-                'visibility': 'none',
-            },
-            'paint': {
-                'fill-color': [
-                    "step",
-                    ['get', 'ambos65mas'],
-                    "#bebebd",
-                    5,'#ffffd4',
-                    7,'#fed98e',
-                    8,'#fe9929',
-                    10,'#d95f0e',
-                    12,'#993404'
-                ],
-                'fill-opacity': 1,
-                'fill-outline-color':'#000000',
-            }
-        });
-
-        map.addLayer({
-            'id': 'hombres65mas',
-            'type': 'fill',
-            'source': 'tabla_completa_indicadores',
-            'layout': {
-                'visibility': 'none',
-            },
-            'paint': {
-                'fill-color': [
-                    "step",
-                    ['get', 'hombres65mas'],
-                    "#bebebd",
-                    5,'#fff5f0',
-                    7,'#fca487',
-                    8,'#eb362a',
-                    10,'#67000d',
-                    12,'#67000d'
-                ],
-                'fill-opacity': 1,
-                'fill-outline-color':'#000000',
-            }
-        });
-
-        map.addLayer({
-            'id': 'mujeres65mas',
-            'type': 'fill',
-            'source': 'tabla_completa_indicadores',
-            'layout': {
-                'visibility': 'none',
-            },
-            'paint': {
-                'fill-color': [
-                    "step",
-                    ['get', 'mujeres65mas'],
-                    "#bebebd",
-                    5,'#fff5f0',
-                    7,'#fca487',
-                    8,'#eb362a',
-                    10,'#67000d',
-                    12,'#67000d'
-                ],
-                'fill-opacity': 1,
-                'fill-outline-color':'#000000',
-            }
-        });
-
-        map.addLayer({
-            'id': 'ambos85mas',
-            'type': 'fill',
-            'source': 'tabla_completa_indicadores',
-            'layout': {
-                'visibility': 'none',
-            },
-            'paint': {
-                'fill-color': [
-                    "step",
-                    ['get', 'ambos85mas'],
-                    "#bebebd",
-                    1,'#fff5f0',
-                    2,'#fca487',
-                ],
-                'fill-opacity': 1,
-                'fill-outline-color':'#000000',
-            }
-        });
-
-        map.addLayer({
-            'id': 'hombres85mas',
-            'type': 'fill',
-            'source': 'tabla_completa_indicadores',
-            'layout': {
-                'visibility': 'none',
-            },
-            'paint': {
-                'fill-color': [
-                    "step",
-                    ['get', 'hombres85mas'],
-                    "#bebebd",
-                    1,'#fff5f0',
-                    2,'#fca487',
-                ],
-                'fill-opacity': 1,
-                'fill-outline-color':'#000000',
-            }
-        });
-
-        map.addLayer({
-            'id': 'mujeres85mas',
-            'type': 'fill',
-            'source': 'tabla_completa_indicadores',
-            'layout': {
-                'visibility': 'none',
-            },
-            'paint': {
-                'fill-color': [
-                    "step",
-                    ['get', 'mujeres85mas'],
-                    "#bebebd",
-                    1,'#fff5f0',
-                    2,'#fca487',
-                ],
-                'fill-opacity': 1,
-                'fill-outline-color':'#000000',
-            }
-        });
-
-        map.addLayer({
             'id': 'total_viviendas',
             'type': 'fill',
             'source': 'tabla_completa_indicadores2',
@@ -1338,27 +1171,7 @@ $(document).ready(function () {
             }
         });
 
-        map.addLayer({
-            'id': 'viviendas_65mas',
-            'type': 'fill',
-            'source': 'tabla_completa_indicadores',
-            'layout': {
-                'visibility': 'none',
-            },
-            'paint': {
-                'fill-color': [
-                    "step",
-                    ['get', 'viviendas_65mas'],
-                    "#bebebd",
-                    15,'#fff5f0',
-                    20,'#fca487',
-                    25,'#eb362a'
-                ],
-                'fill-opacity': 1,
-                'fill-outline-color':'#000000',
-            }
-        });
-
+     
         map.addLayer({
             'id': 'unipersonal_personas_65mas',
             'type': 'fill',
@@ -1634,30 +1447,7 @@ $(document).ready(function () {
             }
         });
 
-        map.addLayer({
-            'id': 'razon_sexos',
-            'type': 'fill',
-            'source': 'tabla_completa_indicadores',
-            'layout': {
-                'visibility': 'none',
-            },
-            'paint': {
-                'fill-color': [
-                    "step",
-                    ['get', 'razon_sexos'],
-                    "#bebebd",
-                    90,'#f7fbff',
-                    95,'#d8e7f5',
-                    100,'#b0d2e8',
-                    105,'#73b3d8',
-                    110,'#3e8ec4',
-                    115,'#1563aa',
-                    120,'#08306b'
-                ],
-                'fill-opacity': 1,
-                'fill-outline-color':'#000000',
-            }
-        });
+       
 
         map.addLayer({
             'id': 'indice_feminidad',
@@ -1682,162 +1472,7 @@ $(document).ready(function () {
             }
         });
 
-        map.addLayer({
-            'id': 'relacion_dependencia_ambos',
-            'type': 'fill',
-            'source': 'tabla_completa_indicadores',
-            'layout': {
-                'visibility': 'none',
-            },
-            'paint': {
-                'fill-color': [
-                    "step",
-                    ['get', 'relacion_dependencia_ambos'],
-                    "#bebebd",
-                    33,'#fff5f0',
-                    36,'#fca487',
-                    39,'#eb362a',
-                    42,'#67000d'
-                ],
-                'fill-opacity': 1,
-                'fill-outline-color':'#000000',
-            }
-        });
-
-        map.addLayer({
-            'id': 'relacion_mayores_jovenes_ambos',
-            'type': 'fill',
-            'source': 'tabla_completa_indicadores',
-            'layout': {
-                'visibility': 'none',
-            },
-            'paint': {
-                'fill-color': [
-                    "step",
-                    ['get', 'relacion_mayores_jovenes_ambos'],
-                    "#bebebd",
-                    40,'#fff5f0',
-                    65,'#fca487',
-                    100,'#eb362a',
-                    128,'#67000d'
-                ],
-                'fill-opacity': 1,
-                'fill-outline-color':'#000000',
-            }
-        });
-
-        map.addLayer({
-            'id': 'relacion_menos15_mujeres1564',
-            'type': 'fill',
-            'source': 'tabla_completa_indicadores',
-            'layout': {
-                'visibility': 'none',
-            },
-            'paint': {
-                'fill-color': [
-                    "step",
-                    ['get', 'relacion_menos15_mujeres1564'],
-                    "#bebebd",
-                    30,'#fff5f0',
-                    40,'#fca487',
-                    50,'#eb362a',
-                    60,'#67000d',
-                    70,'#6b2504'
-                ],
-                'fill-opacity': 1,
-                'fill-outline-color':'#000000',
-            }
-        });
-
-        map.addLayer({
-            'id': 'dificultad_menos15',
-            'type': 'fill',
-            'source': 'tabla_completa_indicadores',
-            'layout': {
-                'visibility': 'none',
-            },
-            'paint': {
-                'fill-color': [
-                    "step",
-                    ['get', 'dificultad_menos15'],
-                    "#bebebd",
-                    2,'#fff5f0',
-                    3,'#fca487',
-                    4,'#eb362a',
-                    5,'#67000d'
-                ],
-                'fill-opacity': 1,
-                'fill-outline-color':'#000000',
-            }
-        });
-
-        map.addLayer({
-            'id': 'dificultad_mayor64',
-            'type': 'fill',
-            'source': 'tabla_completa_indicadores',
-            'layout': {
-                'visibility': 'none',
-            },
-            'paint': {
-                'fill-color': [
-                    "step",
-                    ['get', 'dificultad_mayor64'],
-                    "#bebebd",
-                    16,'#fff5f0',
-                    20,'#fca487',
-                    24,'#eb362a',
-                    28,'#67000d'
-                ],
-                'fill-opacity': 1,
-                'fill-outline-color':'#000000',
-            }
-        });
-
-        map.addLayer({
-            'id': 'dificultad_mayor84',
-            'type': 'fill',
-            'source': 'tabla_completa_indicadores',
-            'layout': {
-                'visibility': 'none',
-            },
-            'paint': {
-                'fill-color': [
-                    "step",
-                    ['get', 'dificultad_mayor84'],
-                    "#bebebd",
-                    30,'#fff5f0',
-                    40,'#fca487',
-                    50,'#eb362a',
-                    60,'#67000d'
-                ],
-                'fill-opacity': 1,
-                'fill-outline-color':'#000000',
-            }
-        });
-
-        map.addLayer({
-            'id': 'dificultad_total',
-            'type': 'fill',
-            'source': 'tabla_completa_indicadores',
-            'layout': {
-                'visibility': 'none',
-            },
-            'paint': {
-                'fill-color': [
-                    "step",
-                    ['get', 'dificultad_total'],
-                    "#bebebd",
-                    200,'#fff5eb',
-                    3000,'#fed2a6',
-                    6000,'#fd9243',
-                    10000,'#df4f05',
-                    20000,'#7f2704'
-                ],
-                'fill-opacity': 1,
-                'fill-outline-color':'#000000',
-            }
-        });
-
+    
         map.addLayer({
             'id': 'mujeres_tareas_hogar',
             'type': 'fill',
@@ -1884,7 +1519,6 @@ $(document).ready(function () {
             }
         });
       
-
         map.addLayer({
             'id': 'presupuesto',
             'type': 'fill',
@@ -1903,6 +1537,774 @@ $(document).ready(function () {
                     2400,'#d42020',
                     3700,'#67000d',
                     4717,'#40060d'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': 'transmilenio_trabajar_hombres',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'transmilenio_trabajar_hombres'],
+                    "#bebebd",
+                    14,'#fdbea5',
+                    20,'#fc7050',
+                    30,'#d42020',
+                    40,'#67000d',
+                    51,'#40060d'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': 'buses_sitp_trabajar_hombres',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'buses_sitp_trabajar_hombres'],
+                    "#bebebd",
+                    13,'#fc7050',
+                    20,'#d42020',
+                    30,'#67000d',
+                    35,'#40060d'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': 'bus_colectivo_trabajar_hombres',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'bus_colectivo_trabajar_hombres'],
+                    "#bebebd",
+                    6,'#fdbea5',
+                    10,'#fc7050',
+                    15,'#d42020',
+                    20,'#67000d',
+                    24,'#40060d'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': 'automovil_trabajar_hombres',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'automovil_trabajar_hombres'],
+                    "#bebebd",
+                    3,'#fdbea5',
+                    10,'#fc7050',
+                    20,'#d42020',
+                    30,'#67000d',
+                    42,'#40060d'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': 'taxi_trabajar_hombres',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'taxi_trabajar_hombres'],
+                    "#bebebd",
+                    2,'#fdbea5',
+                    4,'#fc7050',
+                    6,'#d42020',
+                    8,'#67000d',
+                    10,'#5b0813',
+                    13,'#40060d'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': 'moto_trabajar_hombres',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'moto_trabajar_hombres'],
+                    "#bebebd",
+                    2,'#fc7050',
+                    6,'#d42020',
+                    8,'#67000d',
+                    10,'#5b0813',
+                    12,'#40060d'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': 'bicicleta_trabajar_hombres',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'bicicleta_trabajar_hombres'],
+                    "#bebebd",
+                    2,'#fc7050',
+                    5,'#d42020',
+                    7,'#67000d',
+                    10,'#5b0813',
+                    13,'#40060d'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': 'caminar_trabajar_hombres',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'caminar_trabajar_hombres'],
+                    "#bebebd",
+                    9,'#fc7050',
+                    15,'#d42020',
+                    20,'#67000d',
+                    25,'#5b0813',
+                    30,'#660f1a',
+                    37,'#40060d'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': 'transmilenio_trabajar_mujeres',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'transmilenio_trabajar_mujeres'],
+                    "#bebebd",
+                    21,'#fdbea5',
+                    28,'#fc7050',
+                    35,'#d42020',
+                    42,'#67000d',
+                    50,'#63060d',
+                    57,'#40060d'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': 'buses_sitp_trabajar_mujeres',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'buses_sitp_trabajar_mujeres'],
+                    "#bebebd",
+                    18,'#fdbea5',
+                    22,'#fc7050',
+                    27,'#d42020',
+                    32,'#67000d',
+                    40,'#40060d'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': 'bus_colectivo_trabajar_mujeres',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'bus_colectivo_trabajar_mujeres'],
+                    "#bebebd",
+                    6,'#fdbea5',
+                    12,'#fc7050',
+                    16,'#d42020',
+                    21,'#67000d',
+                    26,'#40030d',
+                    32,'#40060d'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': 'automovil_trabajar_mujeres',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'automovil_trabajar_mujeres'],
+                    "#bebebd",
+                    2,'#fdbea5',
+                    8,'#fc7050',
+                    16,'#d42020',
+                    23,'#67000d',
+                    30,'#40030d',
+                    36,'#40060d'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': 'taxi_trabajar_mujeres',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'taxi_trabajar_mujeres'],
+                    "#bebebd",
+                    3,'#fdbea5',
+                    6,'#fc7050',
+                    9,'#d42020',
+                    12,'#67000d',
+                    15,'#5b0813',
+                    20,'#40060d'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+   /*      map.addLayer({
+            'id': 'moto_trabajar_mujeres',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'moto_trabajar_mujeres'],
+                    "#bebebd",
+                    2,'#fc7050',
+                    6,'#d42020',
+                    8,'#67000d',
+                    10,'#5b0813',
+                    12,'#40060d'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        }); */
+
+        map.addLayer({
+            'id': 'bicicleta_trabajar_mujeres',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'bicicleta_trabajar_mujeres'],
+                    "#bebebd",
+                    2,'#d42020',
+                    3,'#67000d',
+                    4,'#5b0813',
+                    5,'#40060d'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': 'caminar_trabajar_mujeres',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'caminar_trabajar_mujeres'],
+                    "#bebebd",
+                    12,'#fc7050',
+                    18,'#d42020',
+                    22,'#67000d',
+                    28,'#5b0813',
+                    32,'#660f1a',
+                    38,'#40060d'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        //  Paleta verdes: '#ffffcc','#cfeba3','#96d386','#5bb86a','#27974e','#006837'
+
+        map.addLayer({
+            'id': '15_centro_cuidado_infantil',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', '15_centro_cuidado_infantil'],
+                    "#bebebd",
+                    13,'#ffffcc',
+                    16,'#cfeba3',
+                    19,'#96d386',
+                    22,'#5bb86a',
+                    25,'#27974e',
+                    31,'#006837'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': '15_estacion_paradero',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', '15_estacion_paradero'],
+                    "#bebebd",
+                    56,'#ffffcc',
+                    62,'#cfeba3',
+                    68,'#96d386',
+                    75,'#5bb86a',
+                    81,'#27974e',
+                    94,'#006837'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': '15_paradero_buses',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', '15_paradero_buses'],
+                    "#bebebd",
+                    1,'#cfeba3',
+                    3,'#96d386',
+                    6,'#27974e',
+                    8,'#006837'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': '15_transporte_publico',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', '15_transporte_publico'],
+                    "#bebebd",
+                    2,'#ffffcc',
+                    4,'#cfeba3',
+                    6,'#96d386',
+                    8,'#27974e',
+                    12,'#006837'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': '15_transporte_intermunicipal',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', '15_transporte_intermunicipal'],
+                    "#bebebd",
+                    10,'#ffffcc',
+                    15,'#cfeba3',
+                    20,'#96d386',
+                    25,'#5bb86a',
+                    30,'#27974e',
+                    37,'#006837'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': '15_zona_verde',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', '15_zona_verde'],
+                    "#bebebd",
+                    4,'#cfeba3',
+                    8,'#96d386',
+                    10,'#5bb86a',
+                    12,'#27974e',
+                    20,'#006837'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': '15_supermercado',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', '15_supermercado'],
+                    "#bebebd",
+                    2,'#5bb86a',
+                    3,'#27974e',
+                    4,'#006837'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': '15_farmacia',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', '15_farmacia'],
+                    "#bebebd",
+                    1,'#cfeba3',
+                    3,'#96d386',
+                    5,'#5bb86a',
+                    7,'#27974e',
+                    9,'#006837'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': '15_banco',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', '15_banco'],
+                    "#bebebd",
+                    5,'#ffffcc',
+                    13,'#cfeba3',
+                    20,'#96d386',
+                    26,'#5bb86a',
+                    34,'#27974e',
+                    48,'#006837'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': '15_centro_medico',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', '15_centro_medico'],
+                    "#bebebd",
+                    28,'#cfeba3',
+                    32,'#96d386',
+                    36,'#5bb86a',
+                    40,'#27974e',
+                    46,'#006837'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': '15_centro_medico',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', '15_centro_medico'],
+                    "#bebebd",
+                    28,'#cfeba3',
+                    32,'#96d386',
+                    36,'#5bb86a',
+                    40,'#27974e',
+                    46,'#006837'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+// Paleta rosa #f1eef6, #ddc1de, #dc85c0, #df4899,#d0166d, #980043
+        map.addLayer({
+            'id': 'ocupacion_mujeres',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'ocupacion_mujeres'],
+                    "#bebebd",
+                    38,'#96d386',
+                    42,'#5bb86a',
+                    46,'#27974e',
+                    55,'#006837'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': 'mujeres_sin_ingresos',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'mujeres_sin_ingresos'],
+                    "#bebebd",
+                    19,'#f1eef6',
+                    25,'#ddc1de',
+                    30,'#dc85c0',
+                    36,'#df4899',
+                    42,'#d0166d',
+                    48,'#980043'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': 'feminidad_hogares_pobres',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'feminidad_hogares_pobres'],
+                    "#bebebd",
+                    99,'#f1eef6',
+                    110,'#ddc1de',
+                    120,'#dc85c0',
+                    130,'#df4899',
+                    140,'#d0166d',
+                    152,'#980043'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': 'mujeres_sin_cotizar',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'mujeres_sin_cotizar'],
+                    "#bebebd",
+                    24,'#f1eef6',
+                    30,'#ddc1de',
+                    36,'#dc85c0',
+                    42,'#df4899',
+                    48,'#d0166d',
+                    55,'#980043'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': 'hombres_pension',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'hombres_pension'],
+                    "#bebebd",
+                    2,'#dc85c0',
+                    4,'#df4899',
+                    6,'#d0166d',
+                    9,'#980043'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': 'mujeres_pension',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'mujeres_pension'],
+                    "#bebebd",
+                    2,'#ddc1de',
+                    4,'#dc85c0',
+                    6,'#df4899',
+                    8,'#d0166d',
+                    10,'#980043'
                 ],
                 'fill-opacity': 1,
                 'fill-outline-color':'#000000',
@@ -1935,36 +2337,6 @@ $(document).ready(function () {
             }
         })
 
-       /*  map.addLayer({
-            'id': 'limites',
-            'type': 'fill',
-            'source': 'limites',
-            'layout': {
-                'visibility': 'none',
-            },
-            'paint': {
-                'fill-color': '#627BC1',
-                'fill-opacity': [
-                    'case',
-                    ['boolean', ['feature-state', 'hover'], false],
-                    1,
-                    0.5
-                ]
-            }
-        })
-
-        map.addLayer({
-            'id': 'limites_linea',
-            'type': 'line',
-            'source': 'limites_linea',
-            'layout': {
-                'visibility': 'none',
-            },
-            'paint': {
-                'line-color': '#627BC1',
-                'line-width': 2
-            }
-        }) */
 
 
         // Hover
@@ -2130,7 +2502,47 @@ $(document).ready(function () {
          }); 
 
 
-        map.loadImage(
+         map.loadImage(
+            './image/icono_jardin_infantil.png',
+            function (error, image) {
+                if (error) throw error;
+                map.addImage('icono_jardin_infantil', image);
+
+                map.addLayer({
+                    'id': 'jardin_infantil',
+                    'type': 'symbol',
+                    'source': 'jardin_infantil',
+                    'layout': {
+                        'icon-image': 'icono_jardin_infantil',
+                        'icon-allow-overlap': true,
+                        'icon-size': 0.9,
+                        'visibility': 'none'
+                    }
+                });
+            }
+        );
+
+         map.loadImage(
+            './image/icono_cdc.png',
+            function (error, image) {
+                if (error) throw error;
+                map.addImage('icono_cdc', image);
+
+                map.addLayer({
+                    'id': 'cdc',
+                    'type': 'symbol',
+                    'source': 'cdc',
+                    'layout': {
+                        'icon-image': 'icono_cdc',
+                        'icon-allow-overlap': true,
+                        'icon-size': 0.9,
+                        'visibility': 'none'
+                    }
+                });
+            }
+        );
+        
+         map.loadImage(
             './image/icono_creciendo_familia.png',
             function (error, image) {
                 if (error) throw error;
@@ -2312,8 +2724,6 @@ $(document).ready(function () {
             }
         );
 
-
-
          map.addLayer({
            'id': 'indice_seguridad',
            'type': 'circle',
@@ -2333,6 +2743,53 @@ $(document).ready(function () {
                 'circle-opacity':0.75
             }
         }); 
+
+        map.addLayer({
+            'id': 'coordenadas_empresas',
+            'type': 'circle',
+            'source': 'coordenadas_empresas',
+            'layout':{
+                'visibility':'none'
+            },
+            'paint': {
+                 'circle-color':[
+                    "match",
+                    ["get", "DESCRIPCION"],
+                    ["EDUCACION PREESCOLAR"],
+                    "#f06060",
+                    [
+                      "LAVADO Y LIMPIEZA INCLUSO LA LIMPIEZA EN SECO DE PRODUCTOS TEXTILES Y DE PIEL"
+                    ],
+                    "#d219cf",
+                    [
+                      "ACTIVIDADES DE ATENCION RESIDENCIAL PARA EL CUIDADO DE PACIENTES CON RETARDO MENTAL ENFERMEDAD MENTAL Y CONSUMO DE SUSTANCIAS PSICOACTIVAS"
+                    ],
+                    "#1b339d",
+                    [
+                      "ACTIVIDADES DE LOS HOGARES INDIVIDUALES COMO EMPLEADORES DE PERSONAL DOMESTICO"
+                    ],
+                    "#c99718",
+                    [
+                      "EDUCACION DE LA PRIMERA INFANCIA"
+                    ],
+                    "#72eee7",
+                    [
+                      "ACTIVIDADES DE ASISTENCIA SOCIAL SIN ALOJAMIENTO PARA PERSONAS MAYORES Y DISCAPACITADAS"
+                    ],
+                    "#1cd50b",
+                    [
+                      "EDUCACION BASICA PRIMARIA"
+                    ],
+                    "#f52929",
+                    [
+                      "ACTIVIDADES DE ATENCION EN INSTITUCIONES PARA EL CUIDADO DE PERSONAS MAYORES Y/O DISCAPACITADAS"
+                    ],
+                    "#36828c",
+                    "#000000"
+                  ],
+                 'circle-opacity':1
+             }
+         }); 
 
 
         map.loadImage(
@@ -2460,20 +2917,20 @@ $(document).ready(function () {
 
         // // Añadir capas de tipo línea
 
-        /*  map.addLayer({
-             'id': 'cuadrantes_policia',
+          map.addLayer({
+             'id': 'limites',
              'type': 'line',
-             'source': 'cuadrantes_policia',
+             'source': 'limites',
              'layout': {
-                 'visibility': 'none',
+                 'visibility': 'visible',
                  'line-cap': 'round',
                  'line-join': 'round',
              },
              'paint': {
-                 'line-color': 'seagreen',
-                 'line-width': 4,
+                 'line-color': 'grey',
+                 'line-width': 2,
              }
-         }); */
+         });
 
 
         // Add Legend
