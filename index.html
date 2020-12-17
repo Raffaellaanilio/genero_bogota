@@ -137,7 +137,9 @@
     
   <!-- Menú colapsable de capas -->
 
-    <div id="titulo">Capas de Información</div>
+    <div id="titulo">Capas de Información
+      <i id="acerca_de" data-toggle="tooltip" data-placement="top" title="Acerca de" class="fas fa-info-circle" style="padding:10px;float: right;"></i>
+    </div>
     <div id="menu_content">
       <div class="card" id="temas_colapsables" style="width:100%; background-color:#776D9C">
         <div class="card-body" style="text-align:left;">
@@ -200,6 +202,11 @@
                             <label class="form-check-label" for="exampleCheck1">Casa de Igualdad de Oportunidades para Mujeres</label>
                             <div class="container" id="descripcion_casa_oportunidades_mujeres" style="display:none;font-family:  Maven Pro;font-weight:400;">Espacio de encuentro entre mujeres para el conocimiento de sus derechos y el desarrollo de procesos orientados al empoderamiento social y político, promotores del liderazgo, la autonomía y el ejercicio pleno de derechos. Su cubrimiento es el Distrito Capital. En estos lugares se prestan diferentes servicios a la comunidad distrital incluyendo sus 20 localidades.</div>
                           </div>
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check10" onclick="encendido('casa_pensamiento_intercultural'), showdescripcion('descripcion_casa_pensamiento_intercultural')">
+                            <label class="form-check-label" for="exampleCheck1">Casa de Pensamiento Intercultural</label>
+                            <div class="container" id="descripcion_casa_pensamiento_intercultural" style="display:none;font-family:  Maven Pro;font-weight:400;">Espacio donde se presta servicio de Educación Inicial con atención integral a la Primera infancia en el marco de la Ruta Integral de Atenciones -RIA- donde se promueve su desarrollo integral con enfoque diferencial a través de procesos pedagógicos para el potenciamiento del desarrollo, cuidado calificado, apoyo alimentario con calidad y oportunidad y promoción de la corresponsabilidad de las familias, orientado hacia el reconocimiento de la diversidad, de la identidad étnica y cultural.</div>
+                          </div>
 
                     </div>
                   </div>
@@ -214,9 +221,10 @@
                       </div>
                       <div id="collapsePrivada" class="collapse">
                         <div class="form-check">
-                          <input type="checkbox" class="form-check-input" id="check1" onclick="encendido('coordenadas_empresas'), showdescripcion('')">
+                          <input type="checkbox" class="form-check-input" id="check1" onclick="encendido('coordenadas_empresas'), showlegend('leyenda_coordenadas_empresas')">
                           <label class="form-check-label" for="check1">Empresas del Municipio de Bogotá según clase de actividad económica</label> 
                           <div class="container" id="descripcion_cdc" style="display:none;font-family: Maven Pro; font-weight:400;"></div>
+                          <div class="row row_leyenda" id="leyenda_coordenadas_empresas" style="display:none;"></div>
                         </div>                        
                       </div>
                     </div>
@@ -340,9 +348,10 @@
                         <div class="container" id="descripcion_comisaria_familia" style="display:none;font-family: Maven Pro;font-weight:400;">Espacio donde se accede a la Justicia Familiar, ofrece atención jurídica y psicosocial. Tienen como fin proteger y garantizar los derechos humanos de las víctimas de violencia intrafamiliar y otros tipos de violencias en las familias, a través de la imposición de medidas de protección, preventivas, correctivas y de restablecimiento de derechos.</div>
                       </div>
                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check18" onclick="encendido('indice_seguridad'), showdescripcion('descripcion_indice_seguridad')">
+                            <input type="checkbox" class="form-check-input" id="check18" onclick="encendido('indice_seguridad'), showdescripcion('descripcion_indice_seguridad'), showlegend('leyenda_indice_seguridad')">
                             <label class="form-check-label" for="exampleCheck1">Puntos de seguridad nocturna mujeres</label>
                             <div class="container" id="descripcion_indice_seguridad" style="display:none;font-family: Maven Pro;font-weight:400;">Puntos de evaluación que representan el índice de seguridad para las mujeres en el espacio público nocturno del área urbana de Bogotá, tomada de las calificaciones de las ocho variables (iluminación, que veo, visibilidad, quien me ve, personas, presencia de seguridad, sendero, transporte y presencia mixta)de cada uno de los 19.970 puntos, las cuales se ponderaron con el mismo peso las ocho y se sumaron para generar categorías (Muy bajo, Bajo, Medio, Alto y Muy alto), para cada localidad de Bogotá, en vías, arterias y ciclorutas.</div>
+                            <div class="row row_leyenda" id="leyenda_indice_seguridad" style="display:none;"></div>
                           </div>
                     </div>
                   </div>
@@ -378,12 +387,14 @@
                       </div>
                       <div id="colapsar_generales" class="collapse">
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check35" onclick="encendido('total_viviendas')">
+                            <input type="checkbox" class="form-check-input" id="check35" onclick="encendido('total_viviendas'), showlegend('leyenda_total_viviendas')">
                             <label class="form-check-label" for="exampleCheck1">Total de Hogares</label>
+                            <div class="row row_leyenda" id="leyenda_total_viviendas" style="display:none;"></div>
                           </div>
                           <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check35" onclick="encendido('total_ambos')">
+                            <input type="checkbox" class="form-check-input" id="check35" onclick="encendido('total_ambos'), showlegend('leyenda_total_ambos')">
                             <label class="form-check-label" for="exampleCheck1">Total de Personas</label>
+                            <div class="row row_leyenda" id="leyenda_total_ambos" style="display:none;"></div>
                           </div>
                         </div>
 
@@ -603,52 +614,52 @@
                           <h6 style="color:black;padding: 5px;"><b>Porcentaje de Hogares que se demoran menos de 15 minutos a</b></h6>
 
                           <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('15_centro_cuidado_infantil')">
+                            <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('_15_centro_cuidado_infantil')">
                             <label class="form-check-label" for="exampleCheck1">Centros de cuidado infantil</label>
                           </div>
 
                           <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('15_estacion_paradero')">
+                            <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('_15_estacion_paradero')">
                             <label class="form-check-label" for="exampleCheck1">Estación TransMilenio o paradero alimentador</label>
                           </div>
 
                           <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('15_paradero_buses')">
+                            <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('_15_paradero_buses')">
                             <label class="form-check-label" for="exampleCheck1">Paradero buses del SITP</label>
                           </div>
 
                           <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('15_transporte_publico')">
+                            <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('_15_transporte_publico')">
                             <label class="form-check-label" for="exampleCheck1">Paradero de transporte público</label>
                           </div>
 
                           <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('15_transporte_intermunicipal')">
+                            <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('_15_transporte_intermunicipal')">
                             <label class="form-check-label" for="exampleCheck1">Paradero de transporte intermunicipal</label>
                           </div>
 
                           <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('15_zona_verde')">
+                            <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('_15_zona_verde')">
                             <label class="form-check-label" for="exampleCheck1">Parques o zonas verdes</label>
                           </div>
 
                           <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('15_supermercado')">
+                            <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('_15_supermercado')">
                             <label class="form-check-label" for="exampleCheck1">Tienda o supermercado</label>
                           </div>
 
                           <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('15_farmacia')">
+                            <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('_15_farmacia')">
                             <label class="form-check-label" for="exampleCheck1">Droguería o farmacia</label>
                           </div>
 
                           <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('15_banco')">
+                            <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('_15_banco')">
                             <label class="form-check-label" for="exampleCheck1">Banco o cajero</label>
                           </div>
 
                           <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('15_centro_medico')">
+                            <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('_15_centro_medico')">
                             <label class="form-check-label" for="exampleCheck1">Centro médico</label>
                           </div>
 
@@ -672,7 +683,12 @@
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check45" onclick="encendido('mujeres_sin_cotizar')">
-                            <label class="form-check-label" for="exampleCheck1">Mujeres sin seguridad social</label>
+                            <label class="form-check-label" for="exampleCheck1">Mujeres sin cotizar</label>
+                          </div>
+
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check45" onclick="encendido('hombres_sin_cotizar')">
+                            <label class="form-check-label" for="exampleCheck1">Hombres sin cotizar</label>
                           </div>
 
                           <div class="form-check">

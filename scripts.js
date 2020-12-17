@@ -47,6 +47,16 @@ $(document).ready(function () {
 
     var hoveredStateId = null;
 
+    // Función mostrar leyenda
+    showlegend = function showlegend(x) {
+
+        y = document.getElementById(x);
+
+        $(y).toggle();
+    };
+
+    var hoveredStateId = null;
+
     // Cargar GeoJSON
 
     map.on('load', function () {
@@ -55,7 +65,7 @@ $(document).ready(function () {
         var colors = ['#FFEDA0', '#FED976', '#FEB24C', '#FD8D3C', '#FC4E2A', '#E31A1C', '#BD0026', '#800026'];
 
         var array_de_capas_puntos = ['creciendo_familia', 'comedor_comunitario', 'envejecimiento_activo', 'colegios', 'casa_oportunidades_mujeres', 'biblored', 'bibliotecas_comunitarias', 'paraderos_zonales_SITP', 'comisaria_familia', 'estacion_de_policia', 'atencion_personas_mayores_discapacidad', 'atencion_ninos_discapacidad', 'centro_proteger', 'centro_amar']
-        var array_indicadores = ['ambos', 'hombres', 'mujeres', 'hombres05', 'mujeres05', 'ambos05']
+        var array_indicadores = ['']
 
     // Change the cursor to a pointer when the mouse is over the states layer.
 
@@ -148,6 +158,9 @@ $(document).ready(function () {
 
         var url44 = './geojson/coordenadas_empresas.geojson';
         map.addSource('coordenadas_empresas', { type: 'geojson', data: url44 });
+
+        var url45 = './geojson/casa_pensamiento_intercultural.geojson';
+        map.addSource('casa_pensamiento_intercultural', { type: 'geojson', data: url45 });
 
         
         // Se abre caja información de servicios, y cambia el nombre de la localidad según corresponda
@@ -537,7 +550,7 @@ $(document).ready(function () {
             var telefono = e.features[0].properties.EPOTELEFON;
             var email = e.features[0].properties.EPOCELECTR;
             var web = e.features[0].properties.EPOPWEB;
-            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Nombre: </b>' + direccion + '</br>' + '<b>Funcionamiento: </b>' + funcionamiento + '</br>' + '<b>Teléfono: </b>' + telefono + '</br>' + '<b>Email: </b>' + email + '</br>' + '<b>Sitio Web: </b>' + web + '</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Dirección: </b>' + direccion + '</br>' + '<b>Funcionamiento: </b>' + funcionamiento + '</br>' + '<b>Teléfono: </b>' + telefono + '</br>' + '<b>Email: </b>' + email + '</br>' + '<b>Sitio Web: </b>' + web + '</div>';
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
                 .setHTML(innerPopup)
@@ -562,12 +575,25 @@ $(document).ready(function () {
             var direccion = e.features[0].properties.OSSDIRECCI;
             var telefono = e.features[0].properties.OSSTELEFON;
             var horario = e.features[0].properties.OSSHORARIO;
-            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Nombre: </b>' + direccion + '</br>' + '<b>Teléfono: </b>' + telefono + '</br>' + '<b>Horario: </b>' + horario + '</div>';
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Dirección: </b>' + direccion + '</br>' + '<b>Teléfono: </b>' + telefono + '</br>' + '<b>Horario: </b>' + horario + '</div>';
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
                 .setHTML(innerPopup)
                 .addTo(map);
         });
+
+        map.on('click', 'casa_pensamiento_intercultural', function (e) {
+            var nombre = e.features[0].properties.OSSNOMBRE;
+            var direccion = e.features[0].properties.OSSDIRECCI;
+            var telefono = e.features[0].properties.OSSTELEFON;
+            var horario = e.features[0].properties.OSSHORARIO;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' +'<b>Nombre: </b>' + nombre + '</br>'+ '<b>Dirección: </b>' + direccion + '</br>' + '<b>Teléfono: </b>' + telefono + '</br>' + '<b>Horario: </b>' + horario + '</div>';
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
 
         map.on('click', 'total_ambos', function (e) {
 
@@ -602,153 +628,11 @@ $(document).ready(function () {
                 .addTo(map);
         });
 
-        map.on('click', 'ambos05', function (e) {
-
-            var total = e.features[0].properties.ambos05;
-            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Población total de 0 a 5 años: </b>' + total + '</div>';
-
-            new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(innerPopup)
-                .addTo(map);
-        });
-
-        map.on('click', 'hombres05', function (e) {
-
-            var total = e.features[0].properties.hombres05;
-            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Población hombres de 0 a 5 años: </b>' + total + '</div>';
-
-            new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(innerPopup)
-                .addTo(map);
-        });
-
-        map.on('click', 'mujeres05', function (e) {
-
-            var total = e.features[0].properties.mujeres05;
-            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Población mujeres de 0 a 5 años: </b>' + total + '</div>';
-
-            new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(innerPopup)
-                .addTo(map);
-        });
-
-        map.on('click', 'ambos_mediana_edad', function (e) {
-
-            var total = e.features[0].properties.ambos_mediana_edad;
-            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>' + '<b>Población total mediana edad: </b>' + total + '</div>';
-
-            new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(innerPopup)
-                .addTo(map);
-        });
-
-        map.on('click', 'hombres_mediana_edad', function (e) {
-
-            var total = e.features[0].properties.hombres_mediana_edad;
-            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Hombres de mediana edad: </b>' + total + '%'+'</div>';
-
-            new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(innerPopup)
-                .addTo(map);
-        });
-
-        map.on('click', 'mujeres_mediana_edad', function (e) {
-
-            var total = e.features[0].properties.mujeres_mediana_edad;
-            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Mujeres de mediana edad: </b>' + total + '%'+'</div>';
-
-            new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(innerPopup)
-                .addTo(map);
-        });
-
-        map.on('click', 'ambos65mas', function (e) {
-
-            var total = e.features[0].properties.ambos65mas;
-            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Población total mediana edad: </b>' + total + '%'+'</div>';
-
-            new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(innerPopup)
-                .addTo(map);
-        });
-
-        map.on('click', 'hombres65mas', function (e) {
-
-            var total = e.features[0].properties.hombres65mas;
-            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Hombres de 65 años o más: </b>' + total + '%'+'</div>';
-
-            new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(innerPopup)
-                .addTo(map);
-        });
-
-        map.on('click', 'mujeres65mas', function (e) {
-
-            var total = e.features[0].properties.mujeres65mas;
-            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Mujeres de 65 años o más: </b>' + total + '%'+'</div>';
-
-            new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(innerPopup)
-                .addTo(map);
-        });
-
-        map.on('click', 'ambos85mas', function (e) {
-
-            var total = e.features[0].properties.ambos85mas;
-            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Población total de 85 años o más: </b>' + total + '%'+'</div>';
-
-            new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(innerPopup)
-                .addTo(map);
-        });
-
-        map.on('click', 'hombres85mas', function (e) {
-
-            var total = e.features[0].properties.hombres85mas;
-            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Hombres de 85 años o más: </b>' + total + '%'+'</div>';
-
-            new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(innerPopup)
-                .addTo(map);
-        });
-
-        map.on('click', 'mujeres85mas', function (e) {
-
-            var total = e.features[0].properties.mujeres85mas;
-            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Mujeres de 85 años o más: </b>' + total + '%'+'</div>';
-
-            new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(innerPopup)
-                .addTo(map);
-        });
 
         map.on('click', 'total_viviendas', function (e) {
 
             var total = e.features[0].properties.total_viviendas;
             var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total viviendas: </b>' + total + '</div>';
-
-            new mapboxgl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(innerPopup)
-                .addTo(map);
-        });
-
-        map.on('click', 'viviendas_65mas', function (e) {
-
-            var total = e.features[0].properties.viviendas_65mas;
-            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Viviendas 65 mas: </b>' + total + "%"+'</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -810,6 +694,62 @@ $(document).ready(function () {
                 .setHTML(innerPopup)
                 .addTo(map);
         });
+
+        map.on('click', 'porc_pobl_4_menos', function (e) {
+
+            var total = e.features[0].properties.porc_pobl_4_menos;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total + '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'porc_pobl_65mas', function (e) {
+
+            var total = e.features[0].properties.porc_pobl_65mas;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total + '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'porc_poblacion_81mas', function (e) {
+
+            var total = e.features[0].properties.porc_poblacion_81mas;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total + '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'relacion_dependencia', function (e) {
+
+            var total = e.features[0].properties.relacion_dependencia;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total + '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'requieren_cuidado', function (e) {
+
+            var total = e.features[0].properties.requieren_cuidado;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total + '</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
 
         map.on('click', 'analfabetismo', function (e) {
 
@@ -933,10 +873,395 @@ $(document).ready(function () {
                 .addTo(map);
         });
 
-        map.on('click', 'propuesta_manzanas', function (e) {
+        map.on('click', 'transmilenio_trabajar_hombres', function (e) {
 
-            var nombre = e.features[0].properties.Name;
-            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Referencia: </b>' + nombre + '</div>';
+            var total = e.features[0].properties.transmilenio_trabajar_hombres;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'buses_sitp_trabajar_hombres', function (e) {
+
+            var total = e.features[0].properties.buses_sitp_trabajar_hombres;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'bus_colectivo_trabajar_hombres', function (e) {
+
+            var total = e.features[0].properties.bus_colectivo_trabajar_hombres;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'automovil_trabajar_hombres', function (e) {
+
+            var total = e.features[0].properties.automovil_trabajar_hombres;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'taxi_trabajar_hombres', function (e) {
+
+            var total = e.features[0].properties.taxi_trabajar_hombres;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total + '%' + '</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'taxi_trabajar_hombres', function (e) {
+
+            var total = e.features[0].properties.taxi_trabajar_hombres;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total + '%' + '</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'moto_trabajar_hombres', function (e) {
+
+            var nombre = e.features[0].properties.moto_trabajar_hombres;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + nombre +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'bicicleta_trabajar_hombres', function (e) {
+
+            var nombre = e.features[0].properties.bicicleta_trabajar_hombres;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + nombre +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'caminar_trabajar_hombres', function (e) {
+
+            var nombre = e.features[0].properties.caminar_trabajar_hombres;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + nombre +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'caminar_trabajar_hombres', function (e) {
+
+            var nombre = e.features[0].properties.caminar_trabajar_hombres;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + nombre + '%' + '</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'transmilenio_trabajar_mujeres', function (e) {
+
+            var total = e.features[0].properties.transmilenio_trabajar_mujeres;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'buses_sitp_trabajar_mujeres', function (e) {
+
+            var total = e.features[0].properties.buses_sitp_trabajar_mujeres;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total + '%' + '</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'bus_colectivo_trabajar_mujeres', function (e) {
+
+            var total = e.features[0].properties.bus_colectivo_trabajar_mujeres;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'automovil_trabajar_mujeres', function (e) {
+
+            var total = e.features[0].properties.automovil_trabajar_mujeres;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'taxi_trabajar_mujeres', function (e) {
+
+            var total = e.features[0].properties.taxi_trabajar_mujeres;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total + '%' + '</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'taxi_trabajar_mujeres', function (e) {
+
+            var total = e.features[0].properties.taxi_trabajar_mujeres;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + total +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'bicicleta_trabajar_mujeres', function (e) {
+
+            var nombre = e.features[0].properties.bicicleta_trabajar_mujeres;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + nombre +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'caminar_trabajar_mujeres', function (e) {
+
+            var nombre = e.features[0].properties.caminar_trabajar_mujeres;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + nombre + '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'caminar_trabajar_mujeres', function (e) {
+
+            var nombre = e.features[0].properties.caminar_trabajar_mujeres;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + nombre +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', '_15_centro_cuidado_infantil', function (e) {
+
+            var nombre = e.features[0].properties._15_centro_cuidado_infantil;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + nombre +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', '_15_estacion_paradero', function (e) {
+
+            var nombre = e.features[0].properties._15_estacion_paradero;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + nombre +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', '_15_paradero_buses', function (e) {
+
+            var nombre = e.features[0].properties._15_paradero_buses;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + nombre +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', '_15_transporte_publico', function (e) {
+
+            var nombre = e.features[0].properties._15_transporte_publico;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + nombre +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', '_15_transporte_intermunicipal', function (e) {
+
+            var nombre = e.features[0].properties._15_transporte_intermunicipal;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + nombre +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', '_15_zona_verde', function (e) {
+
+            var nombre = e.features[0].properties._15_zona_verde;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + nombre +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', '_15_supermercado', function (e) {
+
+            var nombre = e.features[0].properties._15_supermercado;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + nombre +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', '_15_farmacia', function (e) {
+
+            var nombre = e.features[0].properties._15_farmacia;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + nombre +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', '_15_banco', function (e) {
+
+            var nombre = e.features[0].properties._15_banco;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + nombre +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', '_15_centro_medico', function (e) {
+
+            var nombre = e.features[0].properties._15_centro_medico;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + nombre +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'ocupacion_mujeres', function (e) {
+
+            var nombre = e.features[0].properties.ocupacion_mujeres;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + nombre +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'mujeres_sin_ingresos', function (e) {
+
+            var nombre = e.features[0].properties.mujeres_sin_ingresos;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + nombre +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'feminidad_hogares_pobres', function (e) {
+
+            var nombre = e.features[0].properties.feminidad_hogares_pobres;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + nombre +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'feminidad_hogares_pobres', function (e) {
+
+            var nombre = e.features[0].properties.feminidad_hogares_pobres;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + nombre +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'mujeres_sin_cotizar', function (e) {
+
+            var nombre = e.features[0].properties.mujeres_sin_cotizar;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + nombre +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'hombres_sin_cotizar', function (e) {
+
+            var nombre = e.features[0].properties.hombres_sin_cotizar;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + nombre +  '%' +'</div>';
+
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'mujeres_pension', function (e) {
+
+            var nombre = e.features[0].properties.mujeres_pension;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + nombre +  '%' +'</div>';
 
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
@@ -959,10 +1284,21 @@ $(document).ready(function () {
                 .addTo(map);
         });
 
+        map.on('click', 'propuesta_manzanas', function (e) {
 
-        // Añadir capas de tipo polígono y sus estilos
+            var nombre = e.features[0].properties.Name;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Referencia: </b>' + nombre + '</div>';
 
-        
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+
+        // Añadir capas de tipo polígono y sus estilos y respectiva leyenda
+
+                // Paleta violeta #fcfbfd #e9e8f3 #e4e3f0 #babbdb #8c88c0 #63439c #3f007d
 
         map.addLayer({
             'id': 'total_ambos',
@@ -976,17 +1312,80 @@ $(document).ready(function () {
                     "step",
                     ['get', 'total_ambos'],
                     "#bebebd",
-                    15959,'#ffffd4',
-                    153142,'#ffe19c',
-                    290324,'#ffe19c',
-                    427506,'#feb351',
-                    564688,'#f0821e',
-                    839052,'#cc560c'
+                    0,'#fcfbfd',
+                    200000,'#e9e8f3',
+                    400000,'#e4e3f0',
+                    600000,'#babbdb',
+                    800000,'#8c88c0',
+                    1000000,'#63439c',
+                    1200000,'#3f007d',
                 ],
                 'fill-opacity': 1,
                 'fill-outline-color':'#000000',
             }
         });
+
+        var leyenda_total_ambos = [["0 - 200.000",
+        "#e9e8f3"],
+        ["200.000 - 400.000",
+        "#e4e3f0"],
+        ["400.000 - 600.000",
+        "#babbdb"],
+        ["600.000 - 800.000",
+        "#8c88c0"],
+        ["800.000 - 1.000.000",
+        "#63439c"],
+        ["1.000.000 - 1.200.000",
+        "#3f007d"],
+        ["Sin Información",
+        "#000000"],
+      ];
+   $.each(leyenda_total_ambos, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda_total_ambos').append(registro);
+   })
+   
+        map.addLayer({
+            'id': 'total_viviendas',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'total_viviendas'],
+                    "#bebebd",
+                    0,'#fcfbfd',
+                    50000,'#e4e3f0',
+                    80000,'#babbdb',
+                    120000,'#8c88c0',
+                    200000,'#63439c',
+                    440000,'#3f007d'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        var leyenda_total_viviendas = [["0 - 50.000",
+         "#fcfbfd"],
+         ["50.000 - 80.000",
+         "#e4e3f0"],
+         ["80.000 - 120.000",
+         "#babbdb"],
+         ["120.000 - 200.000",
+         "#63439c"],
+         ["200.000 - 500.000",
+         "#3f007d"],
+         ["Sin Información",
+         "#000000"],
+       ];
+    $.each(leyenda_total_viviendas, function (i, record) {
+        var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+        $('#leyenda_total_viviendas').append(registro);
+    })
 
         map.addLayer({
             'id': 'porc_pobl_4_menos',
@@ -1148,30 +1547,6 @@ $(document).ready(function () {
             }
         });
 
-        map.addLayer({
-            'id': 'total_viviendas',
-            'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
-            'layout': {
-                'visibility': 'none',
-            },
-            'paint': {
-                'fill-color': [
-                    "step",
-                    ['get', 'total_viviendas'],
-                    "#bebebd",
-                    50000,'#fff5f0',
-                    80000,'#fca487',
-                    120000,'#eb362a',
-                    200000,'#67000d',
-                    400000,'#5a1c00'
-                ],
-                'fill-opacity': 1,
-                'fill-outline-color':'#000000',
-            }
-        });
-
-     
         map.addLayer({
             'id': 'unipersonal_personas_65mas',
             'type': 'fill',
@@ -1919,7 +2294,7 @@ $(document).ready(function () {
         //  Paleta verdes: '#ffffcc','#cfeba3','#96d386','#5bb86a','#27974e','#006837'
 
         map.addLayer({
-            'id': '15_centro_cuidado_infantil',
+            'id': '_15_centro_cuidado_infantil',
             'type': 'fill',
             'source': 'tabla_completa_indicadores2',
             'layout': {
@@ -1928,7 +2303,7 @@ $(document).ready(function () {
             'paint': {
                 'fill-color': [
                     "step",
-                    ['get', '15_centro_cuidado_infantil'],
+                    ['get', '_15_centro_cuidado_infantil'],
                     "#bebebd",
                     13,'#ffffcc',
                     16,'#cfeba3',
@@ -1943,7 +2318,7 @@ $(document).ready(function () {
         });
 
         map.addLayer({
-            'id': '15_estacion_paradero',
+            'id': '_15_estacion_paradero',
             'type': 'fill',
             'source': 'tabla_completa_indicadores2',
             'layout': {
@@ -1952,7 +2327,7 @@ $(document).ready(function () {
             'paint': {
                 'fill-color': [
                     "step",
-                    ['get', '15_estacion_paradero'],
+                    ['get', '_15_estacion_paradero'],
                     "#bebebd",
                     56,'#ffffcc',
                     62,'#cfeba3',
@@ -1967,7 +2342,7 @@ $(document).ready(function () {
         });
 
         map.addLayer({
-            'id': '15_paradero_buses',
+            'id': '_15_paradero_buses',
             'type': 'fill',
             'source': 'tabla_completa_indicadores2',
             'layout': {
@@ -1976,7 +2351,7 @@ $(document).ready(function () {
             'paint': {
                 'fill-color': [
                     "step",
-                    ['get', '15_paradero_buses'],
+                    ['get', '_15_paradero_buses'],
                     "#bebebd",
                     1,'#cfeba3',
                     3,'#96d386',
@@ -1989,7 +2364,7 @@ $(document).ready(function () {
         });
 
         map.addLayer({
-            'id': '15_transporte_publico',
+            'id': '_15_transporte_publico',
             'type': 'fill',
             'source': 'tabla_completa_indicadores2',
             'layout': {
@@ -1998,7 +2373,7 @@ $(document).ready(function () {
             'paint': {
                 'fill-color': [
                     "step",
-                    ['get', '15_transporte_publico'],
+                    ['get', '_15_transporte_publico'],
                     "#bebebd",
                     2,'#ffffcc',
                     4,'#cfeba3',
@@ -2012,7 +2387,7 @@ $(document).ready(function () {
         });
 
         map.addLayer({
-            'id': '15_transporte_intermunicipal',
+            'id': '_15_transporte_intermunicipal',
             'type': 'fill',
             'source': 'tabla_completa_indicadores2',
             'layout': {
@@ -2021,7 +2396,7 @@ $(document).ready(function () {
             'paint': {
                 'fill-color': [
                     "step",
-                    ['get', '15_transporte_intermunicipal'],
+                    ['get', '_15_transporte_intermunicipal'],
                     "#bebebd",
                     10,'#ffffcc',
                     15,'#cfeba3',
@@ -2036,7 +2411,7 @@ $(document).ready(function () {
         });
 
         map.addLayer({
-            'id': '15_zona_verde',
+            'id': '_15_zona_verde',
             'type': 'fill',
             'source': 'tabla_completa_indicadores2',
             'layout': {
@@ -2045,7 +2420,7 @@ $(document).ready(function () {
             'paint': {
                 'fill-color': [
                     "step",
-                    ['get', '15_zona_verde'],
+                    ['get', '_15_zona_verde'],
                     "#bebebd",
                     4,'#cfeba3',
                     8,'#96d386',
@@ -2059,7 +2434,7 @@ $(document).ready(function () {
         });
 
         map.addLayer({
-            'id': '15_supermercado',
+            'id': '_15_supermercado',
             'type': 'fill',
             'source': 'tabla_completa_indicadores2',
             'layout': {
@@ -2068,7 +2443,7 @@ $(document).ready(function () {
             'paint': {
                 'fill-color': [
                     "step",
-                    ['get', '15_supermercado'],
+                    ['get', '_15_supermercado'],
                     "#bebebd",
                     2,'#5bb86a',
                     3,'#27974e',
@@ -2080,7 +2455,7 @@ $(document).ready(function () {
         });
 
         map.addLayer({
-            'id': '15_farmacia',
+            'id': '_15_farmacia',
             'type': 'fill',
             'source': 'tabla_completa_indicadores2',
             'layout': {
@@ -2089,7 +2464,7 @@ $(document).ready(function () {
             'paint': {
                 'fill-color': [
                     "step",
-                    ['get', '15_farmacia'],
+                    ['get', '_15_farmacia'],
                     "#bebebd",
                     1,'#cfeba3',
                     3,'#96d386',
@@ -2103,7 +2478,7 @@ $(document).ready(function () {
         });
 
         map.addLayer({
-            'id': '15_banco',
+            'id': '_15_banco',
             'type': 'fill',
             'source': 'tabla_completa_indicadores2',
             'layout': {
@@ -2112,7 +2487,7 @@ $(document).ready(function () {
             'paint': {
                 'fill-color': [
                     "step",
-                    ['get', '15_banco'],
+                    ['get', '_15_banco'],
                     "#bebebd",
                     5,'#ffffcc',
                     13,'#cfeba3',
@@ -2127,7 +2502,7 @@ $(document).ready(function () {
         });
 
         map.addLayer({
-            'id': '15_centro_medico',
+            'id': '_15_centro_medico',
             'type': 'fill',
             'source': 'tabla_completa_indicadores2',
             'layout': {
@@ -2136,7 +2511,7 @@ $(document).ready(function () {
             'paint': {
                 'fill-color': [
                     "step",
-                    ['get', '15_centro_medico'],
+                    ['get', '_15_centro_medico'],
                     "#bebebd",
                     28,'#cfeba3',
                     32,'#96d386',
@@ -2149,28 +2524,6 @@ $(document).ready(function () {
             }
         });
 
-        map.addLayer({
-            'id': '15_centro_medico',
-            'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
-            'layout': {
-                'visibility': 'none',
-            },
-            'paint': {
-                'fill-color': [
-                    "step",
-                    ['get', '15_centro_medico'],
-                    "#bebebd",
-                    28,'#cfeba3',
-                    32,'#96d386',
-                    36,'#5bb86a',
-                    40,'#27974e',
-                    46,'#006837'
-                ],
-                'fill-opacity': 1,
-                'fill-outline-color':'#000000',
-            }
-        });
 // Paleta rosa #f1eef6, #ddc1de, #dc85c0, #df4899,#d0166d, #980043
         map.addLayer({
             'id': 'ocupacion_mujeres',
@@ -2258,6 +2611,30 @@ $(document).ready(function () {
                     30,'#ddc1de',
                     36,'#dc85c0',
                     42,'#df4899',
+                    48,'#d0166d',
+                    55,'#980043'
+                ],
+                'fill-opacity': 1,
+                'fill-outline-color':'#000000',
+            }
+        });
+
+        map.addLayer({
+            'id': 'hombres_sin_cotizar',
+            'type': 'fill',
+            'source': 'tabla_completa_indicadores2',
+            'layout': {
+                'visibility': 'none',
+            },
+            'paint': {
+                'fill-color': [
+                    "step",
+                    ['get', 'hombres_sin_cotizar'],
+                    "#bebebd",
+                    26,'#f1eef6',
+                    32,'#ddc1de',
+                    38,'#dc85c0',
+                    44,'#df4899',
                     48,'#d0166d',
                     55,'#980043'
                 ],
@@ -2522,6 +2899,26 @@ $(document).ready(function () {
             }
         );
 
+        map.loadImage(
+            './image/icono_casa_pensamiento_intercultural.png',
+            function (error, image) {
+                if (error) throw error;
+                map.addImage('icono_casa_pensamiento_intercultural', image);
+
+                map.addLayer({
+                    'id': 'casa_pensamiento_intercultural',
+                    'type': 'symbol',
+                    'source': 'casa_pensamiento_intercultural',
+                    'layout': {
+                        'icon-image': 'icono_casa_pensamiento_intercultural',
+                        'icon-allow-overlap': true,
+                        'icon-size': 0.9,
+                        'visibility': 'none'
+                    }
+                });
+            }
+        );
+
          map.loadImage(
             './image/icono_cdc.png',
             function (error, image) {
@@ -2736,13 +3133,31 @@ $(document).ready(function () {
                     'interpolate',
                     ['linear'],
                     ['get','INDICE_SEG'],
-                    0, '#e01c0a',
-                    2,'#f0b92c',
-                    4,'#1cc416',
+                    0, '#d7191c',
+                    1, '#f69053',
+                    2,'#ffdf9a',
+                    3,'#dcf09e',
+                    4,'#1a9641',
                 ],
                 'circle-opacity':0.75
             }
         }); 
+
+        var leyenda_indice_seguridad = [["Muy bajo",
+         "#d7191c"],
+         ["Bajo",
+         "#f69053"],
+         ["Medio",
+         "#ffdf9a"],
+         ["Alto",
+         "#dcf09e"],
+         ["Muy Alto",
+         "#1a9641"],
+       ];
+    $.each(leyenda_indice_seguridad, function (i, record) {
+        var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+        $('#leyenda_indice_seguridad').append(registro);
+    })
 
         map.addLayer({
             'id': 'coordenadas_empresas',
@@ -2790,6 +3205,28 @@ $(document).ready(function () {
                  'circle-opacity':1
              }
          }); 
+
+         var leyenda_coordenadas_empresas = [["Educación Preescolar",
+         "#f06060"],
+         ["Lavado y limpieza de productos textiles y de piel",
+         "#d219cf"],
+         ["Actividades de atencion residencial para el cuidado de pacientes con retardo mental enfermedad mental y consumo de sustancias psicoactivas",
+         "#1b339d"],
+         ["Actividades de los hogares individuales como empleadores de personal domestico",
+         "#c99718"],
+         ["Educacion primera infancia",
+         "#72eee7"],
+         ["Actividades de asistencia social sin alojamiento para personas mayores y discapacitadas",
+         "#1cd50b"],
+         ["Educacion básica primaria",
+         "#f52929"],
+         ["Actividades de atención en instituciones para el cuidado de personas mayores y/o discapacitadas",
+         "#36828c"],
+       ];
+    $.each(leyenda_coordenadas_empresas, function (i, record) {
+        var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+        $('#leyenda_coordenadas_empresas').append(registro);
+    })
 
 
         map.loadImage(
@@ -2951,5 +3388,6 @@ $(document).ready(function () {
             }
  */
 
+            
     });
 });
