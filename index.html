@@ -25,55 +25,55 @@
       <table class="table table-hover table-borderless table-wrapper-scroll-y my-custom-scrollbar">
         <tbody>
           <tr>
-            <td><i style="padding-right: 7px;" class="fas fa-child"></i>Jardín Infantil</th>
+            <td>Jardín Infantil</th>
             <td id="conteo_jardin_infantil"></td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td><i style="padding-right: 7px; color: royalblue;" class="fas fa-house-user"></i>Centro Día</th>
+            <td>Centro Día</th>
             <td style="padding-right: 50px;" id="conteo_centro_dia"></td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td><i style="padding-right: 7px;color: orchid;" class="fas fa-house-user"></i>Centro Crecer</th>
+            <td>Centro Crecer</th>
             <td id="conteo_centro_crecer"></td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td><i style="padding-right: 7px;color:rgb(120, 158, 62);" class="fas fa-users"></i>Comisaría de la Familia</th>
+            <td>Comisaría de la Familia</th>
             <td id="conteo_comisaria_familia"></td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td><i style="padding-right: 7px;color:brown;" class="fas fa-book"></i>Biblioteca</th>
+            <td></i>Biblioteca</th>
             <td id="conteo_biblioteca"></td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td><i style="padding-right: 7px;color:brown;" class="fas fa-utensils"></i>Cocina</th>
+            <td>Cocina</th>
             <td id="conteo_cocina"></td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td><i style="padding-right: 7px;color:brown;" class="fas fa-archway"></i>Coliseo</th>
+            <td>Coliseo</th>
             <td id="conteo_coliseo"></td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td><i style="padding-right: 7px;color:brown;" class="fas fa-seedling"></i>Huerta</th>
+            <td>Huerta</th>
             <td id="conteo_huerta"></td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td><i style="padding-right: 7px;color:brown;" class="fas fa-swimmer"></i>Piscina</th>
+            <td>Piscina</th>
             <td id="conteo_piscina"></td>
           </tr>
         </tbody>
@@ -154,7 +154,7 @@
                     <div id="collapseOne" class="collapse">
                       <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="check1" onclick="encendido('cdc'), showdescripcion('descripcion_cdc')">
-                        <label class="form-check-label" for="check1">Centros de Desarrollo Comunitario</label> 
+                        <label class="form-check-label" for="check1">Centros de Desarrollo Comunitario</label>
                         <div class="container" id="descripcion_cdc" style="display:none;font-family: Maven Pro; font-weight:400;">Espacio donde se atienden personas que habiten en Bogotá, para facilitar procesos de cualificación para el desarrollo de capacidades a nivel individual y comunitario en articulación con el sector público y privado, que promuevan oportunidades para el mejoramiento de ingresos económicos, el aprovechamiento del tiempo libre y el fortalecimiento del tejido social.</div>
                       </div>
                       <div class="form-check">
@@ -221,7 +221,7 @@
                       </div>
                       <div id="collapsePrivada" class="collapse">
                         <div class="form-check">
-                          <input type="checkbox" class="form-check-input" id="check1" onclick="encendido('coordenadas_empresas'), showlegend('leyenda_coordenadas_empresas')">
+                          <input type="checkbox" class="form-check-input" id="check1" onclick="encendido('coordenadas_empresas')">
                           <label class="form-check-label" for="check1">Empresas del Municipio de Bogotá según clase de actividad económica</label> 
                           <div class="container" id="descripcion_cdc" style="display:none;font-family: Maven Pro; font-weight:400;"></div>
                           <div class="row row_leyenda" id="leyenda_coordenadas_empresas" style="display:none;"></div>
@@ -348,7 +348,7 @@
                         <div class="container" id="descripcion_comisaria_familia" style="display:none;font-family: Maven Pro;font-weight:400;">Espacio donde se accede a la Justicia Familiar, ofrece atención jurídica y psicosocial. Tienen como fin proteger y garantizar los derechos humanos de las víctimas de violencia intrafamiliar y otros tipos de violencias en las familias, a través de la imposición de medidas de protección, preventivas, correctivas y de restablecimiento de derechos.</div>
                       </div>
                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check18" onclick="encendido('indice_seguridad'), showdescripcion('descripcion_indice_seguridad'), showlegend('leyenda_indice_seguridad')">
+                            <input type="checkbox" class="form-check-input" id="check18" onclick="encendido('indice_seguridad'), showdescripcion('descripcion_indice_seguridad')">
                             <label class="form-check-label" for="exampleCheck1">Puntos de seguridad nocturna mujeres</label>
                             <div class="container" id="descripcion_indice_seguridad" style="display:none;font-family: Maven Pro;font-weight:400;">Puntos de evaluación que representan el índice de seguridad para las mujeres en el espacio público nocturno del área urbana de Bogotá, tomada de las calificaciones de las ocho variables (iluminación, que veo, visibilidad, quien me ve, personas, presencia de seguridad, sendero, transporte y presencia mixta)de cada uno de los 19.970 puntos, las cuales se ponderaron con el mismo peso las ocho y se sumaron para generar categorías (Muy bajo, Bajo, Medio, Alto y Muy alto), para cada localidad de Bogotá, en vías, arterias y ciclorutas.</div>
                             <div class="row row_leyenda" id="leyenda_indice_seguridad" style="display:none;"></div>
@@ -409,36 +409,42 @@
                                 <input type="checkbox" class="form-check-input" id="check37" onclick="encendido('indice_feminidad'), showdescripcion('descripcion_indice_feminidad')">
                                 <label class="form-check-label" for="exampleCheck1">Índice de Feminidad</label>
                                 <div class="container" id="descripcion_indice_feminidad" style="display:none;font-family: Maven Pro;font-weight:400;">Mujeres/ Hombres*100</div>
+                                <div class="row row_leyenda" id="leyenda_indice_feminidad" style="display:none;"></div>
                               </div>
 
                               <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="check37" onclick="encendido('porc_pobl_4_menos'), showdescripcion('descripcion_porc_pobl_4_menos')">
                                 <label class="form-check-label" for="exampleCheck1">Porcentaje de personas menores de 5 años</label>
                                 <div class="container" id="descripcion_porc_pobl_4_menos" style="display:none;font-family: Maven Pro;font-weight:400;">Menores de 5 años/ Población Total*100</div>
+                                <div class="row row_leyenda" id="leyenda_porc_pobl_4_menos" style="display:none;"></div>
                               </div>
 
                                 <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="check37" onclick="encendido('porc_pobl_65mas'), showdescripcion('descripcion_porc_pobl_65mas')">
                                 <label class="form-check-label" for="exampleCheck1">Porcentaje de personas mayores de 64 años</label>
                                 <div class="container" id="descripcion_porc_pobl_65mas" style="display:none;font-family: Maven Pro;font-weight:400;">Mayores de 64 años/ Población Total</div>
+                                <div class="row row_leyenda" id="leyenda_porc_pobl_65mas" style="display:none;"></div>
                               </div>
 
                               <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="check37" onclick="encendido('porc_poblacion_81mas'), showdescripcion('descripcion_porc_poblacion_81mas')">
                                 <label class="form-check-label" for="exampleCheck1">Porcentaje de personas mayores de 80 años</label>
                                 <div class="container" id="descripcion_porc_poblacion_81mas" style="display:none;font-family: Maven Pro;font-weight:400;">Mayores de 80 años/ Población Total*100</div>
+                                <div class="row row_leyenda" id="leyenda_porc_poblacion_81mas" style="display:none;"></div>
                               </div>
 
                               <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="check37" onclick="encendido('relacion_dependencia'), showdescripcion('descripcion_relacion_dependencia')">
                                 <label class="form-check-label" for="exampleCheck1">Relación de Dependencia</label>
                                 <div class="container" id="descripcion_relacion_dependencia" style="display:none;font-family: Maven Pro;font-weight:400;">Personas mayores a 64 años +  Personas menores a 15 años)/Personas entre 15 y 64 años*100</div>
+                                <div class="row row_leyenda" id="leyenda_relacion_dependencia" style="display:none;"></div>
                               </div>
 
                               <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="check37" onclick="encendido('requieren_cuidado'), showdescripcion('descripcion_requieren_cuidado')">
                                 <label class="form-check-label" for="exampleCheck1">Personas con dificultades en su vida diaria</label>
                                 <div class="container" id="descripcion_requieren_cuidado" style="display:none;font-family: Maven Pro;font-weight:400;">Nº de Personas con alguna dificultad en su vida diaria que requieren del cuidado de otra persona /Total de personas</div>
+                                <div class="row row_leyenda" id="leyenda_requieren_cuidado" style="display:none;"></div>
                               </div>
 
                             </div>
@@ -449,124 +455,252 @@
                             </a>
                           </div>
                           <div id="colapsar_socioterritoriales" class="collapse">
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check45" onclick="encendido('mujeres_tareas_hogar')">
-                            <label class="form-check-label" for="exampleCheck1">Mujeres que se dedican exclusivamente a las tareas del hogar de 15 años o más/Total mujeres de 15 años o más</label>
+                       
+                          <div class="card">
+                          <div class="card-header" data-toggle="collapse" href="#dimensionespobreza">
+                            <h6 style="color:black;padding: 5px;font-size: small;"><b>Dimensiones de la pobreza</b></h6>
                           </div>
-                          <h6 style="color:black;padding: 5px;"><b>Dimensiones de la Pobreza</b></h6>
-
+                          <div id="dimensionespobreza" class="collapse">
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('analfabetismo'), showdescripcion('descripcion_analfabetismo')">
                             <label class="form-check-label" for="exampleCheck1">Analfabetismo</label>
                             <div class="container" id="descripcion_analfabetismo" style="display:none;font-family: Maven Pro;font-weight:400;">Porcentaje de personas en hogares donde, al menos, una persona de 15 años y más que no sabe leer y escribir.</div>
+                            <div class="row row_leyenda" id="leyenda_analfabetismo" style="display:none;"></div>
                           </div>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('inasistencia_escolar'), showdescripcion('descripcion_inasistencia_escolar')">
                             <label class="form-check-label" for="exampleCheck1">Inasistencia Escolar</label>
                             <div class="container" id="descripcion_inasistencia_escolar" style="display:none;font-family: Maven Pro;font-weight:400;">Porcentaje de personas en hogares  donde  al menos, un niño entre 6 y 16 años que no asiste a una institución.</div>
+                            <div class="row row_leyenda" id="leyenda_inasistencia_escolar" style="display:none;"></div>
                           </div>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('cuidado_primera_infancia'), showdescripcion('descripcion_cuidado_primera_infancia')">
                             <label class="form-check-label" for="exampleCheck1">Cuidado Primera Infancia</label>
                             <div class="container" id="descripcion_cuidado_primera_infancia" style="display:none;font-family: Maven Pro;font-weight:400;">Porcentaje de personas en hogares donde al menos un niño de 0 a 5 años se encuentra sin acceso a todos los servicios de cuidado integral (salud, nutrición y cuidado).</div>
+                            <div class="row row_leyenda" id="leyenda_cuidado_primera_infancia" style="display:none;"></div>
                           </div>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('acceso_salud'), showdescripcion('descripcion_acceso_salud')">
                             <label class="form-check-label" for="exampleCheck1">Acceso a salud</label>
                             <div class="container" id="descripcion_acceso_salud" style="display:none;font-family: Maven Pro;font-weight:400;">Porcentaje de personas en hogares donde  al menos, una persona que en los últimos 30 días tuvo una enfermedad, accidente, problema odontológico o algún otro problema de salud, que no haya implicado hospitalización y que para tratar este problema no acudió a un médico general, especialista, odontólogo, terapista o institución de salud.</div>
+                            <div class="row row_leyenda" id="leyenda_acceso_salud" style="display:none;"></div>
                           </div>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('hacinamiento'), showdescripcion('descripcion_hacinamiento')">
                             <label class="form-check-label" for="exampleCheck1">Hacinamiento</label>
                             <div class="container" id="descripcion_hacinamiento" style="display:none;font-family: Maven Pro;font-weight:400;">Porcentaje de personas en hogares donde hay tres o más personas por cuarto. Un hogar rural se considera en privación, si hay más de tres personas por cuarto.</div>
+                            <div class="row row_leyenda" id="leyenda_hacinamiento" style="display:none;"></div>
                           </div>
 
                           <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('pob_monetaria'), showdescripcion('descripcion_pob_monetaria')">
+                            <label class="form-check-label" for="exampleCheck1">Pobreza monetaria (DANE)</label>
+                            <div class="container" id="descripcion_pob_monetaria" style="display:none;font-family: Maven Pro;font-weight:400;">Porcentaje de Personas bajo la línea de pobreza monetaria.</div>
+                            <div class="row row_leyenda" id="leyenda_pob_monetaria" style="display:none;"></div>
+                          </div>
+                        </div>
+                        </div>
+
+                        <div class="card">
+                          <div class="card-header" data-toggle="collapse" href="#privacioneshogar">
+                            <h6 style="color:black;padding: 5px;font-size: small;"><b>Privaciones en el hogar</b></h6>
+                          </div>
+                          <div id="privacioneshogar" class="collapse">
+                            <div class="form-check">
+                              <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('no_lavadora')">
+                              <label class="form-check-label" for="exampleCheck1">% Hogares que no poseen lavadora</label>
+            <!--                   <div class="container" id="descripcion_pob_monetaria" style="display:none;font-family: Maven Pro;font-weight:400;">Porcentaje de Personas bajo la línea de pobreza monetaria.</div>-->
+                              <div class="row row_leyenda" id="leyenda_no_lavadora" style="display:none;"></div>
+                            </div>
+                          </div>
+                          <div id="privacioneshogar" class="collapse">
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('no_refrigerador')">
+                            <label class="form-check-label" for="exampleCheck1">% Hogares que no poseen refrigerador</label>
+          <!--                   <div class="container" id="descripcion_pob_monetaria" style="display:none;font-family: Maven Pro;font-weight:400;">Porcentaje de Personas bajo la línea de pobreza monetaria.</div>-->
+                            <div class="row row_leyenda" id="leyenda_no_refrigerador" style="display:none;"></div>
+                          </div>
+                        </div>
+                        <div id="privacioneshogar" class="collapse">
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('no_internet')">
+                            <label class="form-check-label" for="exampleCheck1">% Hogares que no poseen internet</label>
+          <!--                   <div class="container" id="descripcion_pob_monetaria" style="display:none;font-family: Maven Pro;font-weight:400;">Porcentaje de Personas bajo la línea de pobreza monetaria.</div> -->
+                            <div class="row row_leyenda" id="leyenda_no_internet" style="display:none;"></div>
+
+                          </div>
+                        </div>
+                        </div>
+
+                         <!--  <div class="form-check">
                           <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('pobreza_multidimension'), showdescripcion('descripcion_pobreza_multidimension')">
                           <label class="form-check-label" for="exampleCheck1">Pobreza Multidimensional</label>
                           <div class="container" id="descripcion_pobreza_multidimension" style="display:none;font-family: Maven Pro;font-weight:400;">Porcentaje de personas en hogares que tienen índice de pobreza multidimensional ponderado, igual o superior al 33% de las privaciones.</div>
-                          </div>
+                          <div class="row row_leyenda" id="leyenda_pobreza_multidimension" style="display:none;"></div>  
+                        </div> -->
 
-                        <div class="form-check">
+                    <!--     <div class="form-check">
                           <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('hogares_pobreza')">
                           <label class="form-check-label" for="exampleCheck1">Hogares en situación de pobreza</label>
+                          <div class="row row_leyenda" id="leyenda_hogares_pobreza" style="display:none;"></div>  
                         </div>
 
                         <div class="form-check">
                           <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('hogares_pobreza_jefe_mujer')">
                           <label class="form-check-label" for="exampleCheck1">Hogares en situación de pobreza Jefe-Mujer</label>
+                          <div class="row row_leyenda" id="leyenda_hogares_pobreza_jefe_mujer" style="display:none;"></div>  
+                        </div> -->
+
+                        <div class="card">
+                        <div class="card-header" data-toggle="collapse" href="#subclasificacioneshogar">
+                          <h6 style="color:black;padding: 5px;font-size: small;"><b>Subclasificaciones Tipos de Hogar</b></h6>
                         </div>
-
-                        <h6 style="color:black;padding: 5px;"><b>Subclasificaciones Tipos de Hogar</b></h6>
-
+                        <div id="subclasificacioneshogar" class="collapse">
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('unipersonal_personas_65mas')">
                             <label class="form-check-label" for="exampleCheck1">Hogares unipersonales con personas de  65 años o más/Total hogares</label>
+                            <div class="row row_leyenda" id="leyenda_unipersonal_personas_65mas" style="display:none;"></div>  
                           </div>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('monoparental_femeninos')">
                             <label class="form-check-label" for="exampleCheck1">Hogares monoparentales femeninos con menores de 15 años/ Total de hogares</label>
+                            <div class="row row_leyenda" id="leyenda_monoparental_femeninos" style="display:none;"></div>  
                           </div>
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('monoparental_fem_65mas')">
                             <label class="form-check-label" for="exampleCheck1">Hogares monoparentales femeninos con mayores de 65 años/ Total de hogares</label>
+                            <div class="row row_leyenda" id="leyenda_monoparental_fem_65mas" style="display:none;"></div>  
                           </div>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('biparental_menor15')">
                             <label class="form-check-label" for="exampleCheck1">Hogares biparentales  con menores de 15 años/ Total hogares</label>
+                            <div class="row row_leyenda" id="leyenda_biparental_menor15" style="display:none;"></div>  
                           </div>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('biparental_65mas')">
                             <label class="form-check-label" for="exampleCheck1">Hogares biparentales con mayores de 65 años/ Total de hogares </label>
+                            <div class="row row_leyenda" id="leyenda_biparental_65mas" style="display:none;"></div>  
                           </div>
+
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check45" onclick="encendido('feminidad_hogares_pobres')">
+                            <label class="form-check-label" for="exampleCheck1">Indice de feminidad de hogares pobres</label>
+                            <div class="row row_leyenda" id="leyenda_feminidad_hogares_pobres" style="display:none;"></div>
+                          </div>
+                        </div>
+                        </div>
+
+                          <div class="card">
+                            
+                          <div class="card-header" data-toggle="collapse" href="#trabajoyseguridadsocial">
+                            <h6 style="color:black;padding: 5px;font-size: small;"><b>Trabajo y Seguridad Social</b></h6>
+                          </div>
+                          <div id="trabajoyseguridadsocial" class="collapse">
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check45" onclick="encendido('ocupacion_mujeres')">
+                            <label class="form-check-label" for="exampleCheck1">Tasa de Ocupación en mujeres</label>
+                            <div class="row row_leyenda" id="leyenda_ocupacion_mujeres" style="display:none;"></div>
+                          </div>
+
+                         <!--  <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check45" onclick="encendido('mujeres_sin_ingresos')">
+                            <label class="form-check-label" for="exampleCheck1">Mujeres sin ingresos propios</label>
+                            <div class="row row_leyenda" id="leyenda_mujeres_sin_ingresos" style="display:none;"></div>
+                          </div> -->
+
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check45" onclick="encendido('mujeres_sin_cotizar')">
+                            <label class="form-check-label" for="exampleCheck1">Mujeres sin cotizar</label>
+                            <div class="row row_leyenda" id="leyenda_mujeres_sin_cotizar" style="display:none;"></div>
+                          </div>
+
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check45" onclick="encendido('hombres_sin_cotizar')">
+                            <label class="form-check-label" for="exampleCheck1">Hombres sin cotizar</label>
+                            <div class="row row_leyenda" id="leyenda_hombres_sin_cotizar" style="display:none;"></div>
+                          </div>
+
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check45" onclick="encendido('hombres_pension')">
+                            <label class="form-check-label" for="exampleCheck1">Hombres que reciben pensión</label>
+                            <div class="row row_leyenda" id="leyenda_hombres_pension" style="display:none;"></div>
+                          </div>
+
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check45" onclick="encendido('mujeres_pension')">
+                            <label class="form-check-label" for="exampleCheck1">Mujeres que reciben pensión</label>
+                            <div class="row row_leyenda" id="leyenda_mujeres_pension" style="display:none;"></div>
+                          </div>
+
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check45" onclick="encendido('mujeres_tareas_hogar')">
+                            <label class="form-check-label" for="exampleCheck1">Mujeres que se dedican exclusivamente a las tareas del hogar de 15 años o más/Total mujeres de 15 años o más</label>
+                            <div class="row row_leyenda" id="leyenda_mujeres_tareas_hogar" style="display:none;"></div>
+                          </div>
+                        </div>
+                        </div>
+
+                        <div class="card">
+                          <div class="card-header" data-toggle="collapse" href="#todotransporteymovilizacion">
+                          <h6 style="color:black;padding: 5px;font-size: small;"><b>Transporte y Movilización</b></h6>
+                        </div>
+                        <div id="todotransporteymovilizacion" class="collapse">
 
                           <h6 style="color:black;padding: 5px;"><b>Medio de transporte para ir a trabajar (Hombres)</b></h6>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('transmilenio_trabajar_hombres')">
                             <label class="form-check-label" for="exampleCheck1">Porcentaje de uso de transmilenio para llegar al trabajo</label>
+                            <div class="row row_leyenda" id="leyenda_transmilenio_trabajar_hombres" style="display:none;"></div>  
                           </div>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('buses_sitp_trabajar_hombres')">
                             <label class="form-check-label" for="exampleCheck1">Porcentaje de uso de buses SITP para llegar al trabajo</label>
+                            <div class="row row_leyenda" id="leyenda_buses_sitp_trabajar_hombres" style="display:none;"></div>  
                           </div>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('bus_colectivo_trabajar_hombres')">
                             <label class="form-check-label" for="exampleCheck1">Porcentaje de uso de Bus, buseta o colectivo para llegar al trabajo</label>
+                            <div class="row row_leyenda" id="leyenda_bus_colectivo_trabajar_hombres" style="display:none;"></div>
                           </div>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('automovil_trabajar_hombres')">
                             <label class="form-check-label" for="exampleCheck1">Porcentaje de uso de automovil para llegar al trabajo</label>
+                            <div class="row row_leyenda" id="leyenda_automovil_trabajar_hombres" style="display:none;"></div>
                           </div>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('taxi_trabajar_hombres')">
                             <label class="form-check-label" for="exampleCheck1">Porcentaje de uso de taxi para llegar al trabajo</label>
+                            <div class="row row_leyenda" id="leyenda_taxi_trabajar_hombres" style="display:none;"></div>
                           </div>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('moto_trabajar_hombres')">
                             <label class="form-check-label" for="exampleCheck1">Porcentaje de uso de moto para llegar al trabajo</label>
+                            <div class="row row_leyenda" id="leyenda_moto_trabajar_hombres" style="display:none;"></div>
                           </div>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('bicicleta_trabajar_hombres')">
                             <label class="form-check-label" for="exampleCheck1">Porcentaje de uso de bicicleta para llegar al trabajo</label>
+                            <div class="row row_leyenda" id="leyenda_bicicleta_trabajar_hombres" style="display:none;"></div>
                           </div>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('caminar_trabajar_hombres')">
                             <label class="form-check-label" for="exampleCheck1">Porcentaje que camina para llegar al trabajo</label>
+                            <div class="row row_leyenda" id="leyenda_caminar_trabajar_hombres" style="display:none;"></div>
                           </div>
 
                           <h6 style="color:black;padding: 5px;"><b>Medio de transporte para ir a trabajar (Mujeres)</b></h6>
@@ -574,26 +708,31 @@
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('transmilenio_trabajar_mujeres')">
                             <label class="form-check-label" for="exampleCheck1">Porcentaje de uso de transmilenio para llegar al trabajo</label>
+                            <div class="row row_leyenda" id="leyenda_transmilenio_trabajar_mujeres" style="display:none;"></div>
                           </div>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('buses_sitp_trabajar_mujeres')">
                             <label class="form-check-label" for="exampleCheck1">Porcentaje de uso de buses SITP para llegar al trabajo</label>
+                            <div class="row row_leyenda" id="leyenda_buses_sitp_trabajar_mujeres" style="display:none;"></div>
                           </div>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('bus_colectivo_trabajar_mujeres')">
                             <label class="form-check-label" for="exampleCheck1">Porcentaje de uso de buses, busetas o colectivos para llegar al trabajo</label>
+                            <div class="row row_leyenda" id="leyenda_bus_colectivo_trabajar_mujeres" style="display:none;"></div>
                           </div>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('automovil_trabajar_mujeres')">
                             <label class="form-check-label" for="exampleCheck1">Porcentaje de uso de automovil para llegar al trabajo</label>
+                            <div class="row row_leyenda" id="leyenda_automovil_trabajar_mujeres" style="display:none;"></div>
                           </div>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('taxi_trabajar_mujeres')">
                             <label class="form-check-label" for="exampleCheck1">Porcentaje de uso de taxis para llegar al trabajo</label>
+                            <div class="row row_leyenda" id="leyenda_taxi_trabajar_mujeres" style="display:none;"></div>
                           </div>
 
                           <!-- <div class="form-check">
@@ -604,11 +743,13 @@
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('bicicleta_trabajar_mujeres')">
                             <label class="form-check-label" for="exampleCheck1">Porcentaje de uso de bicicleta para llegar al trabajo</label>
+                            <div class="row row_leyenda" id="leyenda_bicicleta_trabajar_mujeres" style="display:none;"></div>
                           </div>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('caminar_trabajar_mujeres')">
                             <label class="form-check-label" for="exampleCheck1">Porcentaje que camina para llegar al trabajo</label>
+                            <div class="row row_leyenda" id="leyenda_caminar_trabajar_mujeres" style="display:none;"></div>
                           </div>
 
                           <h6 style="color:black;padding: 5px;"><b>Porcentaje de Hogares que se demoran menos de 15 minutos a</b></h6>
@@ -616,93 +757,66 @@
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('_15_centro_cuidado_infantil')">
                             <label class="form-check-label" for="exampleCheck1">Centros de cuidado infantil</label>
+                            <div class="row row_leyenda" id="leyenda__15_centro_cuidado_infantil" style="display:none;"></div>
                           </div>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('_15_estacion_paradero')">
                             <label class="form-check-label" for="exampleCheck1">Estación TransMilenio o paradero alimentador</label>
+                            <div class="row row_leyenda" id="leyenda__15_estacion_paradero" style="display:none;"></div>
                           </div>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('_15_paradero_buses')">
                             <label class="form-check-label" for="exampleCheck1">Paradero buses del SITP</label>
+                            <div class="row row_leyenda" id="leyenda__15_paradero_buses" style="display:none;"></div>
                           </div>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('_15_transporte_publico')">
                             <label class="form-check-label" for="exampleCheck1">Paradero de transporte público</label>
+                            <div class="row row_leyenda" id="leyenda__15_transporte_publico" style="display:none;"></div>
                           </div>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('_15_transporte_intermunicipal')">
                             <label class="form-check-label" for="exampleCheck1">Paradero de transporte intermunicipal</label>
+                            <div class="row row_leyenda" id="leyenda__15_transporte_intermunicipal" style="display:none;"></div>
                           </div>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('_15_zona_verde')">
                             <label class="form-check-label" for="exampleCheck1">Parques o zonas verdes</label>
+                            <div class="row row_leyenda" id="leyenda__15_zona_verde" style="display:none;"></div>
                           </div>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('_15_supermercado')">
                             <label class="form-check-label" for="exampleCheck1">Tienda o supermercado</label>
+                            <div class="row row_leyenda" id="leyenda__15_supermercado" style="display:none;"></div>
                           </div>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('_15_farmacia')">
                             <label class="form-check-label" for="exampleCheck1">Droguería o farmacia</label>
+                            <div class="row row_leyenda" id="leyenda__15_farmacia" style="display:none;"></div>
                           </div>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('_15_banco')">
                             <label class="form-check-label" for="exampleCheck1">Banco o cajero</label>
+                            <div class="row row_leyenda" id="leyenda__15_banco" style="display:none;"></div>
                           </div>
 
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check36" onclick="encendido('_15_centro_medico')">
                             <label class="form-check-label" for="exampleCheck1">Centro médico</label>
-                          </div>
-
-                        
-                          <h6 style="color:black;padding: 5px;"><b>Otros</b></h6>
-
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check45" onclick="encendido('ocupacion_mujeres')">
-                            <label class="form-check-label" for="exampleCheck1">Tasa de Ocupación en mujeres</label>
-                          </div>
-
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check45" onclick="encendido('mujeres_sin_ingresos')">
-                            <label class="form-check-label" for="exampleCheck1">Mujeres sin ingresos propios</label>
-                          </div>
-
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check45" onclick="encendido('feminidad_hogares_pobres')">
-                            <label class="form-check-label" for="exampleCheck1">Indice de feminidad de hogares pobres</label>
-                          </div>
-
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check45" onclick="encendido('mujeres_sin_cotizar')">
-                            <label class="form-check-label" for="exampleCheck1">Mujeres sin cotizar</label>
-                          </div>
-
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check45" onclick="encendido('hombres_sin_cotizar')">
-                            <label class="form-check-label" for="exampleCheck1">Hombres sin cotizar</label>
-                          </div>
-
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check45" onclick="encendido('hombres_pension')">
-                            <label class="form-check-label" for="exampleCheck1">Hombres que reciben pensión</label>
-                          </div>
-
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="check45" onclick="encendido('mujeres_pension')">
-                            <label class="form-check-label" for="exampleCheck1">Mujeres que reciben pensión</label>
+                            <div class="row row_leyenda" id="leyenda__15_centro_medico" style="display:none;"></div>
                           </div>
 
                           </div>
-
+                        </div>
+                      </div>
                           <div class="card-header" data-toggle="collapse" href="#colapsar_presupuestos">
                             <a class="collapsed card-link" style="color:grey">
                           <h6><i class="fas fa-minus fa-xs" style="margin-right: 5px;"></i>Presupuestos Participactivos</h6>
@@ -712,11 +826,12 @@
                           <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check45" onclick="encendido('presupuesto')">
                             <label class="form-check-label" for="exampleCheck1">Estrategia de cuidado a cuidadoras, cuidadores y personas con discapacidad</label>
+                            <div class="row row_leyenda" id="leyenda_presupuesto" style="display:none;"></div>
                           </div>
                           </div>
                           </div>
                          
-                        </div>
+                        
                       </div>
                     </div>
                   </div>

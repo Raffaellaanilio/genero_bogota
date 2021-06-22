@@ -34,21 +34,21 @@ $(document).ready(function () {
             this.className = 'active';
             map.setLayoutProperty(x, 'visibility', 'visible');
         }
+
+        if (visibility === 'visible') {
+            map.setLayoutProperty(x, 'visibility', 'none');
+            this.className = '';
+            $('#leyenda_' + x).hide();
+        } else {
+            this.className = 'active';
+            map.setLayoutProperty(x, 'visibility', 'visible');
+            $('#leyenda_' + x).show();
+        }
     };
 
 
     // Función mostrar descripción
     showdescripcion = function showdescripcion(x) {
-
-        y = document.getElementById(x);
-
-        $(y).toggle();
-    };
-
-    var hoveredStateId = null;
-
-    // Función mostrar leyenda
-    showlegend = function showlegend(x) {
 
         y = document.getElementById(x);
 
@@ -144,8 +144,8 @@ $(document).ready(function () {
         var url39 = './geojson/etiquetas.geojson';
         map.addSource('etiquetas', { type: 'geojson', data: url39 });
 
-        var url40 = './geojson/tabla_completa_indicadores2.geojson';
-        map.addSource('tabla_completa_indicadores2', { type: 'geojson', data: url40 });
+        var url40 = './geojson/tabla_indicadores_actualizada.geojson';
+        map.addSource('tabla_indicadores_actualizada', { type: 'geojson', data: url40 });
 
         var url41 = './geojson/propuesta_manzanas.geojson';
         map.addSource('propuesta_manzanas', { type: 'geojson', data: url41 });
@@ -1295,6 +1295,46 @@ $(document).ready(function () {
                 .addTo(map);
         });
 
+        map.on('click', 'pob_monetaria', function (e) {
+
+            var nombre = e.features[0].properties.pob_monetaria;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + nombre +  '%' +'</div>';
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'no_refrigerador', function (e) {
+
+            var nombre = e.features[0].properties.no_refrigerador;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + nombre +  '%' +'</div>';
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'no_internet', function (e) {
+
+            var nombre = e.features[0].properties.no_internet;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + nombre +  '%' +'</div>';
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
+        map.on('click', 'no_lavadora', function (e) {
+
+            var nombre = e.features[0].properties.no_lavadora;
+            var innerPopup = '<div>' + '<h6 style="text-align: center;"><b>Información</b></h6>'+ '<b>Total: </b>' + nombre +  '%' +'</div>';
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(innerPopup)
+                .addTo(map);
+        });
+
 
         // Añadir capas de tipo polígono y sus estilos y respectiva leyenda
 
@@ -1303,7 +1343,7 @@ $(document).ready(function () {
         map.addLayer({
             'id': 'total_ambos',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -1348,7 +1388,7 @@ $(document).ready(function () {
         map.addLayer({
             'id': 'total_viviendas',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -1368,6 +1408,17 @@ $(document).ready(function () {
                 'fill-outline-color':'#000000',
             }
         });
+
+        map.on('mouseenter', 'total_viviendas', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'total_viviendas', function () {
+            map.getCanvas().style.cursor = '';
+        });
+
+        //
 
         var leyenda_total_viviendas = [["0 - 50.000",
          "#fcfbfd"],
@@ -1390,7 +1441,7 @@ $(document).ready(function () {
         map.addLayer({
             'id': 'porc_pobl_4_menos',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -1408,10 +1459,33 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda_porc_pobl_4_menos = [["4%",
+         "#feb351"],
+         ["6%",
+         "#f0821e"],
+         ["8%",
+         "#cc560c"],
+       ];
+    $.each(leyenda_porc_pobl_4_menos, function (i, record) {
+        var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+        $('#leyenda_porc_pobl_4_menos').append(registro);
+    })
+
+
+    map.on('mouseenter', 'porc_pobl_4_menos', function () {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+
+    // Change it back to a pointer when it leaves.
+    map.on('mouseleave', 'porc_pobl_4_menos', function () {
+        map.getCanvas().style.cursor = '';
+    });
+    //
+
         map.addLayer({
             'id': 'porc_pobl_65mas',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -1432,10 +1506,39 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda_porc_pobl_65mas = [["4%",
+         "#ffffd4"],
+         ["6%",
+         "#ffe19c"],
+         ["8%",
+         "#ffe19c"],
+         ["10%",
+         "#feb351"],
+         ["12%",
+         "#f0821e"],
+         ["14%",
+         "#cc560c"],
+       ];
+    $.each(leyenda_porc_pobl_65mas, function (i, record) {
+        var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+        $('#leyenda_porc_pobl_65mas').append(registro);
+    })
+
+    map.on('mouseenter', 'porc_pobl_65mas', function () {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+
+    // Change it back to a pointer when it leaves.
+    map.on('mouseleave', 'porc_pobl_65mas', function () {
+        map.getCanvas().style.cursor = '';
+    });
+
+//
+
         map.addLayer({
             'id': 'porc_poblacion_81mas',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -1453,10 +1556,33 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda_porc_poblacion_81mas = [["1%",
+         "#ffffd4"],
+         ["2%",
+         "#feb351"],
+         ["3%",
+         "#cc560c"],
+       ];
+    $.each(leyenda_porc_poblacion_81mas, function (i, record) {
+        var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+        $('#leyenda_porc_poblacion_81mas').append(registro);
+    })
+
+    map.on('mouseenter', 'porc_poblacion_81mas', function () {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+
+    // Change it back to a pointer when it leaves.
+    map.on('mouseleave', 'porc_poblacion_81mas', function () {
+        map.getCanvas().style.cursor = '';
+    });
+
+    //
+
         map.addLayer({
             'id': 'relacion_dependencia',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -1475,10 +1601,36 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda_relacion_dependencia = [["30%",
+         "#f1eef6"],
+         ["33%",
+         "#91b6d7"],
+         ["37%",
+         "#2382b4"],
+         ["41%",
+         "#045a8d"],
+       ];
+    $.each(leyenda_relacion_dependencia, function (i, record) {
+        var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+        $('#leyenda_relacion_dependencia').append(registro);
+    })
+
+    map.on('mouseenter', 'relacion_dependencia', function () {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+
+    // Change it back to a pointer when it leaves.
+    map.on('mouseleave', 'relacion_dependencia', function () {
+        map.getCanvas().style.cursor = '';
+    });
+
+
+    //
+
         map.addLayer({
             'id': 'requieren_cuidado',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -1499,58 +1651,39 @@ $(document).ready(function () {
             }
         });
 
-        map.addLayer({
-            'id': 'hombres',
-            'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
-            'layout': {
-                'visibility': 'none',
-            },
-            'paint': {
-                'fill-color': [
-                    "step",
-                    ['get', 'hombres'],
-                    "#bebebd",
-                    8227,'#f1eef6',
-                    51297,'#c8d1e6',
-                    74581,'#91b6d7',
-                    166782,'#579ec8',
-                    179777,'#2382b4',
-                    316933,'#045a8d'
-                ],
-                'fill-opacity': 1,
-                'fill-outline-color':'#000000',
-            }
-        });
+        var leyenda_requieren_cuidado = [["200",
+         "#f1eef6"],
+         ["3000",
+         "#c8d1e6"],
+         ["6000",
+         "#91b6d7"],
+         ["12000",
+         "#579ec8"],
+         ["20000",
+         "#2382b4"],
+         ["25000",
+         "#045a8d"],
+       ];
+    $.each(leyenda_requieren_cuidado, function (i, record) {
+        var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+        $('#leyenda_requieren_cuidado').append(registro);
+    })
 
-        map.addLayer({
-            'id': 'mujeres',
-            'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
-            'layout': {
-                'visibility': 'none',
-            },
-            'paint': {
-                'fill-color': [
-                    "step",
-                    ['get', 'mujeres'],
-                    "#bebebd",
-                    7732,'#fcfbfd',
-                    52917,'#e4e3f0',
-                    81398,'#babbdb',
-                    177313,'#8c88c0',
-                    192080,'#63439c',
-                    339722,'#3f007d'
-                ],
-                'fill-opacity': 1,
-                'fill-outline-color':'#000000',
-            }
-        });
+    map.on('mouseenter', 'requieren_cuidado', function () {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+
+    // Change it back to a pointer when it leaves.
+    map.on('mouseleave', 'requieren_cuidado', function () {
+        map.getCanvas().style.cursor = '';
+    });
+    //
+
 
         map.addLayer({
             'id': 'unipersonal_personas_65mas',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -1559,21 +1692,50 @@ $(document).ready(function () {
                     "step",
                     ['get', 'unipersonal_personas_65mas'],
                     "#bebebd",
-                    2,'#fff5f0',
-                    4,'#fdbea5',
-                    6,'#fc7050',
-                    8,'#d42020',
-                    10,'#67000d'
+                    2,'#c8d1e6',
+                    4,'#91b6d7',
+                    6,'#579ec8',
+                    8,'#2382b4',
+                    10,'#045a8d'
                 ],
                 'fill-opacity': 1,
                 'fill-outline-color':'#000000',
             }
         });
 
+        // Paleta Azules #f1eef6 #c8d1e6 #91b6d7 #579ec8 #2382b4 #045a8d
+        var leyenda_unipersonal_personas_65mas = [["2%",
+        "#c8d1e6"],
+        ["4%",
+        "#91b6d7"],
+        ["6%",
+        "#579ec8"],
+        ["8%",
+        "#2382b4"],
+        ["10%",
+        "#045a8d"],
+      ];
+   $.each(leyenda_unipersonal_personas_65mas, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda_unipersonal_personas_65mas').append(registro);
+   })
+
+   
+   map.on('mouseenter', 'unipersonal_personas_65mas', function () {
+    map.getCanvas().style.cursor = 'pointer';
+});
+
+// Change it back to a pointer when it leaves.
+map.on('mouseleave', 'unipersonal_personas_65mas', function () {
+    map.getCanvas().style.cursor = '';
+});
+
+   //
+
         map.addLayer({
             'id': 'monoparental_femeninos',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -1582,20 +1744,44 @@ $(document).ready(function () {
                     "step",
                     ['get', 'monoparental_femeninos'],
                     "#bebebd",
-                    3,'#fff5eb',
-                    6,'#fdbd83',
-                    9,'#ee6510',
-                    12,'#7f2704'
+                    3,'#91b6d7',
+                    6,'#579ec8',
+                    9,'#2382b4',
+                    12,'#045a8d'
                 ],
                 'fill-opacity': 1,
                 'fill-outline-color':'#000000',
             }
         });
 
+        // Paleta Azules #f1eef6 #c8d1e6 #91b6d7 #579ec8 #2382b4 #045a8d
+        var leyenda_monoparental_femeninos = [["3%",
+        "#91b6d7"],
+        ["6%",
+        "#579ec8"],
+        ["9%",
+        "#2382b4"],
+        ["12%",
+        "#045a8d"],
+      ];
+   $.each(leyenda_monoparental_femeninos, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda_monoparental_femeninos').append(registro);
+   })
+
+   map.on('mouseenter', 'monoparental_femeninos', function () {
+    map.getCanvas().style.cursor = 'pointer';
+});
+
+// Change it back to a pointer when it leaves.
+map.on('mouseleave', 'monoparental_femeninos', function () {
+    map.getCanvas().style.cursor = '';
+});
+//
         map.addLayer({
             'id': 'monoparental_fem_65mas',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -1604,21 +1790,47 @@ $(document).ready(function () {
                     "step",
                     ['get', 'monoparental_fem_65mas'],
                     "#bebebd",
-                    2,'#fff5eb',
-                    3,'#fed2a6',
-                    4,'#fd9243',
-                    5,'#df4f05',
-                    6,'#7f2704',
+                    2,'#c8d1e6',
+                    3,'#91b6d7',
+                    4,'#579ec8',
+                    5,'#2382b4',
+                    6,'#045a8d',
                 ],
                 'fill-opacity': 1,
                 'fill-outline-color':'#000000',
             }
         });
 
+         // Paleta Azules #f1eef6 #c8d1e6 #91b6d7 #579ec8 #2382b4 #045a8d
+         var leyenda_monoparental_fem_65mas = [["2%",
+         "#c8d1e6"],
+         ["3%",
+         "#91b6d7"],
+         ["4%",
+         "#579ec8"],
+         ["5%",
+         "#2382b4"],
+         ["6%",
+         "#045a8d"],
+       ];
+    $.each(leyenda_monoparental_fem_65mas, function (i, record) {
+        var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+        $('#leyenda_monoparental_fem_65mas').append(registro);
+    })
+
+    map.on('mouseenter', 'monoparental_fem_65mas', function () {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+    
+    // Change it back to a pointer when it leaves.
+    map.on('mouseleave', 'monoparental_fem_65mas', function () {
+        map.getCanvas().style.cursor = '';
+    });
+//
         map.addLayer({
             'id': 'biparental_menor15',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -1627,22 +1839,52 @@ $(document).ready(function () {
                     "step",
                     ['get', 'biparental_menor15'],
                     "#bebebd",
-                    14,'#d8e7f5',
-                    20,'#b0d2e8',
-                    25,'#73b3d8',
-                    30,'#3e8ec4',
-                    35,'#1563aa',
-                    40,'#08306b'
+                    14,'#f1eef6',
+                    20,'#c8d1e6',
+                    25,'#91b6d7',
+                    30,'#579ec8',
+                    35,'#2382b4',
+                    40,'#045a8d'
                 ],
                 'fill-opacity': 1,
                 'fill-outline-color':'#000000',
             }
         });
 
+         // Paleta Azules #f1eef6 #c8d1e6 #91b6d7 #579ec8 #2382b4 #045a8d
+         var leyenda_biparental_menor15 = [["14%",
+         "#f1eef6"],
+         ["20%",
+         "#c8d1e6"],
+         ["25%",
+         "#91b6d7"],
+         ["30%",
+         "#579ec8"],
+         ["35%",
+         "#2382b4"],
+         ["40%",
+         "#045a8d"],
+       ];
+    $.each(leyenda_biparental_menor15, function (i, record) {
+        var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+        $('#leyenda_biparental_menor15').append(registro);
+    })
+
+    map.on('mouseenter', 'biparental_menor15', function () {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+    
+    // Change it back to a pointer when it leaves.
+    map.on('mouseleave', 'biparental_menor15', function () {
+        map.getCanvas().style.cursor = '';
+    });
+
+    //
+
         map.addLayer({
             'id': 'biparental_65mas',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -1651,20 +1893,37 @@ $(document).ready(function () {
                     "step",
                     ['get', 'biparental_65mas'],
                     "#bebebd",
-                    6,'#73b3d8',
-                    8,'#3e8ec4',
-                    10,'#1563aa',
-                    12,'#08306b'
+                    6,'#91b6d7',
+                    8,'#579ec8',
+                    10,'#2382b4',
+                    12,'#045a8d'
                 ],
                 'fill-opacity': 1,
                 'fill-outline-color':'#000000',
             }
         });
 
+         // Paleta Azules #f1eef6 #c8d1e6 #91b6d7 #579ec8 #2382b4 #045a8d
+         var leyenda_biparental_65mas = [["6%",
+            "#91b6d7"],
+            ["8%",
+            "#579ec8"],
+            ["10%",
+            "#2382b4"],
+            ["12%",
+            "#045a8d"],
+          ];
+       $.each(leyenda_biparental_65mas, function (i, record) {
+           var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+           $('#leyenda_biparental_65mas').append(registro);
+       })
+
+       //
+
         map.addLayer({
             'id': 'hogares_pobreza',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -1673,22 +1932,41 @@ $(document).ready(function () {
                     "step",
                     ['get', 'hogares_pobreza'],
                     "#bebebd",
-                    500,'#c8ddf0',
-                    7000,'#73b3d8',
-                    20000,'#73b3d8',
-                    50000,'#3e8ec4',
-                    70000,'#1563aa',
-                    90000,'#08306b'
+                    500,'#f1eef6',
+                    7000,'#c8d1e6',
+                    20000,'#91b6d7',
+                    50000,'#579ec8',
+                    70000,'#2382b4',
+                    90000,'#045a8d'
                 ],
                 'fill-opacity': 1,
                 'fill-outline-color':'#000000',
             }
         });
 
+        // Paleta Azules #f1eef6 #c8d1e6 #91b6d7 #579ec8 #2382b4 #045a8d
+        var leyenda_hogares_pobreza = [["500",
+        "#f1eef6"],
+        ["7000",
+        "#c8d1e6"],
+        ["20000",
+        "#91b6d7"],
+        ["50000",
+        "#579ec8"],
+        ["70000",
+        "#2382b4"],
+        ["90000",
+        "#045a8d"],
+      ];
+   $.each(leyenda_hogares_pobreza, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda_hogares_pobreza').append(registro);
+   })
+
         map.addLayer({
             'id': 'hogares_pobreza_jefe_mujer',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -1699,19 +1977,36 @@ $(document).ready(function () {
                     "#bebebd",
                     100,'#c8ddf0',
                     800,'#73b3d8',
-                    3000,'#73b3d8',
-                    8000,'#3e8ec4',
-                    25000,'#1563aa'
+                    3000,'#579ec8',
+                    8000,'#2382b4',
+                    25000,'#045a8d'
                 ],
                 'fill-opacity': 1,
                 'fill-outline-color':'#000000',
             }
         });
+// Paleta Azules #f1eef6 #c8d1e6 #91b6d7 #579ec8 #2382b4 #045a8d
+        var leyenda_hogares_pobreza_jefe_mujer = [["100",
+        "#c8ddf0"],
+        ["800",
+        "#73b3d8"],
+        ["3000",
+        "#579ec8"],
+        ["8000",
+        "#2382b4"],
+        ["25000",
+        "#045a8d"],
+      ];
+   $.each(leyenda_hogares_pobreza_jefe_mujer, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda_hogares_pobreza_jefe_mujer').append(registro);
+   })
+//
 
         map.addLayer({
             'id': 'analfabetismo',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -1720,22 +2015,42 @@ $(document).ready(function () {
                     "step",
                     ['get', 'analfabetismo'],
                     "#bebebd",
-                    1,'#c8ddf0',
-                    2,'#73b3d8',
-                    3,'#73b3d8',
-                    4,'#3e8ec4',
-                    5,'#1563aa',
-                    6,'#08306b'
+                    1,'#f1eef6',
+                    2,'#c8d1e6',
+                    3,'#91b6d7',
+                    4,'#579ec8',
+                    5,'#2382b4',
+                    6,'#045a8d'
                 ],
                 'fill-opacity': 1,
                 'fill-outline-color':'#000000',
             }
         });
 
+        var leyenda_analfabetismo = [["1%",
+         "#f1eef6"],
+         ["2%",
+         "#c8d1e6"],
+         ["3%",
+         "#91b6d7"],
+         ["4%",
+         "#579ec8"],
+         ["5%",
+         "#2382b4"],
+         ["6%",
+         "#045a8d"],
+       ];
+    $.each(leyenda_analfabetismo, function (i, record) {
+        var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+        $('#leyenda_analfabetismo').append(registro);
+    })
+
+    //
+
         map.addLayer({
             'id': 'inasistencia_escolar',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -1744,19 +2059,32 @@ $(document).ready(function () {
                     "step",
                     ['get', 'inasistencia_escolar'],
                     "#bebebd",
-                    1,'#3e8ec4',
-                    2,'#1563aa',
-                    3,'#08306b'
+                    1,'#579ec8',
+                    2,'#2382b4',
+                    3,'#045a8d'
                 ],
                 'fill-opacity': 1,
                 'fill-outline-color':'#000000',
             }
         });
 
+        var leyenda_inasistencia_escolar = [["1%",
+         "#579ec8"],
+         ["2%",
+         "#2382b4"],
+         ["3%",
+         "#045a8d"],
+       ];
+    $.each(leyenda_inasistencia_escolar, function (i, record) {
+        var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+        $('#leyenda_inasistencia_escolar').append(registro);
+    })
+//
+// Paleta Azules #f1eef6 #c8d1e6 #91b6d7 #579ec8 #2382b4 #045a8d
         map.addLayer({
             'id': 'cuidado_primera_infancia',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -1765,21 +2093,39 @@ $(document).ready(function () {
                     "step",
                     ['get', 'cuidado_primera_infancia'],
                     "#bebebd",
-                    6,'#c8ddf0',
-                    9,'#73b3d8',
-                    10,'#73b3d8',
-                    14,'#3e8ec4',
-                    16,'#1563aa'
+                    6,'#c8d1e6',
+                    9,'#91b6d7',
+                    10,'#579ec8',
+                    14,'#2382b4',
+                    16,'#045a8d'
                 ],
                 'fill-opacity': 1,
                 'fill-outline-color':'#000000',
             }
         });
 
+        var leyenda_cuidado_primera_infancia = [["6%",
+         "#c8ddf0"],
+         ["9%",
+         "#73b3d8"],
+         ["10%",
+         "#73b3d8"],
+         ["14%",
+         "#579ec8"],
+         ["16%",
+         "#2382b4"],
+       ];
+    $.each(leyenda_cuidado_primera_infancia, function (i, record) {
+        var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+        $('#leyenda_cuidado_primera_infancia').append(registro);
+    })
+
+//
+
         map.addLayer({
             'id': 'acceso_salud',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -1788,21 +2134,39 @@ $(document).ready(function () {
                     "step",
                     ['get', 'acceso_salud'],
                     "#bebebd",
-                    1,'#c8ddf0',
-                    2,'#73b3d8',
-                    3,'#73b3d8',
-                    4,'#3e8ec4',
-                    5,'#1563aa'
+                    1,'#c8d1e6',
+                    2,'#91b6d7',
+                    3,'#579ec8',
+                    4,'#2382b4',
+                    5,'#045a8d'
                 ],
                 'fill-opacity': 1,
                 'fill-outline-color':'#000000',
             }
         });
 
+        var leyenda_acceso_salud = [["1%",
+        "#c8d1e6"],
+        ["2%",
+        "#91b6d7"],
+        ["3%",
+        "#579ec8"],
+        ["4%",
+        "#2382b4"],
+        ["5%",
+        "#045a8d"],
+      ];
+   $.each(leyenda_acceso_salud, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda_acceso_salud').append(registro);
+   })
+
+   //
+
         map.addLayer({
             'id': 'hacinamiento',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -1811,23 +2175,39 @@ $(document).ready(function () {
                     "step",
                     ['get', 'hacinamiento'],
                     "#bebebd",
-                    2,'#c8ddf0',
-                    3,'#73b3d8',
-                    5,'#73b3d8',
-                    7,'#3e8ec4',
-                    10,'#1563aa'
+                    2,'#c8d1e6',
+                    3,'#91b6d7',
+                    5,'#579ec8',
+                    7,'#2382b4',
+                    10,'#045a8d'
                 ],
                 'fill-opacity': 1,
                 'fill-outline-color':'#000000',
             }
         });
 
-       
+        var leyenda_hacinamiento = [["2%",
+        "#c8d1e6"],
+        ["3%",
+        "#91b6d7"],
+        ["5%",
+        "#579ec8"],
+        ["7%",
+        "#2382b4"],
+        ["10%",
+        "#045a8d"],
+      ];
+   $.each(leyenda_hacinamiento, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda_hacinamiento').append(registro);
+   })
 
+   //
+         
         map.addLayer({
             'id': 'indice_feminidad',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -1847,11 +2227,27 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda_indice_feminidad = [["100",
+        "#b0d2e8"],
+        ["101",
+        "#73b3d8"],
+        ["102",
+        "#3e8ec4"],
+        ["103",
+        "#1563aa"],
+        ["104",
+        "#08306b"],
+      ];
+   $.each(leyenda_indice_feminidad, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda_indice_feminidad').append(registro);
+   })
+
     
         map.addLayer({
             'id': 'mujeres_tareas_hogar',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -1871,10 +2267,26 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda_mujeres_tareas_hogar = [["30000",
+        "#fff5eb"],
+        ["60000",
+        "#fed2a6"],
+        ["90000",
+        "#fd9243"],
+        ["120000",
+        "#df4f05"],
+        ["160000",
+        "#7f2704"],
+      ];
+   $.each(leyenda_mujeres_tareas_hogar, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda_mujeres_tareas_hogar').append(registro);
+   })
+
         map.addLayer({
             'id': 'pobreza_multidimension',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -1893,11 +2305,27 @@ $(document).ready(function () {
                 'fill-outline-color':'#000000',
             }
         });
+
+        var leyenda_pobreza_multidimension = [["2%",
+        "#fff5eb"],
+        ["4%",
+        "#fed2a6"],
+        ["6%",
+        "#fd9243"],
+        ["8%",
+        "#df4f05"],
+        ["10%",
+        "#7f2704"],
+      ];
+   $.each(leyenda_pobreza_multidimension, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda_pobreza_multidimension').append(registro);
+   })
       
         map.addLayer({
             'id': 'presupuesto',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -1918,10 +2346,28 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda_presupuesto = [["500",
+        "#fff5f0"],
+        ["700",
+        "#fdbea5"],
+        ["1300",
+        "#fc7050"],
+        ["2400",
+        "#d42020"],
+        ["3700",
+        "#67000d"],
+        ["4700",
+        "#40060d"],
+      ];
+   $.each(leyenda_presupuesto, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda_presupuesto').append(registro);
+   })
+
         map.addLayer({
             'id': 'transmilenio_trabajar_hombres',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -1941,10 +2387,26 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda_transmilenio_trabajar_hombres = [["14%",
+        "#fdbea5"],
+        ["20%",
+        "#fc7050"],
+        ["30%",
+        "#d42020"],
+        ["40%",
+        "#67000d"],
+        ["51%",
+        "#40060d"],
+      ];
+   $.each(leyenda_transmilenio_trabajar_hombres, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda_transmilenio_trabajar_hombres').append(registro);
+   })
+
         map.addLayer({
             'id': 'buses_sitp_trabajar_hombres',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -1953,20 +2415,34 @@ $(document).ready(function () {
                     "step",
                     ['get', 'buses_sitp_trabajar_hombres'],
                     "#bebebd",
-                    13,'#fc7050',
-                    20,'#d42020',
-                    30,'#67000d',
-                    35,'#40060d'
+                    13,'#fdbea5',
+                    20,'#fc7050',
+                    30,'#d42020',
+                    35,'#67000d'
                 ],
                 'fill-opacity': 1,
                 'fill-outline-color':'#000000',
             }
         });
 
+        var leyenda_buses_sitp_trabajar_hombres = [["13%",
+        "#fdbea5"],
+        ["20%",
+        "#fc7050"],
+        ["30%",
+        "#d42020"],
+        ["36%",
+        "#67000d"],
+      ];
+   $.each(leyenda_buses_sitp_trabajar_hombres, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda_buses_sitp_trabajar_hombres').append(registro);
+   })
+
         map.addLayer({
             'id': 'bus_colectivo_trabajar_hombres',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -1986,10 +2462,26 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda_bus_colectivo_trabajar_hombres = [["6%",
+        "#fdbea5"],
+        ["10%",
+        "#fc7050"],
+        ["15%",
+        "#d42020"],
+        ["20%",
+        "#67000d"],
+        ["24%",
+        "#40060d"],
+      ];
+   $.each(leyenda_bus_colectivo_trabajar_hombres, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda_bus_colectivo_trabajar_hombres').append(registro);
+   })
+
         map.addLayer({
             'id': 'automovil_trabajar_hombres',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2009,10 +2501,26 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda_automovil_trabajar_hombres = [["3%",
+        "#fdbea5"],
+        ["10%",
+        "#fc7050"],
+        ["20%",
+        "#d42020"],
+        ["30%",
+        "#67000d"],
+        ["42%",
+        "#40060d"],
+      ];
+   $.each(leyenda_automovil_trabajar_hombres, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda_automovil_trabajar_hombres').append(registro);
+   })
+
         map.addLayer({
             'id': 'taxi_trabajar_hombres',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2033,10 +2541,28 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda_taxi_trabajar_hombres = [["2%",
+        "#fdbea5"],
+        ["4%",
+        "#fc7050"],
+        ["6%",
+        "#d42020"],
+        ["8%",
+        "#67000d"],
+        ["10%",
+        "#5b0813"],
+        ["13%",
+        "#40060d"],
+      ];
+   $.each(leyenda_taxi_trabajar_hombres, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda_taxi_trabajar_hombres').append(registro);
+   })
+
         map.addLayer({
             'id': 'moto_trabajar_hombres',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2056,10 +2582,26 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda_moto_trabajar_hombres = [["2%",
+        "#fc7050"],
+        ["6%",
+        "#d42020"],
+        ["8%",
+        "#67000d"],
+        ["10%",
+        "#5b0813"],
+        ["12%",
+        "#40060d"],
+      ];
+   $.each(leyenda_moto_trabajar_hombres, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda_moto_trabajar_hombres').append(registro);
+   })
+
         map.addLayer({
             'id': 'bicicleta_trabajar_hombres',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2079,10 +2621,26 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda_bicicleta_trabajar_hombres = [["2%",
+        "#fc7050"],
+        ["5%",
+        "#d42020"],
+        ["7%",
+        "#67000d"],
+        ["10%",
+        "#5b0813"],
+        ["13%",
+        "#40060d"],
+      ];
+   $.each(leyenda_bicicleta_trabajar_hombres, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda_bicicleta_trabajar_hombres').append(registro);
+   })
+
         map.addLayer({
             'id': 'caminar_trabajar_hombres',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2103,10 +2661,28 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda_caminar_trabajar_hombres = [["9%",
+        "#fc7050"],
+        ["15%",
+        "#d42020"],
+        ["20%",
+        "#67000d"],
+        ["25%",
+        "#5b0813"],
+        ["30%",
+        "#660f1a"],
+        ["37%",
+        "#40060d"],
+      ];
+   $.each(leyenda_caminar_trabajar_hombres, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda_caminar_trabajar_hombres').append(registro);
+   })
+
         map.addLayer({
             'id': 'transmilenio_trabajar_mujeres',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2115,11 +2691,11 @@ $(document).ready(function () {
                     "step",
                     ['get', 'transmilenio_trabajar_mujeres'],
                     "#bebebd",
-                    21,'#fdbea5',
-                    28,'#fc7050',
-                    35,'#d42020',
-                    42,'#67000d',
-                    50,'#63060d',
+                    21,'#fc7050',
+                    28,'#d42020',
+                    35,'#67000d',
+                    42,'#5b0813',
+                    50,'#660f1a',
                     57,'#40060d'
                 ],
                 'fill-opacity': 1,
@@ -2127,10 +2703,28 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda_transmilenio_trabajar_mujeres = [["21%",
+        "#fc7050"],
+        ["28%",
+        "#d42020"],
+        ["35%",
+        "#67000d"],
+        ["42%",
+        "#5b0813"],
+        ["50%",
+        "#660f1a"],
+        ["57%",
+        "#40060d"],
+      ];
+   $.each(leyenda_transmilenio_trabajar_mujeres, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda_transmilenio_trabajar_mujeres').append(registro);
+   })
+
         map.addLayer({
             'id': 'buses_sitp_trabajar_mujeres',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2150,10 +2744,26 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda_buses_sitp_trabajar_mujeres = [["18%",
+        "#fc7050"],
+        ["22%",
+        "#d42020"],
+        ["27%",
+        "#67000d"],
+        ["32%",
+        "#5b0813"],
+        ["40%",
+        "#660f1a"],
+      ];
+   $.each(leyenda_buses_sitp_trabajar_mujeres, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda_buses_sitp_trabajar_mujeres').append(registro);
+   })
+
         map.addLayer({
             'id': 'bus_colectivo_trabajar_mujeres',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2174,10 +2784,28 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda_bus_colectivo_trabajar_mujeres = [["6%",
+        "#fdbea5"],
+        ["12%",
+        "#fc7050"],
+        ["16%",
+        "#d42020"],
+        ["21%",
+        "#67000d"],
+        ["26%",
+        "#40030d"],
+        ["32%",
+        "#40060d"],
+      ];
+   $.each(leyenda_bus_colectivo_trabajar_mujeres, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda_bus_colectivo_trabajar_mujeres').append(registro);
+   })
+
         map.addLayer({
             'id': 'automovil_trabajar_mujeres',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2198,10 +2826,28 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda_automovil_trabajar_mujeres = [["2%",
+        "#fdbea5"],
+        ["8%",
+        "#fc7050"],
+        ["16%",
+        "#d42020"],
+        ["23%",
+        "#67000d"],
+        ["30%",
+        "#40030d"],
+        ["36%",
+        "#40060d"],
+      ];
+   $.each(leyenda_automovil_trabajar_mujeres, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda_automovil_trabajar_mujeres').append(registro);
+   })
+
         map.addLayer({
             'id': 'taxi_trabajar_mujeres',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2222,10 +2868,28 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda_taxi_trabajar_mujeres = [["3%",
+        "#fdbea5"],
+        ["6%",
+        "#fc7050"],
+        ["9%",
+        "#d42020"],
+        ["12%",
+        "#67000d"],
+        ["15%",
+        "#5b0813"],
+        ["20%",
+        "#40060d"],
+      ];
+   $.each(leyenda_taxi_trabajar_mujeres, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda_taxi_trabajar_mujeres').append(registro);
+   })
+
    /*      map.addLayer({
             'id': 'moto_trabajar_mujeres',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2248,7 +2912,7 @@ $(document).ready(function () {
         map.addLayer({
             'id': 'bicicleta_trabajar_mujeres',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2267,10 +2931,24 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda_bicicleta_trabajar_mujeres = [["2%",
+        "#d42020"],
+        ["3%",
+        "#67000d"],
+        ["4%",
+        "#5b0813"],
+        ["5%",
+        "#40060d"],
+      ];
+   $.each(leyenda_bicicleta_trabajar_mujeres, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda_bicicleta_trabajar_mujeres').append(registro);
+   })
+
         map.addLayer({
             'id': 'caminar_trabajar_mujeres',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2291,12 +2969,30 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda_caminar_trabajar_mujeres = [["12%",
+        "#fc7050"],
+        ["18%",
+        "#d42020"],
+        ["22%",
+        "#67000d"],
+        ["28%",
+        "#5b0813"],
+        ["32%",
+        "#660f1a"],
+        ["38%",
+        "#40060d"],
+      ];
+   $.each(leyenda_caminar_trabajar_mujeres, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda_caminar_trabajar_mujeres').append(registro);
+   })
+
         //  Paleta verdes: '#ffffcc','#cfeba3','#96d386','#5bb86a','#27974e','#006837'
 
         map.addLayer({
             'id': '_15_centro_cuidado_infantil',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2317,10 +3013,28 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda__15_centro_cuidado_infantil = [["13%",
+        "#ffffcc"],
+        ["16%",
+        "#cfeba3"],
+        ["19%",
+        "#96d386"],
+        ["22%",
+        "#5bb86a"],
+        ["25%",
+        "#27974e"],
+        ["31%",
+        "#006837"],
+      ];
+   $.each(leyenda__15_centro_cuidado_infantil, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda__15_centro_cuidado_infantil').append(registro);
+   })
+
         map.addLayer({
             'id': '_15_estacion_paradero',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2341,10 +3055,28 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda__15_estacion_paradero = [["56%",
+        "#ffffcc"],
+        ["62%",
+        "#cfeba3"],
+        ["68%",
+        "#96d386"],
+        ["75%",
+        "#5bb86a"],
+        ["81%",
+        "#27974e"],
+        ["94%",
+        "#006837"],
+      ];
+   $.each(leyenda__15_estacion_paradero, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda__15_estacion_paradero').append(registro);
+   })
+
         map.addLayer({
             'id': '_15_paradero_buses',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2363,10 +3095,25 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda__15_paradero_buses = [[
+        "1%",
+        "#96d386"],
+        ["3%",
+        "#5bb86a"],
+        ["6%",
+        "#27974e"],
+        ["8%",
+        "#006837"],
+      ];
+   $.each(leyenda__15_paradero_buses, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda__15_paradero_buses').append(registro);
+   })
+
         map.addLayer({
             'id': '_15_transporte_publico',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2386,10 +3133,26 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda__15_transporte_publico = [["2%",
+        "#ffffcc"],
+        ["4%",
+        "#cfeba3"],
+        ["6%",
+        "#96d386"],
+        ["8%",
+        "#27974e"],
+        ["12%",
+        "#006837"],
+      ];
+   $.each(leyenda__15_transporte_publico, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda__15_transporte_publico').append(registro);
+   })
+
         map.addLayer({
             'id': '_15_transporte_intermunicipal',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2410,10 +3173,28 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda__15_transporte_intermunicipal = [["10%",
+        "#ffffcc"],
+        ["15%",
+        "#cfeba3"],
+        ["20%",
+        "#96d386"],
+        ["25%",
+        "#5bb86a"],
+        ["30%",
+        "#27974e"],
+        ["37%",
+        "#006837"],
+      ];
+   $.each(leyenda__15_transporte_intermunicipal, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda__15_transporte_intermunicipal').append(registro);
+   })
+
         map.addLayer({
             'id': '_15_zona_verde',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2433,10 +3214,26 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda__15_zona_verde = [["4%",
+        "#cfeba3"],
+        ["8%",
+        "#96d386"],
+        ["10%",
+        "#5bb86a"],
+        ["12%",
+        "#27974e"],
+        ["20%",
+        "#006837"],
+      ];
+   $.each(leyenda__15_zona_verde, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda__15_zona_verde').append(registro);
+   })
+
         map.addLayer({
             'id': '_15_supermercado',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2454,10 +3251,23 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda__15_supermercado = [[
+        "2%",
+        "#5bb86a"],
+        ["3%",
+        "#27974e"],
+        ["4%",
+        "#006837"],
+      ];
+   $.each(leyenda__15_supermercado, function (i, record) {
+       var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+       $('#leyenda__15_supermercado').append(registro);
+   })
+
         map.addLayer({
             'id': '_15_farmacia',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2477,10 +3287,27 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda__15_farmacia = [[
+            "1%",
+            "#cfeba3"],
+            ["3%",
+            "#96d386"],
+            ["5%",
+            "#5bb86a"],
+            ["7%",
+            "#27974e"],
+            ["9%",
+            "#006837"],
+          ];
+       $.each(leyenda__15_farmacia, function (i, record) {
+           var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+           $('#leyenda__15_farmacia').append(registro);
+       })
+
         map.addLayer({
             'id': '_15_banco',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2501,10 +3328,29 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda__15_banco = [[
+            "5%",
+            "#ffffcc"],
+            ["13%",
+            "#cfeba3"],
+            ["20%",
+            "#96d386"],
+            ["26%",
+            "#5bb86a"],
+            ["34%",
+            "#27974e"],
+            ["48%",
+            "#006837"],
+          ];
+       $.each(leyenda__15_banco, function (i, record) {
+           var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+           $('#leyenda__15_banco').append(registro);
+       })
+
         map.addLayer({
             'id': '_15_centro_medico',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2524,11 +3370,28 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda__15_centro_medico = [[
+            "28%",
+            "#cfeba3"],
+            ["32%",
+            "#96d386"],
+            ["36%",
+            "#5bb86a"],
+            ["40%",
+            "#27974e"],
+            ["46%",
+            "#006837"],
+          ];
+       $.each(leyenda__15_centro_medico, function (i, record) {
+           var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+           $('#leyenda__15_centro_medico').append(registro);
+       })
+
 // Paleta rosa #f1eef6, #ddc1de, #dc85c0, #df4899,#d0166d, #980043
         map.addLayer({
             'id': 'ocupacion_mujeres',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2537,20 +3400,36 @@ $(document).ready(function () {
                     "step",
                     ['get', 'ocupacion_mujeres'],
                     "#bebebd",
-                    38,'#96d386',
-                    42,'#5bb86a',
-                    46,'#27974e',
-                    55,'#006837'
+                    38,'#f1eef6',
+                    42,'#ddc1de',
+                    46,'#dc85c0',
+                    55,'#df4899'
                 ],
                 'fill-opacity': 1,
                 'fill-outline-color':'#000000',
             }
         });
 
+        var leyenda_ocupacion_mujeres = [[
+            "38%",
+            "#f1eef6"],
+            ["42%",
+            "#ddc1de"],
+            ["46%",
+            "#dc85c0"],
+            ["55%",
+            "#df4899"],
+          ];
+       $.each(leyenda_ocupacion_mujeres, function (i, record) {
+           var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+           $('#leyenda_ocupacion_mujeres').append(registro);
+       })
+  
+
         map.addLayer({
             'id': 'mujeres_sin_ingresos',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2571,10 +3450,29 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda_mujeres_sin_ingresos = [[
+            "19%",
+            "#f1eef6"],
+            ["25%",
+            "#ddc1de"],
+            ["30%",
+            "#dc85c0"],
+            ["36%",
+            "#df4899"],
+            ["42%",
+            "#d0166d"],
+            ["48%",
+            "#980043"],
+          ];
+       $.each(leyenda_mujeres_sin_ingresos, function (i, record) {
+           var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+           $('#leyenda_mujeres_sin_ingresos').append(registro);
+       })
+
         map.addLayer({
             'id': 'feminidad_hogares_pobres',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2583,22 +3481,36 @@ $(document).ready(function () {
                     "step",
                     ['get', 'feminidad_hogares_pobres'],
                     "#bebebd",
-                    99,'#f1eef6',
-                    110,'#ddc1de',
-                    120,'#dc85c0',
-                    130,'#df4899',
-                    140,'#d0166d',
-                    152,'#980043'
+                    108,'#f7fcf5',
+                    116,'#caeac3',
+                    125,'#2a924a',
+                    149,'#00441b',
                 ],
                 'fill-opacity': 1,
                 'fill-outline-color':'#000000',
             }
         });
 
+        var leyenda_feminidad_hogares_pobres = [[
+            "108 - 116",
+            "#f7fcf5"],
+            ["116 - 125",
+            "#caeac3"],
+            ["125 - 149",
+            "#2a924a"],
+            ["149 - 163",
+            "#00441b"],
+          ];
+       $.each(leyenda_feminidad_hogares_pobres, function (i, record) {
+           var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+           $('#leyenda_feminidad_hogares_pobres').append(registro);
+       })
+
+
         map.addLayer({
             'id': 'mujeres_sin_cotizar',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2619,10 +3531,29 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda_mujeres_sin_cotizar = [[
+            "24%",
+            "#f1eef6"],
+            ["30%",
+            "#ddc1de"],
+            ["36%",
+            "#dc85c0"],
+            ["42%",
+            "#df4899"],
+            ["48%",
+            "#d0166d"],
+            ["55%",
+            "#980043"],
+          ];
+       $.each(leyenda_mujeres_sin_cotizar, function (i, record) {
+           var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+           $('#leyenda_mujeres_sin_cotizar').append(registro);
+       })
+
         map.addLayer({
             'id': 'hombres_sin_cotizar',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2643,10 +3574,29 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda_hombres_sin_cotizar = [[
+            "26%",
+            "#f1eef6"],
+            ["32%",
+            "#ddc1de"],
+            ["38%",
+            "#dc85c0"],
+            ["44%",
+            "#df4899"],
+            ["48%",
+            "#d0166d"],
+            ["55%",
+            "#980043"],
+          ];
+       $.each(leyenda_hombres_sin_cotizar, function (i, record) {
+           var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+           $('#leyenda_hombres_sin_cotizar').append(registro);
+       })
+
         map.addLayer({
             'id': 'hombres_pension',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2665,10 +3615,25 @@ $(document).ready(function () {
             }
         });
 
+        var leyenda_hombres_pension = [[
+            "2%",
+            "#dc85c0"],
+            ["4%",
+            "#df4899"],
+            ["6%",
+            "#d0166d"],
+            ["9%",
+            "#980043"],
+          ];
+       $.each(leyenda_hombres_pension, function (i, record) {
+           var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+           $('#leyenda_hombres_pension').append(registro);
+       })
+
         map.addLayer({
             'id': 'mujeres_pension',
             'type': 'fill',
-            'source': 'tabla_completa_indicadores2',
+            'source': 'tabla_indicadores_actualizada',
             'layout': {
                 'visibility': 'none',
             },
@@ -2687,6 +3652,23 @@ $(document).ready(function () {
                 'fill-outline-color':'#000000',
             }
         });
+
+        var leyenda_mujeres_pension = [[
+            "2%",
+            "#ddc1de"],
+            ["4%",
+            "#dc85c0"],
+            ["6%",
+            "#df4899"],
+            ["8%",
+            "#d0166d"],
+            ["10%",
+            "#980043"],
+          ];
+       $.each(leyenda_mujeres_pension, function (i, record) {
+           var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+           $('#leyenda_mujeres_pension').append(registro);
+       })
 
         map.addLayer({
             'id': 'ciclovias',
@@ -2714,8 +3696,198 @@ $(document).ready(function () {
             }
         })
 
+//
 
+map.addLayer({
+    'id': 'pob_monetaria',
+    'type': 'fill',
+    'source': 'tabla_indicadores_actualizada',
+    'layout': {
+        'visibility': 'none',
+    },
+    'paint': {
+        'fill-color': [
+            "step",
+            ['get', 'pob_monetaria'],
+            "#bebebd",
+            3,'#f1eef6',
+            10,'#bdc9e1',
+            18,'#74a9cf',
+            25,'#2b8cbe',
+            33.8,'#045a8d'
+        ],
+        'fill-opacity': 1,
+        'fill-outline-color':'#000000',
+    }
+});
 
+var leyenda_pob_monetaria = [["3 - 10%",
+ "#f1eef6"],
+ ["11 - 17 %",
+ "#bdc9e1"],
+ ["18 - 24%",
+ "#74a9cf"],
+ ["25 - 33%",
+ "#2b8cbe"],
+ ["33,8 %",
+ "#045a8d"],
+];
+$.each(leyenda_pob_monetaria, function (i, record) {
+var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+$('#leyenda_pob_monetaria').append(registro);
+})
+
+map.on('mouseenter', 'pob_monetaria', function () {
+map.getCanvas().style.cursor = 'pointer';
+});
+
+// Change it back to a pointer when it leaves.
+map.on('mouseleave', 'pob_monetaria', function () {
+map.getCanvas().style.cursor = '';
+});
+
+//
+
+map.addLayer({
+    'id': 'no_refrigerador',
+    'type': 'fill',
+    'source': 'tabla_indicadores_actualizada',
+    'layout': {
+        'visibility': 'none',
+    },
+    'paint': {
+        'fill-color': [
+            "step",
+            ['get', 'no_refrigerador'],
+            "#bebebd",
+            0,'#f7fcf5',
+            2,'#caeac3',
+            5,'#7bc87c',
+            8,'#00441b',
+        ],
+        'fill-opacity': 1,
+        'fill-outline-color':'#000000',
+    }
+});
+
+var leyenda_no_refrigerador = [["0 - 2%",
+ "#f7fcf5"],
+ ["2 - 5%",
+ "#caeac3"],
+ ["5 - 8%",
+ "#7bc87c"],
+ ["8 - 13%",
+ "#00441b"],
+];
+$.each(leyenda_no_refrigerador, function (i, record) {
+var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+$('#leyenda_no_refrigerador').append(registro);
+})
+
+map.on('mouseenter', 'no_refrigerador', function () {
+map.getCanvas().style.cursor = 'pointer';
+});
+
+// Change it back to a pointer when it leaves.
+map.on('mouseleave', 'no_refrigerador', function () {
+map.getCanvas().style.cursor = '';
+});
+
+//
+
+map.addLayer({
+    'id': 'no_internet',
+    'type': 'fill',
+    'source': 'tabla_indicadores_actualizada',
+    'layout': {
+        'visibility': 'none',
+    },
+    'paint': {
+        'fill-color': [
+            "step",
+            ['get', 'no_internet'],
+            "#bebebd",
+            0,'#f7fcf5',
+            10,'#b2e0ab',
+            30,'#3da75a',
+            40,'#00441b'
+        ],
+        'fill-opacity': 1,
+        'fill-outline-color':'#000000',
+    }
+});
+
+var leyenda_no_internet = [["0 - 10%",
+ "#f7fcf5"],
+ ["10 - 30%",
+ "#b2e0ab"],
+ ["30 - 40",
+ "#3da75a"],
+ ["40 - 60%",
+ "#00441b"],
+];
+$.each(leyenda_no_internet, function (i, record) {
+var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+$('#leyenda_no_internet').append(registro);
+})
+
+map.on('mouseenter', 'no_internet', function () {
+map.getCanvas().style.cursor = 'pointer';
+});
+
+// Change it back to a pointer when it leaves.
+map.on('mouseleave', 'no_internet', function () {
+map.getCanvas().style.cursor = '';
+});
+
+//
+
+map.addLayer({
+    'id': 'no_lavadora',
+    'type': 'fill',
+    'source': 'tabla_indicadores_actualizada',
+    'layout': {
+        'visibility': 'none',
+    },
+    'paint': {
+        'fill-color': [
+            "step",
+            ['get', 'no_lavadora'],
+            "#bebebd",
+            0,'#f7fcf5',
+            4,'#caeac3',
+            9,'#3da75a',
+            14,'#00441b'
+        ],
+        'fill-opacity': 1,
+        'fill-outline-color':'#000000',
+    }
+});
+
+var leyenda_no_lavadora = [["0 - 4%",
+ "#f7fcf5"],
+ ["4 - 9%",
+ "#caeac3"],
+ ["9 - 14%",
+ "#3da75a"],
+ ["14 - 21%",
+ "#00441b"],
+];
+$.each(leyenda_no_lavadora, function (i, record) {
+var registro = $('<div class="col-2"><span style="background-color: ' + record[1] + ';border-radius: 10%;display: inline-block;height: 10px;width: 10px;z-index: 1;padding-left: 5px;"></span></div><div class="col-10">' + record[0] + '</div>');
+$('#leyenda_no_lavadora').append(registro);
+})
+
+map.on('mouseenter', 'no_lavadora', function () {
+map.getCanvas().style.cursor = 'pointer';
+});
+
+// Change it back to a pointer when it leaves.
+map.on('mouseleave', 'no_lavadora', function () {
+map.getCanvas().style.cursor = '';
+});
+
+//
         // Hover
 
         // When the user moves their mouse over the state-fill layer, we'll update the
@@ -2878,7 +4050,7 @@ $(document).ready(function () {
             }
          }); 
 
-
+         
          map.loadImage(
             './image/icono_jardin_infantil.png',
             function (error, image) {
@@ -2898,6 +4070,16 @@ $(document).ready(function () {
                 });
             }
         );
+
+        map.on('mouseenter', 'jardin_infantil', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+        
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'jardin_infantil', function () {
+            map.getCanvas().style.cursor = '';
+        });
+
 
         map.loadImage(
             './image/icono_casa_pensamiento_intercultural.png',
@@ -2919,6 +4101,16 @@ $(document).ready(function () {
             }
         );
 
+        map.on('mouseenter', 'casa_pensamiento_intercultural', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+        
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'casa_pensamiento_intercultural', function () {
+            map.getCanvas().style.cursor = '';
+        });
+
+
          map.loadImage(
             './image/icono_cdc.png',
             function (error, image) {
@@ -2938,6 +4130,17 @@ $(document).ready(function () {
                 });
             }
         );
+
+        
+        map.on('mouseenter', 'cdc', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+        
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'cdc', function () {
+            map.getCanvas().style.cursor = '';
+        });
+
         
          map.loadImage(
             './image/icono_creciendo_familia.png',
@@ -2959,6 +4162,15 @@ $(document).ready(function () {
             }
         );
 
+        map.on('mouseenter', 'creciendo_familia', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+        
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'creciendo_familia', function () {
+            map.getCanvas().style.cursor = '';
+        });
+
         map.loadImage(
             './image/icono_comedor_comunitario.png',
             function (error, image) {
@@ -2978,6 +4190,15 @@ $(document).ready(function () {
                 });
             }
         );
+
+        map.on('mouseenter', 'comedor_comunitario', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+        
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'comedor_comunitario', function () {
+            map.getCanvas().style.cursor = '';
+        });
 
 
         map.loadImage(
@@ -3000,6 +4221,15 @@ $(document).ready(function () {
             }
         );
 
+        map.on('mouseenter', 'envejecimiento_activo', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+        
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'envejecimiento_activo', function () {
+            map.getCanvas().style.cursor = '';
+        });
+
         map.loadImage(
             './image/icono_colegios.png',
             function (error, image) {
@@ -3019,6 +4249,15 @@ $(document).ready(function () {
                 });
             }
         );
+
+        map.on('mouseenter', 'colegios', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+        
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'colegios', function () {
+            map.getCanvas().style.cursor = '';
+        });
 
         map.loadImage(
             './image/icono_casa_oportunidades_mujeres.png',
@@ -3040,6 +4279,14 @@ $(document).ready(function () {
             }
         );
 
+        map.on('mouseenter', 'casa_oportunidades_mujeres', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+        
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'casa_oportunidades_mujeres', function () {
+            map.getCanvas().style.cursor = '';
+        });
 
         map.loadImage(
             './image/icono_bibliotecas_comunitarias.png',
@@ -3061,6 +4308,15 @@ $(document).ready(function () {
             }
         );
 
+        map.on('mouseenter', 'bibliotecas_comunitarias', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+        
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'bibliotecas_comunitarias', function () {
+            map.getCanvas().style.cursor = '';
+        });
+
         map.loadImage(
             './image/icono_biblored.png',
             function (error, image) {
@@ -3080,6 +4336,15 @@ $(document).ready(function () {
                 });
             }
         );
+
+        map.on('mouseenter', 'biblored', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+        
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'biblored', function () {
+            map.getCanvas().style.cursor = '';
+        });
 
         map.loadImage(
             './image/icono_paraderos_zonales_SITP.png',
@@ -3101,6 +4366,15 @@ $(document).ready(function () {
             }
         );
 
+        map.on('mouseenter', 'paraderos_zonales_SITP', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+        
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'paraderos_zonales_SITP', function () {
+            map.getCanvas().style.cursor = '';
+        });
+
         map.loadImage(
             './image/icono_estacion_de_policia.png',
             function (error, image) {
@@ -3120,6 +4394,15 @@ $(document).ready(function () {
                 });
             }
         );
+
+        map.on('mouseenter', 'estacion_de_policia', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+        
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'estacion_de_policia', function () {
+            map.getCanvas().style.cursor = '';
+        });
 
          map.addLayer({
            'id': 'indice_seguridad',
@@ -3142,6 +4425,15 @@ $(document).ready(function () {
                 'circle-opacity':0.75
             }
         }); 
+
+        map.on('mouseenter', 'indice_seguridad', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+        
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'indice_seguridad', function () {
+            map.getCanvas().style.cursor = '';
+        });
 
         var leyenda_indice_seguridad = [["Muy bajo",
          "#d7191c"],
@@ -3228,6 +4520,14 @@ $(document).ready(function () {
         $('#leyenda_coordenadas_empresas').append(registro);
     })
 
+    map.on('mouseenter', 'coordenadas_empresas', function () {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+    
+    // Change it back to a pointer when it leaves.
+    map.on('mouseleave', 'coordenadas_empresas', function () {
+        map.getCanvas().style.cursor = '';
+    });
 
         map.loadImage(
             './image/icono_comisaria_familia.png',
@@ -3270,6 +4570,14 @@ $(document).ready(function () {
             }
         );
 
+        map.on('mouseenter', 'atencion_personas_mayores_discapacidad', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+        
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'atencion_personas_mayores_discapacidad', function () {
+            map.getCanvas().style.cursor = '';
+        });
 
         map.loadImage(
             './image/icono_atencion_ninos_discapacidad.png',
@@ -3291,6 +4599,15 @@ $(document).ready(function () {
             }
         );
 
+        map.on('mouseenter', 'atencion_ninos_discapacidad', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+        
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'atencion_ninos_discapacidad', function () {
+            map.getCanvas().style.cursor = '';
+        });
+
         map.loadImage(
             './image/icono_centro_proteger.png',
             function (error, image) {
@@ -3311,6 +4628,15 @@ $(document).ready(function () {
             }
         );
 
+        map.on('mouseenter', 'centro_proteger', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+        
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'centro_proteger', function () {
+            map.getCanvas().style.cursor = '';
+        });
+
         map.loadImage(
             './image/icono_centro_amar.png',
             function (error, image) {
@@ -3330,6 +4656,15 @@ $(document).ready(function () {
                 });
             }
         );
+
+        map.on('mouseenter', 'centro_amar', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+        
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'centro_amar', function () {
+            map.getCanvas().style.cursor = '';
+        });
 
         map.loadImage(
             './image/icono_propuesta_manzanas.png',
