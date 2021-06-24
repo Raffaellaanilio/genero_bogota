@@ -67,100 +67,83 @@ $(document).ready(function () {
         var array_de_capas_puntos = ['creciendo_familia', 'comedor_comunitario', 'envejecimiento_activo', 'colegios', 'casa_oportunidades_mujeres', 'biblored', 'bibliotecas_comunitarias', 'paraderos_zonales_SITP', 'comisaria_familia', 'estacion_de_policia', 'atencion_personas_mayores_discapacidad', 'atencion_ninos_discapacidad', 'centro_proteger', 'centro_amar']
         var array_indicadores = ['']
 
-    // Change the cursor to a pointer when the mouse is over the states layer.
+        //var url = './geojson/creciendo_familia.js';
+        map.addSource('creciendo_familia', { type: 'geojson', data:creciendo_familia });
 
-        //map.on('mouseover', '(var=array_de_capas_puntos)', function () {
-        //map.getCanvas().style.cursor = 'pointer';
-        //});
+       // var url2 = './geojson/comedor_comunitario.js';
+        map.addSource('comedor_comunitario', { type: 'geojson', data: comedor_comunitario });
 
-        // Change it back to a pointer when it leaves.
-        //map.on('mouseleave', '(array_de_capas_puntos)', function () {
-        //map.getCanvas().style.cursor = '';
-        //});
+        //var url3 = './geojson/envejecimiento_activo.js';
+        map.addSource('envejecimiento_activo', { type: 'geojson', data: envejecimiento_activo });
 
-        var url = './geojson/creciendo_familia.geojson';
-        map.addSource('creciendo_familia', { type: 'geojson', data: url });
+        //var url5 = './geojson/colegios.geojson';
+        map.addSource('colegios', { type: 'geojson', data: colegios });
 
-        var url2 = './geojson/comedor_comunitario.geojson';
-        map.addSource('comedor_comunitario', { type: 'geojson', data: url2 });
+        //var url6 = './geojson/casa_oportunidades_mujeres.geojson';
+        map.addSource('casa_oportunidades_mujeres', { type: 'geojson', data: casa_oportunidades_mujeres });
 
-        var url3 = './geojson/envejecimiento_activo.geojson';
-        map.addSource('envejecimiento_activo', { type: 'geojson', data: url3 });
+        //var url7 = './geojson/biblored.geojson';
+        map.addSource('biblored', { type: 'geojson', data: biblored });
 
-        // var url4 = './geojson/hospitales.geojson';
-        // map.addSource('hospitales', { type: 'geojson', data: url4 });
+        //var url8 = './geojson/bibliotecas_comunitarias.geojson';
+        map.addSource('bibliotecas_comunitarias', { type: 'geojson', data: bibliotecas_comunitarias });
 
-        var url5 = './geojson/colegios.geojson';
-        map.addSource('colegios', { type: 'geojson', data: url5 });
+        //var url9 = './geojson/ciclovias.geojson';
+        map.addSource('ciclovias', { type: 'geojson', data: ciclovias });
 
-        var url6 = './geojson/casa_oportunidades_mujeres.geojson';
-        map.addSource('casa_oportunidades_mujeres', { type: 'geojson', data: url6 });
+        //var url10 = './geojson/paraderos_zonales_SITP.geojson';
+        map.addSource('paraderos_zonales_SITP', { type: 'geojson', data: paraderos_zonales_SITP });
 
-        var url7 = './geojson/biblored.geojson';
-        map.addSource('biblored', { type: 'geojson', data: url7 });
+        //var url12 = './geojson/indice_seguridad.geojson';
+        map.addSource('indice_seguridad', { type: 'geojson', data: indice_seguridad });
 
-        var url8 = './geojson/bibliotecas_comunitarias.geojson';
-        map.addSource('bibliotecas_comunitarias', { type: 'geojson', data: url8 });
+        //var url13 = './geojson/comisaria_familia.geojson';
+        map.addSource('comisaria_familia', { type: 'geojson', data: comisaria_familia });
 
-        var url9 = './geojson/ciclovias.geojson';
-        map.addSource('ciclovias', { type: 'geojson', data: url9 });
+        //var url22 = './geojson/limites.geojson';
+        map.addSource('limites', { type: 'geojson', data: limites });
 
-        var url10 = './geojson/paraderos_zonales_SITP.geojson';
-        map.addSource('paraderos_zonales_SITP', { type: 'geojson', data: url10 });
+        //var url24 = './geojson/estacion_de_policia.geojson';
+        map.addSource('estacion_de_policia', { type: 'geojson', data: estacion_de_policia });
 
-        // var url11 = './geojson/estaciones.geojson';
-        // map.addSource('estaciones', { type: 'geojson', data: url11 });
+        //var url25 = './geojson/cuadrantes_policia.geojson';
+        map.addSource('cuadrantes_policia', { type: 'geojson', data: cuadrantes_policia });
 
-        var url12 = './geojson/indice_seguridad.geojson';
-        map.addSource('indice_seguridad', { type: 'geojson', data: url12 });
+        //var url26 = './geojson/atencion_personas_mayores_discapacidad.geojson';
+        map.addSource('atencion_personas_mayores_discapacidad', { type: 'geojson', data: atencion_personas_mayores_discapacidad });
 
-        var url13 = './geojson/comisaria_familia.geojson';
-        map.addSource('comisaria_familia', { type: 'geojson', data: url13 });
+        //var url27 = './geojson/atencion_ninos_discapacidad.geojson';
+        map.addSource('atencion_ninos_discapacidad', { type: 'geojson', data: atencion_ninos_discapacidad});
 
-       var url22 = './geojson/limites.geojson';
-        map.addSource('limites', { type: 'geojson', data: url22 });
+        //var url28 = './geojson/centro_proteger.geojson';
+        map.addSource('centro_proteger', { type: 'geojson', data: centro_proteger});
 
-        var url24 = './geojson/estacion_de_policia.geojson';
-        map.addSource('estacion_de_policia', { type: 'geojson', data: url24 });
+        //var url29 = './geojson/centro_amar.geojson';
+        map.addSource('centro_amar', { type: 'geojson', data: centro_amar});
 
-        var url25 = './geojson/cuadrantes_policia.geojson';
-        map.addSource('cuadrantes_policia', { type: 'geojson', data: url25 });
+        //var url33 = './geojson/cuadrantes_policia_puntos.geojson';
+        map.addSource('cuadrantes_policia_puntos', { type: 'geojson', data: cuadrantes_policia_puntos});
 
-        var url26 = './geojson/atencion_personas_mayores_discapacidad.geojson';
-        map.addSource('atencion_personas_mayores_discapacidad', { type: 'geojson', data: url26 });
+        //var url39 = './geojson/etiquetas.geojson';
+        map.addSource('etiquetas', { type: 'geojson', data: etiquetas });
 
-        var url27 = './geojson/atencion_ninos_discapacidad.geojson';
-        map.addSource('atencion_ninos_discapacidad', { type: 'geojson', data: url27 });
+        //var url40 = './geojson/tabla_indicadores_actualizada.geojson';
+        map.addSource('tabla_indicadores_actualizada', { type: 'geojson', data: tabla_indicadores_actualizada});
 
-        var url28 = './geojson/centro_proteger.geojson';
-        map.addSource('centro_proteger', { type: 'geojson', data: url28 });
+        //var url41 = './geojson/propuesta_manzanas.geojson';
+        map.addSource('propuesta_manzanas', { type: 'geojson', data: propuesta_manzanas });
 
-        var url29 = './geojson/centro_amar.geojson';
-        map.addSource('centro_amar', { type: 'geojson', data: url29 });
+        //var url42 = './geojson/cdc.geojson';
+        map.addSource('cdc', { type: 'geojson', data: cdc});
 
-        var url33 = './geojson/cuadrantes_policia_puntos.geojson';
-        map.addSource('cuadrantes_policia_puntos', { type: 'geojson', data: url33 });
+        //var url43 = './geojson/jardin_infantil.geojson';
+        map.addSource('jardin_infantil', { type: 'geojson', data: jardin_infantil});
 
-        var url39 = './geojson/etiquetas.geojson';
-        map.addSource('etiquetas', { type: 'geojson', data: url39 });
+        //var url44 = './geojson/coordenadas_empresas.geojson';
+        map.addSource('coordenadas_empresas', { type: 'geojson', data: coordenadas_empresas});
 
-        var url40 = './geojson/tabla_indicadores_actualizada.geojson';
-        map.addSource('tabla_indicadores_actualizada', { type: 'geojson', data: url40 });
-
-        var url41 = './geojson/propuesta_manzanas.geojson';
-        map.addSource('propuesta_manzanas', { type: 'geojson', data: url41 });
-
-        var url42 = './geojson/cdc.geojson';
-        map.addSource('cdc', { type: 'geojson', data: url42 });
-
-        var url43 = './geojson/jardin_infantil.geojson';
-        map.addSource('jardin_infantil', { type: 'geojson', data: url43 });
-
-        var url44 = './geojson/coordenadas_empresas.geojson';
-        map.addSource('coordenadas_empresas', { type: 'geojson', data: url44 });
-
-        var url45 = './geojson/casa_pensamiento_intercultural.geojson';
-        map.addSource('casa_pensamiento_intercultural', { type: 'geojson', data: url45 });
+        //var url45 = './geojson/casa_pensamiento_intercultural.geojson';
+        map.addSource('casa_pensamiento_intercultural', { type: 'geojson', data: casa_pensamiento_intercultural });
 
         
         // Se abre caja información de servicios, y cambia el nombre de la localidad según corresponda
